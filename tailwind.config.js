@@ -59,6 +59,9 @@ export default {
       fontFamily: {
         sans: ["Inter", ...defaultTheme.fontFamily.sans],
       },
+      "max-w": {
+        container: "1248px",
+      },
     },
   },
   plugins: [],

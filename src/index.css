@@ -59,7 +59,8 @@
 
 :root,
 html,
-body {
+body,
+#root {
   height: 100%;
 }
 

@@ -6,6 +6,7 @@ import {
   HOME_ROUTE,
   PRODUCTS_ROUTE,
 } from "@/shared/consts";
+import { Header } from "@/widgets";
 import { Suspense } from "react";
 import { lazily } from "react-lazily";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -23,19 +24,26 @@ const {
 
 export const App = () => {
   return (
-    <BrowserRouter>
-      <Suspense fallback={<div>Loading...</div>}>
-        <Routes>
-          <Route path={HOME_ROUTE} element={<HomePage />} />
-          <Route path={PRODUCTS_ROUTE} element={<ProductsPage />} />
-          <Route path={`${PRODUCTS_ROUTE}/:id`} element={<ProductPage />} />
-          <Route path={CART_ROUTE} element={<CartPage />} />
-          <Route path={FAQ_ROUTE} element={<FaqPage />} />
-          <Route path={ABOUT_ROUTE} element={<AboutPage />} />
-          <Route path={CONTACT_ROUTE} element={<ContactPage />} />
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
-      </Suspense>
-    </BrowserRouter>
+    <div className="flex flex-col h-full">
+      <BrowserRouter>
+        <Header />
+        <main className="flex-1">
+          <Suspense fallback={<div>Loading...</div>}>
+            <Routes>
+              <Route path={HOME_ROUTE} element={<HomePage />} />
+              <Route path={PRODUCTS_ROUTE}>
+                <Route path="" element={<ProductsPage />} />
+                <Route path={`product/:slug`} element={<ProductPage />} />
+              </Route>
+              <Route path={CART_ROUTE} element={<CartPage />} />
+              <Route path={FAQ_ROUTE} element={<FaqPage />} />
+              <Route path={ABOUT_ROUTE} element={<AboutPage />} />
+              <Route path={CONTACT_ROUTE} element={<ContactPage />} />
+              <Route path="*" element={<NotFoundPage />} />
+            </Routes>
+          </Suspense>
+        </main>
+      </BrowserRouter>
+    </div>
   );
 };
