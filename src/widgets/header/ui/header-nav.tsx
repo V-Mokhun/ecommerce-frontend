@@ -8,8 +8,8 @@ interface HeaderNavProps {
 
 const getLinkClasses = (isActive: boolean) =>
   cn(
-    "inline-block p-2 font-light hover:text-primary-400 transition-colors border-b border-solid border-b-transparent hover:border-b-primary-100",
-    isActive && "border-b-primary-400"
+    "inline-block p-2 font-light hover:text-primary transition-colors border-b border-solid border-b-transparent hover:border-b-primary-100",
+    isActive && "border-b-primary"
   );
 
 export const HeaderNav = ({ links }: HeaderNavProps) => {
