@@ -11,7 +11,7 @@ export const HeaderCart = ({}: HeaderCartProps) => {
           3
         </span>
       </PopoverTrigger>
-      <PopoverContent sideOffset={28.5}>Cart</PopoverContent>
+      <PopoverContent className="w-[512px]" sideOffset={28.5}>Cart</PopoverContent>
     </Popover>
   );
 };

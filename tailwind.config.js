@@ -95,7 +95,7 @@ export default {
       fontFamily: {
         sans: ["Inter", ...defaultTheme.fontFamily.sans],
       },
-      "max-w": {
+      maxWidth: {
         container: "1248px",
       },
       keyframes: {
