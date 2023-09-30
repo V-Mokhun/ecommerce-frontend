@@ -42,7 +42,7 @@ export const HeaderNav = ({ links }: HeaderNavProps) => {
                   {link.label}{" "}
                   <ChevronDown className="transition-transform group-data-[state=open]:-rotate-180 ml-1" />
                 </MenubarTrigger>
-                <MenubarContent>
+                <MenubarContent sideOffset={28.5}>
                   {link.sublinks.map((sublink) => (
                     <MenubarItem
                       className="flex items-center gap-2"

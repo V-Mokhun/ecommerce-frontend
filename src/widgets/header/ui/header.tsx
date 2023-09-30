@@ -11,6 +11,7 @@ import logoImage from "@/assets/images/logo.png";
 import mobileIcon from "@/assets/icons/mobile.svg";
 import { HeaderNav } from "./header-nav";
 import { HeaderSearch } from "./header-search";
+import { HeaderCart } from "./header-cart";
 
 export type NavigationLink =
   | { label: string; route: string }
@@ -69,7 +70,7 @@ interface HeaderProps {}
 
 export const Header = ({}: HeaderProps) => {
   return (
-    <header className="border-b border-solid border-b-primary-100 py-5">
+    <header className="border-b border-solid border-b-primary-100 py-4">
       <Container>
         <div className="flex items-center justify-between gap-4">
           <NavLink to={HOME_ROUTE}>
@@ -78,6 +79,7 @@ export const Header = ({}: HeaderProps) => {
           <HeaderNav links={NAVIGATION_LINKS} />
           <div className="flex items-center gap-2">
             <HeaderSearch />
+            <HeaderCart />
           </div>
         </div>
       </Container>
