@@ -1,27 +1,36 @@
 import { NavLink } from "react-router-dom";
 import { NavigationLink } from "./header";
 import { cn } from "@/shared/lib";
+import {
+  Menubar,
+  MenubarContent,
+  MenubarItem,
+  MenubarMenu,
+  MenubarSeparator,
+  MenubarShortcut,
+  MenubarTrigger,
+} from "@/shared/ui";
+import { ArrowDownIcon, ChevronDown } from "lucide-react";
 
 interface HeaderNavProps {
   links: NavigationLink[];
 }
 
-const getLinkClasses = (isActive: boolean) =>
-  cn(
-    "inline-block p-2 font-light hover:text-primary transition-colors border-b border-solid border-b-transparent hover:border-b-primary-100",
-    isActive && "border-b-primary"
-  );
-
 export const HeaderNav = ({ links }: HeaderNavProps) => {
   return (
     <nav className="flex-1">
-      <ul className="flex items-center gap-6">
+      <Menubar className="gap-6">
         {links.map((link) => {
-          if (link.route) {
+          if (link.route !== undefined) {
             return (
               <li key={link.label}>
                 <NavLink
-                  className={({ isActive }) => getLinkClasses(isActive)}
+                  className={({ isActive }) =>
+                    cn(
+                      "inline-block p-2 font-light hover:text-primary transition-colors border-b border-solid border-b-transparent hover:border-b-primary-100",
+                      isActive && "text-primary border-b-primary"
+                    )
+                  }
                   to={link.route}
                 >
                   {link.label}
@@ -29,10 +38,41 @@ export const HeaderNav = ({ links }: HeaderNavProps) => {
               </li>
             );
           } else {
-            return <li key={link.label}></li>;
+            return (
+              <MenubarMenu key={link.label}>
+                <MenubarTrigger className="group">
+                  {link.label} <ChevronDown className="transition-transform group-data-[state=open]:-rotate-180 ml-1" />
+                </MenubarTrigger>
+                <MenubarContent>
+                  {link.sublinks.map((sublink) => (
+                    <MenubarItem
+                      className="flex items-center gap-2"
+                      key={sublink.label}
+                    >
+                      <img
+                        src={sublink.icon}
+                        alt={sublink.label}
+                        className="w-6 h-6"
+                      />
+                      <NavLink
+                        className={({ isActive }) =>
+                          cn(
+                            "inline-block font-light hover:text-primary transition-colors",
+                            isActive && "text-primary"
+                          )
+                        }
+                        to={sublink.route}
+                      >
+                        {sublink.label}
+                      </NavLink>
+                    </MenubarItem>
+                  ))}
+                </MenubarContent>
+              </MenubarMenu>
+            );
           }
         })}
-      </ul>
+      </Menubar>
     </nav>
   );
 };
