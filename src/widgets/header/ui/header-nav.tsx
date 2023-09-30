@@ -1,16 +1,14 @@
-import { NavLink } from "react-router-dom";
-import { NavigationLink } from "./header";
 import { cn } from "@/shared/lib";
 import {
   Menubar,
   MenubarContent,
   MenubarItem,
   MenubarMenu,
-  MenubarSeparator,
-  MenubarShortcut,
-  MenubarTrigger,
+  MenubarTrigger
 } from "@/shared/ui";
-import { ArrowDownIcon, ChevronDown } from "lucide-react";
+import { ChevronDown } from "lucide-react";
+import { NavLink } from "react-router-dom";
+import { NavigationLink } from "./header";
 
 interface HeaderNavProps {
   links: NavigationLink[];
@@ -19,7 +17,7 @@ interface HeaderNavProps {
 export const HeaderNav = ({ links }: HeaderNavProps) => {
   return (
     <nav className="flex-1">
-      <Menubar className="gap-6">
+      <Menubar className="gap-6 justify-center">
         {links.map((link) => {
           if (link.route !== undefined) {
             return (
@@ -41,7 +39,8 @@ export const HeaderNav = ({ links }: HeaderNavProps) => {
             return (
               <MenubarMenu key={link.label}>
                 <MenubarTrigger className="group">
-                  {link.label} <ChevronDown className="transition-transform group-data-[state=open]:-rotate-180 ml-1" />
+                  {link.label}{" "}
+                  <ChevronDown className="transition-transform group-data-[state=open]:-rotate-180 ml-1" />
                 </MenubarTrigger>
                 <MenubarContent>
                   {link.sublinks.map((sublink) => (

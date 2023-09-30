@@ -10,6 +10,7 @@ import { NavLink } from "react-router-dom";
 import logoImage from "@/assets/images/logo.png";
 import mobileIcon from "@/assets/icons/mobile.svg";
 import { HeaderNav } from "./header-nav";
+import { HeaderSearch } from "./header-search";
 
 export type NavigationLink =
   | { label: string; route: string }
@@ -75,6 +76,9 @@ export const Header = ({}: HeaderProps) => {
             <img src={logoImage} alt="Logo" className="w-14 h-16" />
           </NavLink>
           <HeaderNav links={NAVIGATION_LINKS} />
+          <div className="flex items-center gap-2">
+            <HeaderSearch />
+          </div>
         </div>
       </Container>
     </header>
