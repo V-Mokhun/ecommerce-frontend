@@ -12,6 +12,7 @@ import mobileIcon from "@/assets/icons/mobile.svg";
 import { HeaderNav } from "./header-nav";
 import { HeaderSearch } from "./header-search";
 import { HeaderCart } from "./header-cart";
+import { HeaderAuth } from "./header-auth";
 
 export type NavigationLink =
   | { label: string; route: string }
@@ -74,12 +75,13 @@ export const Header = ({}: HeaderProps) => {
       <Container>
         <div className="flex items-center justify-between gap-4">
           <NavLink to={HOME_ROUTE}>
-            <img src={logoImage} alt="Logo" className="w-14 h-16" />
+            <img src={logoImage} alt="Logo" className="w-14 h-16 border" />
           </NavLink>
           <HeaderNav links={NAVIGATION_LINKS} />
           <div className="flex items-center gap-2">
             <HeaderSearch />
             <HeaderCart />
+            <HeaderAuth />
           </div>
         </div>
       </Container>
