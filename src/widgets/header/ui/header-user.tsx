@@ -11,7 +11,17 @@ const LIST_ITEMS = [
   {
     label: "Orders",
     icon: <Icon name="bag" className="w-6 h-6" />,
-    // href:
+    href: ACCOUNT_ROUTE,
+  },
+  {
+    label: "Wishlist",
+    icon: <Icon name="heart" className="w-6 h-6" />,
+    href: ACCOUNT_ROUTE,
+  },
+  {
+    label: "Payments",
+    icon: <Icon name="dollar-circle" className="w-6 h-6" />,
+    href: ACCOUNT_ROUTE,
   },
 ];
 
@@ -26,13 +36,38 @@ export const HeaderUser = ({ onLogout, user }: HeaderUserProps) => {
       <PopoverContent sideOffset={28.5}>
         <ul className="space-y-6">
           <li className="flex items-start gap-4">
-            <Icon name="profile-circle" className="w-6 h-6" />
+            <Icon name="profile-circle" className="w-6 h-6 shrink-0" />
             <div>
-              <NavLink to={ACCOUNT_ROUTE} className="text-base md:text-lg font-light ">
+              <NavLink
+                to={ACCOUNT_ROUTE}
+                className="text-base md:text-lg font-light mb-2 inline-block transition-colors hover:text-primary"
+              >
                 Jimmy Smith
               </NavLink>
-              <span className="text-sm">Jimmy.smith1996@gmail.com</span>
+              <span className="text-sm font-light">
+                Jimmy.smith1996@gmail.com
+              </span>
             </div>
+          </li>
+          {LIST_ITEMS.map(({ label, icon, href }) => (
+            <li className="flex items-center gap-4">
+              {icon}{" "}
+              <NavLink
+                to={href}
+                className="text-base md:text-lg font-light transition-colors hover:text-primary"
+              >
+                {label}
+              </NavLink>
+            </li>
+          ))}
+          <li className="flex items-center gap-4">
+            <Icon name="logout" className="w-6 h-6" />
+            <button
+              onClick={onLogout}
+              className="text-base md:text-lg font-light transition-colors hover:text-primary"
+            >
+              Log out
+            </button>
           </li>
         </ul>
       </PopoverContent>
