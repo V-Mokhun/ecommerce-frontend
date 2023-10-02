@@ -23,7 +23,7 @@ export const HeaderMobileMenu = ({ links }: HeaderMobileMenuProps) => {
   return (
     <Sheet>
       <SheetTrigger>
-        <MenuIcon className="w-6 h-6" />{" "}
+        <MenuIcon className="inline-block w-10 h-8 py-1 px-2" />
       </SheetTrigger>
       <SheetContent side="left">
         <SheetClose />

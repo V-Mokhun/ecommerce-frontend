@@ -36,16 +36,14 @@ export const HeaderUser = ({ onLogout, user }: HeaderUserProps) => {
       </PopoverTrigger>
       <PopoverContent sideOffset={28.5}>
         <ul className="space-y-6">
-          <li className="flex items-start gap-4">
+          <li className="flex items-center gap-4">
             <Icon name="profile-circle" className="w-6 h-6 shrink-0" />
-            <div>
-              <NavLink
-                to={ACCOUNT_ROUTE}
-                className="text-base md:text-lg font-light inline-block transition-colors hover:text-primary"
-              >
-                {user.name}
-              </NavLink>
-            </div>
+            <NavLink
+              to={ACCOUNT_ROUTE}
+              className="text-base md:text-lg font-light inline-block transition-colors hover:text-primary"
+            >
+              {user.name}
+            </NavLink>
           </li>
           {LIST_ITEMS.map(({ label, icon, href }) => (
             <li className="flex items-center gap-4">

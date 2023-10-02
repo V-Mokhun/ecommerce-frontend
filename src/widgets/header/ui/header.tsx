@@ -15,6 +15,7 @@ import { HeaderCart } from "./header-cart";
 import { HeaderAuth } from "./header-auth";
 import { useMediaQuery } from "@/shared/lib/hooks";
 import { HeaderMobileMenu } from "./header-mobile-menu";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export type NavigationLink =
   | { label: string; route: string }
@@ -73,11 +74,14 @@ interface HeaderProps {}
 
 export const Header = ({}: HeaderProps) => {
   const isMd = useMediaQuery("(min-width: 768px)");
+  const { isAuthenticated } = useAuth0();
+
+  const showCart = isMd || (!isMd && isAuthenticated);
 
   return (
-    <header className="border-b border-solid border-b-primary-100 py-4">
+    <header className="md:border-b border-solid border-b-primary-100 md:py-4">
       <Container>
-        <div className="flex items-center justify-between gap-4">
+        <div className="flex items-center justify-between gap-4 py-2 md:py-0">
           {isMd ? (
             <>
               <NavLink to={HOME_ROUTE}>
@@ -90,14 +94,23 @@ export const Header = ({}: HeaderProps) => {
               <HeaderMobileMenu
                 links={NAVIGATION_LINKS.filter((link) => link.label !== "Home")}
               />
+              <NavLink className="text-primary-300 font-medium" to={HOME_ROUTE}>
+                Ecommerce
+              </NavLink>
             </>
           )}
           <div className="flex items-center gap-2">
-            <HeaderSearch />
-            <HeaderCart />
+            {isMd && <HeaderSearch />}
+            {showCart && <HeaderCart />}
             <HeaderAuth />
           </div>
         </div>
+        {!isMd && (
+          <div className="flex w-full items-center gap-2">
+            {!showCart && <HeaderCart />}
+            <HeaderSearch />
+          </div>
+        )}
       </Container>
     </header>
   );
