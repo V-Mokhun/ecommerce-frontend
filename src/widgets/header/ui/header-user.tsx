@@ -1,10 +1,11 @@
 import { ACCOUNT_ROUTE } from "@/shared/consts";
 import { Icon, Popover, PopoverContent, PopoverTrigger } from "@/shared/ui";
+import { User } from "@auth0/auth0-react";
 import { NavLink } from "react-router-dom";
 
 interface HeaderUserProps {
   onLogout: () => void;
-  user: any;
+  user: User;
 }
 
 const LIST_ITEMS = [
@@ -40,13 +41,10 @@ export const HeaderUser = ({ onLogout, user }: HeaderUserProps) => {
             <div>
               <NavLink
                 to={ACCOUNT_ROUTE}
-                className="text-base md:text-lg font-light mb-2 inline-block transition-colors hover:text-primary"
+                className="text-base md:text-lg font-light inline-block transition-colors hover:text-primary"
               >
-                Jimmy Smith
+                {user.name}
               </NavLink>
-              <span className="text-sm font-light">
-                Jimmy.smith1996@gmail.com
-              </span>
             </div>
           </li>
           {LIST_ITEMS.map(({ label, icon, href }) => (
