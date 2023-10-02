@@ -25,7 +25,7 @@ export const HeaderNav = ({ links }: HeaderNavProps) => {
                 <NavLink
                   className={({ isActive }) =>
                     cn(
-                      "inline-block p-2 font-light hover:text-primary transition-colors border-b border-solid border-b-transparent hover:border-b-primary-100",
+                      "inline-block px-1 py-2 lg:px-2 font-light hover:text-primary transition-colors border-b border-solid border-b-transparent hover:border-b-primary-100",
                       isActive && "text-primary border-b-primary"
                     )
                   }

@@ -13,6 +13,8 @@ import { HeaderNav } from "./header-nav";
 import { HeaderSearch } from "./header-search";
 import { HeaderCart } from "./header-cart";
 import { HeaderAuth } from "./header-auth";
+import { useMediaQuery } from "@/shared/lib/hooks";
+import { HeaderMobileMenu } from "./header-mobile-menu";
 
 export type NavigationLink =
   | { label: string; route: string }
@@ -70,14 +72,24 @@ const NAVIGATION_LINKS: NavigationLink[] = [
 interface HeaderProps {}
 
 export const Header = ({}: HeaderProps) => {
+  const isMd = useMediaQuery("(min-width: 768px)");
+
   return (
     <header className="border-b border-solid border-b-primary-100 py-4">
       <Container>
         <div className="flex items-center justify-between gap-4">
-          <NavLink to={HOME_ROUTE}>
-            <img src={logoImage} alt="Logo" className="w-14 h-16 border" />
-          </NavLink>
-          <HeaderNav links={NAVIGATION_LINKS} />
+          {isMd ? (
+            <>
+              <NavLink to={HOME_ROUTE}>
+                <img src={logoImage} alt="Logo" className="w-14 h-16" />
+              </NavLink>
+              <HeaderNav links={NAVIGATION_LINKS} />
+            </>
+          ) : (
+            <>
+              <HeaderMobileMenu />
+            </>
+          )}
           <div className="flex items-center gap-2">
             <HeaderSearch />
             <HeaderCart />
