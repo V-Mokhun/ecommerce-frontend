@@ -87,7 +87,9 @@ export const Header = ({}: HeaderProps) => {
             </>
           ) : (
             <>
-              <HeaderMobileMenu />
+              <HeaderMobileMenu
+                links={NAVIGATION_LINKS.filter((link) => link.label !== "Home")}
+              />
             </>
           )}
           <div className="flex items-center gap-2">
