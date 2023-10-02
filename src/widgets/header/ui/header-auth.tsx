@@ -14,7 +14,7 @@ export const HeaderAuth = ({}: HeaderAuthProps) => {
   if (isLoading) return null;
 
   return isAuthenticated && user ? (
-    <HeaderUser user={user} onLogout={logout} />
+    <HeaderUser user={user} onLogout={logout} isMd={isMd} />
   ) : (
     <Button
       variant={isMd ? "default" : "text"}

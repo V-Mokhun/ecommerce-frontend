@@ -1,17 +1,16 @@
-import { useMediaQuery } from "@/shared/lib/hooks";
 import { Icon } from "@/shared/ui";
 
-interface HeaderSearchProps {}
+interface HeaderSearchProps {
+  isMd: boolean;
+}
 
-export const HeaderSearch = ({}: HeaderSearchProps) => {
-  const isMd = useMediaQuery("(min-width: 768px)");
-
+export const HeaderSearch = ({ isMd }: HeaderSearchProps) => {
   return isMd ? (
     <button type="button" className="p-2">
       <Icon name="search" className="w-6 h-6" />
     </button>
   ) : (
-    <div className="relative flex-1 mr-2">
+    <div className="relative flex-1">
       <input
         type="text"
         className="w-full h-10 pl-4 pr-11 bg-gray-200 rounded-md font-light text-xs placeholder:text-gray-600 text-primary focus:outline-none"

@@ -79,7 +79,7 @@ export const Header = ({}: HeaderProps) => {
   const showCart = isMd || (!isMd && isAuthenticated);
 
   return (
-    <header className="md:border-b border-solid border-b-primary-100 md:py-4">
+    <header className="md:border-b border-solid border-b-primary-100 md:py-4 relative z-[51] md:z-10 bg-background">
       <Container>
         <div className="flex items-center justify-between gap-4 py-2 md:py-0">
           {isMd ? (
@@ -100,15 +100,15 @@ export const Header = ({}: HeaderProps) => {
             </>
           )}
           <div className="flex items-center gap-2">
-            {isMd && <HeaderSearch />}
+            {isMd && <HeaderSearch isMd={isMd} />}
             {showCart && <HeaderCart />}
             <HeaderAuth />
           </div>
         </div>
         {!isMd && (
-          <div className="flex w-full items-center gap-2">
+          <div className="flex items-center gap-2 mx-2">
             {!showCart && <HeaderCart />}
-            <HeaderSearch />
+            <HeaderSearch isMd={isMd} />
           </div>
         )}
       </Container>

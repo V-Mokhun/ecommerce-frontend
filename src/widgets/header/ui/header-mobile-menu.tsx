@@ -47,7 +47,12 @@ export const HeaderMobileMenu = ({ links }: HeaderMobileMenuProps) => {
               );
             } else {
               return (
-                <Accordion type="single" collapsible className="w-full">
+                <Accordion
+                  key={link.label}
+                  type="single"
+                  collapsible
+                  className="w-full"
+                >
                   <AccordionItem value="products">
                     <AccordionTrigger className="px-3 data-[state=open]:text-primary [&[data-state=open]>svg]:text-primary">
                       {link.label}

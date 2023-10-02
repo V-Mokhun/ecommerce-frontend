@@ -6,6 +6,7 @@ import { NavLink } from "react-router-dom";
 interface HeaderUserProps {
   onLogout: () => void;
   user: User;
+  isMd: boolean;
 }
 
 const LIST_ITEMS = [
@@ -26,15 +27,16 @@ const LIST_ITEMS = [
   },
 ];
 
-export const HeaderUser = ({ onLogout, user }: HeaderUserProps) => {
-  console.log("user", user);
-
+export const HeaderUser = ({ onLogout, user, isMd }: HeaderUserProps) => {
   return (
     <Popover>
       <PopoverTrigger className="p-2">
         <Icon name="user" className="w-6 h-6" />
       </PopoverTrigger>
-      <PopoverContent sideOffset={28.5}>
+      <PopoverContent
+        className="w-screen h-[100dvh] md:h-auto md:w-72 pt-20 md:pt-4"
+        sideOffset={isMd ? 28.5 : 0}
+      >
         <ul className="space-y-6">
           <li className="flex items-center gap-4">
             <Icon name="profile-circle" className="w-6 h-6 shrink-0" />
@@ -46,7 +48,7 @@ export const HeaderUser = ({ onLogout, user }: HeaderUserProps) => {
             </NavLink>
           </li>
           {LIST_ITEMS.map(({ label, icon, href }) => (
-            <li className="flex items-center gap-4">
+            <li key={label} className="flex items-center gap-4">
               {icon}{" "}
               <NavLink
                 to={href}
