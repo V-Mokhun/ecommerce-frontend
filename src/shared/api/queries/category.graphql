@@ -1,7 +1,0 @@
-query GetCategories {
-	allCategory {
-    _id
-    name
-    shortName
-  }
-}
