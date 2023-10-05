@@ -5,3 +5,4 @@ export * from './popover';
 export * from './button';
 export * from './sheet';
 export * from './accordion';
+export * from './section';

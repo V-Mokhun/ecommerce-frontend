@@ -86,7 +86,7 @@ export default {
           foreground: "hsl(var(--card-foreground))",
         },
       },
-      shadow: {
+      boxShadow: {
         sm: "-2px 2px 20px -1px rgb(113 113 113 / 0.2)",
         md: "-2px 2px 15px -1px rgb(113 113 113 / 0.12)",
         lg: "-2px 2px 10px -1px rgb(113 113 113 / 0.15)",

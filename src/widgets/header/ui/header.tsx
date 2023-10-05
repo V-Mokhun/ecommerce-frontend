@@ -71,7 +71,7 @@ export const Header = ({}: HeaderProps) => {
       .map((category) => ({
         label: category.name!,
         icon: imageBuilder(category.icon!).url(),
-        route: `${PRODUCTS_ROUTE}/${category.slug}`,
+        route: `${PRODUCTS_ROUTE}/${category.slug?.current}`,
       }))
       .sort((a, b) => a.label.localeCompare(b.label));
 

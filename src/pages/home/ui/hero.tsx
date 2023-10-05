@@ -6,7 +6,7 @@ interface HeroProps {}
 
 export const Hero = ({}: HeroProps) => {
   return (
-    <section>
+    <section className="pb-3 md:pb-4 lg:pb-6">
       <Container>
         <div className="flex justify-between mt-6 md:mt-0">
           <div className="flex-auto mt-4 md:mt-10">
