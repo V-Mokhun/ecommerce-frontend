@@ -18,6 +18,8 @@ import { HeaderMobileMenu } from "./header-mobile-menu";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useQuery } from "@apollo/client";
 import { GET_CATEGORIES_QUERY } from "@/shared/api";
+import { useEffect, useState } from "react";
+import { imageBuilder } from "@/shared/lib/image-builder";
 
 export type NavigationLink =
   | { label: string; route: string }
@@ -35,28 +37,7 @@ const NAVIGATION_LINKS: NavigationLink[] = [
   {
     label: "Products",
     route: undefined,
-    sublinks: [
-      {
-        label: "Mobile Phones",
-        icon: mobileIcon,
-        route: PRODUCTS_ROUTE,
-      },
-      {
-        label: "Laptops & Computers ",
-        icon: mobileIcon,
-        route: PRODUCTS_ROUTE,
-      },
-      {
-        label: "Wearables",
-        icon: mobileIcon,
-        route: PRODUCTS_ROUTE,
-      },
-      {
-        label: "Networking",
-        icon: mobileIcon,
-        route: PRODUCTS_ROUTE,
-      },
-    ],
+    sublinks: [],
   },
   {
     label: "Blog",
@@ -78,10 +59,34 @@ export const Header = ({}: HeaderProps) => {
   const isMd = useMediaQuery("(min-width: 768px)");
   const { isAuthenticated } = useAuth0();
   const { data } = useQuery(GET_CATEGORIES_QUERY);
-
-  console.log(data);
+  const [navLinks, setNavLinks] = useState(NAVIGATION_LINKS);
 
   const showCart = isMd || (!isMd && isAuthenticated);
+  console.log(data, navLinks);
+
+  useEffect(() => {
+    if (!data) return;
+
+    const sublinks = data.allCategory
+      .map((category) => ({
+        label: category.name!,
+        icon: imageBuilder(category.icon!).url(),
+        route: `${PRODUCTS_ROUTE}/${category.slug}`,
+      }))
+      .sort((a, b) => a.label.localeCompare(b.label));
+
+    setNavLinks((prev) => {
+      return prev.map((link) => {
+        if (link.label === "Products") {
+          return {
+            ...link,
+            sublinks,
+          };
+        }
+        return link;
+      });
+    });
+  }, [data]);
 
   return (
     <header className="md:border-b border-solid border-b-primary-100 md:py-4 relative z-[51] md:z-10 bg-background">
@@ -92,12 +97,12 @@ export const Header = ({}: HeaderProps) => {
               <NavLink to={HOME_ROUTE}>
                 <img src={logoImage} alt="Logo" className="w-14 h-16" />
               </NavLink>
-              <HeaderNav links={NAVIGATION_LINKS} />
+              <HeaderNav links={navLinks} />
             </>
           ) : (
             <>
               <HeaderMobileMenu
-                links={NAVIGATION_LINKS.filter((link) => link.label !== "Home")}
+                links={navLinks.filter((link) => link.label !== "Home")}
               />
               <NavLink className="text-primary-300 font-medium" to={HOME_ROUTE}>
                 Ecommerce
