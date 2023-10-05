@@ -63,7 +63,7 @@ body,
 #root {
   height: 100%;
 }
- 
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -71,53 +71,53 @@ body,
 
     --card: 0 0% 100%;
     --card-foreground: 0 0% 5%;
- 
+
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 5%;
 
-    --primary-25: 213 82% 88%;
-    --primary-50: 214 76% 78%;
-    --primary-75: 215 73% 68%;
-    --primary-100: 216 76% 54%;
-    --primary-200: 216 77% 47%;
-    --primary-300: 218 81% 32%;
-    --primary: 216 93% 58%;
-    --primary-500: 218 75% 28%;
-    --primary-600: 218 78% 24%;
-    --primary-700: 218 81% 19%;
-    --primary-900: 218 81% 10%;
+    --primary-25: 217 93% 95%;
+    --primary-50: 216 91% 83%;
+    --primary-75: 216 91% 72%;
+    --primary-100: 216 91% 61%;
+    --primary-200: 216 91% 56%;
+    --primary-300: 216 91% 39%;
+    --primary: 216 91% 50%;
+    --primary-500: 216 92% 28%;
+    --primary-600: 216 91% 22%;
+    --primary-700: 216 91% 17%;
+    --primary-900: 216 93% 11%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary-100: 17 85% 79%;
-    --secondary-200: 27 79% 68%;
-    --secondary-300: 30 82% 54%;
-    --secondary: 33 90% 45%;
-    --secondary-500: 28 86% 36%;
-    --secondary-600: 30 60% 22%;
+    --secondary-100: 21 93% 89%;
+    --secondary-200: 21 91% 78%;
+    --secondary-300: 21 91% 61%;
+    --secondary: 21 91% 50%;
+    --secondary-500: 21 91% 39%;
+    --secondary-600: 21 92% 28%;
     --secondary-foreground: 0 0% 100%;
- 
+
     --muted: 220 14.3% 95.9%;
     --muted-foreground: 220 8.9% 46.1%;
- 
+
     --accent: 220 14.3% 95.9%;
     --accent-foreground: 220.9 39.3% 11%;
- 
+
     --destructive: 350 82% 43%;
     --destructive-light: 347 66% 94%;
     --destructive-foreground: 210 20% 98%;
 
     --success: 152 69% 31%;
-    --success-light: 152 70% 89%; 
+    --success-light: 152 70% 89%;
     --success-foreground: 210 20% 98%;
 
     --border: 220 13% 91%;
     --input: 220 13% 91%;
     --ring: 0 0% 5%;
- 
+
     --radius: 0.5rem;
   }
 }
- 
+
 @layer base {
   * {
     @apply border-border;

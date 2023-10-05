@@ -13,6 +13,10 @@ export default {
         "2xl": "1400px",
       },
     },
+    screens: {
+      xs: "475px",
+      ...defaultTheme.screens,
+    },
     extend: {
       colors: {
         border: "hsl(var(--border))",
@@ -44,16 +48,16 @@ export default {
           foreground: "hsl(var(--secondary-foreground))",
         },
         gray: {
-          50: "hsl(0, 0%, 98%)",
-          100: "hsl(0, 0%, 96%)",
-          200: "hsl(0, 0%, 93%)",
-          300: "hsl(0, 0%, 80%)",
-          400: "hsl(0, 0%, 71%)",
-          500: "hsl(0, 0%, 62%)",
-          600: "hsl(0, 0%, 44%)",
-          700: "hsl(0, 0%, 31%)",
-          800: "hsl(0, 0%, 27%)",
-          900: "hsl(0, 0%, 18%)",
+          50: "#F9F9F9",
+          100: "#F6F6F6",
+          200: "#EDEDED",
+          300: "#CBCBCB",
+          400: "#B4B4B4",
+          500: "#9E9E9E",
+          600: "#717171",
+          700: "#505050",
+          800: "#444444",
+          900: "#2D2D2D",
         },
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
