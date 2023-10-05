@@ -5,7 +5,7 @@ import {
   SanityImageWithAssetStub,
   SanityReference,
 } from "@sanity/image-url/lib/types/types";
-import { sanityClient } from "..";
+import { sanityClient } from "../sanity-client";
 
 const builder = imageUrlBuilder(sanityClient);
 

@@ -16,6 +16,8 @@ import { HeaderAuth } from "./header-auth";
 import { useMediaQuery } from "@/shared/lib/hooks";
 import { HeaderMobileMenu } from "./header-mobile-menu";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useQuery } from "@apollo/client";
+import { GET_CATEGORIES_QUERY } from "@/shared/api";
 
 export type NavigationLink =
   | { label: string; route: string }
@@ -75,6 +77,9 @@ interface HeaderProps {}
 export const Header = ({}: HeaderProps) => {
   const isMd = useMediaQuery("(min-width: 768px)");
   const { isAuthenticated } = useAuth0();
+  const { data } = useQuery(GET_CATEGORIES_QUERY);
+
+  console.log(data);
 
   const showCart = isMd || (!isMd && isAuthenticated);
 

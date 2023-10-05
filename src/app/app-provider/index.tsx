@@ -1,4 +1,4 @@
-import { apolloClient } from "@/shared/lib";
+import { apolloClient } from "@/shared/lib/apollo";
 import { ApolloProvider } from "@apollo/client";
 import { Auth0Provider } from "@auth0/auth0-react";
 

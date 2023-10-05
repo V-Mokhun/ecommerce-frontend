@@ -1,6 +1,6 @@
 import { graphql } from "..";
 
-export const IMAGE_FIELDS = graphql(
+export const IMAGE_FIELDS_FRAGMENT = graphql(
   `
     fragment ImageFields on Image {
       asset {
