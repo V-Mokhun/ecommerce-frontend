@@ -25,7 +25,7 @@ export const HeaderMobileMenu = ({ links }: HeaderMobileMenuProps) => {
       <SheetTrigger>
         <MenuIcon className="inline-block w-10 h-8 py-1 px-2" />
       </SheetTrigger>
-      <SheetContent side="left">
+      <SheetContent overlayClassName="z-[60]" className="z-[60]" side="left">
         <SheetClose />
         <NavLink className="pr-8 inline-block mb-5" to={HOME_ROUTE}>
           <img src={logoImage} alt="Logo" className="w-10 h-12" />
