@@ -62,10 +62,16 @@ export const Header = ({}: HeaderProps) => {
   const [navLinks, setNavLinks] = useState(NAVIGATION_LINKS);
 
   const showCart = isMd || (!isMd && isAuthenticated);
-  console.log(data, navLinks);
 
   useEffect(() => {
-    if (!data) return;
+    const productsLink = navLinks.find((link) => link.label === "Products");
+    if (
+      !data ||
+      (productsLink &&
+        productsLink.route === undefined &&
+        productsLink.sublinks.length > 0)
+    )
+      return;
 
     const sublinks = data.allCategory
       .map((category) => ({
@@ -86,7 +92,7 @@ export const Header = ({}: HeaderProps) => {
         return link;
       });
     });
-  }, [data]);
+  }, [data, navLinks]);
 
   return (
     <header className="md:border-b border-solid border-b-primary-100 md:py-4 relative z-[51] md:z-10 bg-background">

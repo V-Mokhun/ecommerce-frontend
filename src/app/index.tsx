@@ -6,7 +6,7 @@ import {
   HOME_ROUTE,
   PRODUCTS_ROUTE,
 } from "@/shared/consts";
-import { Header } from "@/widgets";
+import { Footer, Header } from "@/widgets";
 import { Suspense } from "react";
 import { lazily } from "react-lazily";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -43,6 +43,7 @@ export const App = () => {
             </Routes>
           </Suspense>
         </main>
+        <Footer />
       </BrowserRouter>
     </div>
   );
