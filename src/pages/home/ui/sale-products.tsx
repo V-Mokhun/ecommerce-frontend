@@ -1,12 +1,14 @@
+import { GET_SALE_PRODUCTS } from "@/shared/api";
 import { PRODUCTS_ROUTE } from "@/shared/consts";
 import { Container, Section } from "@/shared/ui";
+import { useQuery } from "@apollo/client";
 import { ChevronRight } from "lucide-react";
 import { NavLink } from "react-router-dom";
 
 interface SaleProductsProps {}
 
 export const SaleProducts = ({}: SaleProductsProps) => {
-	
+  const { data } = useQuery(GET_SALE_PRODUCTS);
 
   return (
     <Section>
@@ -27,7 +29,9 @@ export const SaleProducts = ({}: SaleProductsProps) => {
               <ChevronRight className="w-6 h-6" />
             </NavLink>
           </div>
-          <div className="flex-1 min-w-0"></div>
+          <div className="flex-1 min-w-0">
+						
+					</div>
         </div>
       </Container>
     </Section>
