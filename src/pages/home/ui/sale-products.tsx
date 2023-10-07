@@ -1,4 +1,5 @@
-import { GET_SALE_PRODUCTS } from "@/shared/api";
+import { ProductCard } from "@/entities";
+import { GET_SALE_PRODUCTS, Product } from "@/shared/api";
 import { PRODUCTS_ROUTE } from "@/shared/consts";
 import { Container, Section } from "@/shared/ui";
 import { useQuery } from "@apollo/client";
@@ -29,9 +30,16 @@ export const SaleProducts = ({}: SaleProductsProps) => {
               <ChevronRight className="w-6 h-6" />
             </NavLink>
           </div>
-          <div className="flex-1 min-w-0">
-						
-					</div>
+          <div className="flex gap-4 flex-1 min-w-0">
+            {data?.allProduct.map(
+              (product, i) =>
+                i < 3 && (
+                  <div className="flex-[0_1_calc(25%-12px)]">
+                    <ProductCard product={product as Product} />
+                  </div>
+                )
+            )}
+          </div>
         </div>
       </Container>
     </Section>
