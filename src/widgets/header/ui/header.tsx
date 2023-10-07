@@ -1,3 +1,5 @@
+import logoImage from "@/assets/images/logo.png";
+import { GET_CATEGORIES_QUERY } from "@/shared/api";
 import {
   BLOG_ROUTE,
   CONTACT_ROUTE,
@@ -5,21 +7,16 @@ import {
   HOME_ROUTE,
   PRODUCTS_ROUTE,
 } from "@/shared/consts";
+import { useMediaQuery } from "@/shared/lib/hooks";
+import { imageBuilder } from "@/shared/lib/image-builder";
 import { Container } from "@/shared/ui";
+import { useQuery } from "@apollo/client";
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import logoImage from "@/assets/images/logo.png";
-import mobileIcon from "@/assets/icons/mobile.svg";
+import { HeaderCart } from "./header-cart";
+import { HeaderMobileMenu } from "./header-mobile-menu";
 import { HeaderNav } from "./header-nav";
 import { HeaderSearch } from "./header-search";
-import { HeaderCart } from "./header-cart";
-import { HeaderAuth } from "./header-auth";
-import { useMediaQuery } from "@/shared/lib/hooks";
-import { HeaderMobileMenu } from "./header-mobile-menu";
-import { useAuth0 } from "@auth0/auth0-react";
-import { useQuery } from "@apollo/client";
-import { GET_CATEGORIES_QUERY } from "@/shared/api";
-import { useEffect, useState } from "react";
-import { imageBuilder } from "@/shared/lib/image-builder";
 
 export type NavigationLink =
   | { label: string; route: string }
@@ -57,11 +54,8 @@ interface HeaderProps {}
 
 export const Header = ({}: HeaderProps) => {
   const isMd = useMediaQuery("(min-width: 768px)");
-  const { isAuthenticated } = useAuth0();
   const { data } = useQuery(GET_CATEGORIES_QUERY);
   const [navLinks, setNavLinks] = useState(NAVIGATION_LINKS);
-
-  const showCart = isMd || (!isMd && isAuthenticated);
 
   useEffect(() => {
     const productsLink = navLinks.find((link) => link.label === "Products");
@@ -117,13 +111,11 @@ export const Header = ({}: HeaderProps) => {
           )}
           <div className="flex items-center gap-2">
             {isMd && <HeaderSearch isMd={isMd} />}
-            {showCart && <HeaderCart />}
-            <HeaderAuth />
+            <HeaderCart />
           </div>
         </div>
         {!isMd && (
           <div className="flex items-center gap-2 mx-2">
-            {!showCart && <HeaderCart />}
             <HeaderSearch isMd={isMd} />
           </div>
         )}

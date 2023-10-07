@@ -12,7 +12,6 @@
   },
   "dependencies": {
     "@apollo/client": "^3.8.4",
-    "@auth0/auth0-react": "^2.2.1",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-dialog": "1.0.4",
     "@radix-ui/react-menubar": "^1.0.4",
