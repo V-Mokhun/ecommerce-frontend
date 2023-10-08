@@ -1,4 +1,4 @@
-import { PRODUCT_FIELDS, Product } from "@/shared/api";
+import { Product } from "@/shared/api";
 import { SINGLE_PRODUCT_ROUTE } from "@/shared/consts";
 import { cn } from "@/shared/lib";
 import { imageBuilder } from "@/shared/lib/image-builder";

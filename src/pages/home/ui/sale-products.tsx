@@ -1,15 +1,15 @@
-import { ProductCard } from "@/entities";
+import { SaleProductCard } from "@/entities";
 import { GET_SALE_PRODUCTS, Product } from "@/shared/api";
 import { PRODUCTS_ROUTE } from "@/shared/consts";
+import { MutationPlugin } from "@/shared/lib";
+import { useMediaQuery } from "@/shared/lib/hooks";
 import "@/shared/styles/slider.css";
 import { Container, Section, SliderArrow } from "@/shared/ui";
 import { useQuery } from "@apollo/client";
-import { ChevronRight } from "lucide-react";
-import { NavLink } from "react-router-dom";
 import { useKeenSlider } from "keen-slider/react";
+import { ChevronRight } from "lucide-react";
 import { useState } from "react";
-import { MutationPlugin } from "@/shared/lib";
-import { useMediaQuery } from "@/shared/lib/hooks";
+import { NavLink } from "react-router-dom";
 
 interface SaleProductsProps {}
 
@@ -96,7 +96,7 @@ export const SaleProducts = ({}: SaleProductsProps) => {
                       className="keen-slider__slide h-full flex-[0_0_60%] xs:flex-[0_0_40%] md:flex-[0_0_27%] lg:flex-[0_0_21%]"
                       key={product._id}
                     >
-                      <ProductCard product={product as Product} />
+                      <SaleProductCard product={product as Product} />
                     </div>
                   ))}
                   <div className="keen-slider__slide flex-[0_0_60%] xs:flex-[0_0_40%] md:flex-[0_0_27%] lg:flex-[0_0_21%]"></div>
