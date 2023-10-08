@@ -4,6 +4,7 @@ export const PRODUCT_FIELDS = graphql(`
   fragment ProductFields on Product {
     _id
     name
+    rating
     price
     salePrice
     salePercentage

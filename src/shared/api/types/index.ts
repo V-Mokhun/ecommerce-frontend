@@ -4,6 +4,7 @@ export type Product = {
   _id: string;
   name: string;
   price: number;
+  rating: number;
   salePrice?: number;
   salePercentage?: number;
   isOnSale: boolean;
