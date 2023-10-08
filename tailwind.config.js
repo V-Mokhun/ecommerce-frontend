@@ -117,6 +117,7 @@ export default {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
       fontSize: {
+        xxs: ["0.625rem", "normal"],
         xs: ["0.75rem", "normal"],
         sm: ["0.875rem", "normal"],
         base: ["1rem", "normal"],

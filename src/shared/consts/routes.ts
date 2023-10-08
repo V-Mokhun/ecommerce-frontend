@@ -1,5 +1,6 @@
 export const HOME_ROUTE = "/";
 export const PRODUCTS_ROUTE = "/products";
+export const SINGLE_PRODUCT_ROUTE = "/products/product";
 export const ACCOUNT_ROUTE = "/account";
 export const CART_ROUTE = "/cart";
 export const BLOG_ROUTE = "/blog";
