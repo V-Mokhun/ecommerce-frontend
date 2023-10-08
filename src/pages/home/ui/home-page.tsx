@@ -1,5 +1,6 @@
 import { Categories } from "./categories";
 import { Hero } from "./hero";
+import { NewProducts } from "./new-products";
 import { SaleProducts } from "./sale-products";
 
 interface HomePageProps {}
@@ -10,6 +11,7 @@ export const HomePage = ({}: HomePageProps) => {
       <Hero />
       <Categories />
       <SaleProducts />
+      <NewProducts />
     </>
   );
 };

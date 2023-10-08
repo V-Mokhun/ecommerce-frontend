@@ -50,12 +50,12 @@ export const SaleProducts = ({}: SaleProductsProps) => {
                 <linearGradient id="sw-gradient" x1="0" x2="1" y1="1" y2="0">
                   <stop
                     id="stop1"
-                    stop-color="rgba(16.874, 81.972, 180.524, 0.75)"
+                    stopColor="rgba(16.874, 81.972, 180.524, 0.75)"
                     offset="0%"
                   ></stop>
                   <stop
                     id="stop2"
-                    stop-color="rgba(19.684, 82.773, 178.283, 0.71)"
+                    stopColor="rgba(19.684, 82.773, 178.283, 0.71)"
                     offset="100%"
                   ></stop>
                 </linearGradient>

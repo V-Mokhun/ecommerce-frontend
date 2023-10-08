@@ -14,7 +14,7 @@ export const ProductCard = ({ product, className }: ProductCardProps) => {
   return (
     <div
       className={cn(
-        "flex flex-col rounded-sm p-2 bg-white group text-black relative group h-full",
+        "flex flex-col rounded-sm p-2 bg-white group text-black relative group h-full shadow-md hover:shadow-sm transition-shadow",
         className
       )}
     >
@@ -25,11 +25,11 @@ export const ProductCard = ({ product, className }: ProductCardProps) => {
       )}
       <NavLink
         to={`${SINGLE_PRODUCT_ROUTE}/${product.slug.current}`}
-        className="block pb-2 mb-2 md:pb-4 md:mb-4 relative z-0 after:w-full after:h-px after:absolute after:bottom-0 after:bg-gray-400 after:left-0 after:right-0 after:transition-colors group-hover:after:bg-primary"
+        className="flex justify-center items-center pb-2 mb-2 md:pb-4 md:mb-4 relative z-0 after:w-full after:h-px after:absolute after:bottom-0 after:bg-gray-400 after:left-0 after:right-0 after:transition-colors group-hover:after:bg-primary md:p-2"
       >
         <img
-          className="object-cover aspect-[15/13] max-h-28 xs:max-h-32 md:max-h-36 lg:max-h-40 w-full"
-          src={imageBuilder(product.mainImage!).width(216).height(160).url()}
+          className="object-cover aspect-[15/13] max-h-28 xs:max-h-32 md:max-h-36 lg:max-h-40 max-w-[140px] md:max-w-[220px] w-full group-hover:scale-105 transition-transform"
+          src={imageBuilder(product.mainImage!).url()}
           alt={product.name!}
         />
       </NavLink>

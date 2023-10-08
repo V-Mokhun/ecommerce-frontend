@@ -7,3 +7,11 @@ export const GET_SALE_PRODUCTS = graphql(`
     }
   }
 `);
+
+export const GET_NEW_PRODUCTS = graphql(`
+  query GetNewProducts {
+    allProduct(where: { isNew: { eq: true } }, limit: 4) {
+      ...ProductFields
+    }
+  }
+`);
