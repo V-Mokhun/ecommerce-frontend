@@ -3,6 +3,7 @@ import { SINGLE_PRODUCT_ROUTE } from "@/shared/consts";
 import { cn } from "@/shared/lib";
 import { imageBuilder } from "@/shared/lib/image-builder";
 import { Button, Icon } from "@/shared/ui";
+import { Plus } from "lucide-react";
 import { NavLink } from "react-router-dom";
 
 interface ProductCardProps {
@@ -14,7 +15,7 @@ export const ProductCard = ({ product, className }: ProductCardProps) => {
   return (
     <div
       className={cn(
-        "flex flex-col rounded-sm p-2 bg-white group text-black relative group h-full shadow-md hover:shadow-sm transition-shadow",
+        "flex flex-col rounded-sm p-2 md:p-4 bg-white group text-black relative group h-full shadow-md hover:shadow-sm transition-shadow",
         className
       )}
     >
@@ -27,6 +28,24 @@ export const ProductCard = ({ product, className }: ProductCardProps) => {
         to={`${SINGLE_PRODUCT_ROUTE}/${product.slug.current}`}
         className="flex justify-center items-center pb-2 mb-2 md:pb-4 md:mb-4 relative z-0 after:w-full after:h-px after:absolute after:bottom-0 after:bg-gray-400 after:left-0 after:right-0 after:transition-colors group-hover:after:bg-primary md:p-2"
       >
+        {product.colors && (
+          <ul className="md:group-hover:hidden absolute top-1/2 -translate-y-1/2 right-0 flex flex-col justify-center items-center gap-1 md:gap-2">
+            {product.colors.map(
+              (color, i) =>
+                i < 3 && (
+                  <li key={color.value.hex}>
+                    <span
+                      className="block border-[0.5px] border-gray-800 w-2 h-2 md:w-3 md:h-3 rounded-full"
+                      style={{ backgroundColor: color.value.hex }}
+                    />
+                  </li>
+                )
+            )}
+            {product.colors.length > 3 && (
+              <li className="font-medium text-center text-sm md:text-base">+</li>
+            )}
+          </ul>
+        )}
         <img
           className="object-cover aspect-[15/13] max-h-28 xs:max-h-32 md:max-h-36 lg:max-h-40 max-w-[140px] md:max-w-[220px] w-full group-hover:scale-105 transition-transform"
           src={imageBuilder(product.mainImage!).url()}
