@@ -1,3 +1,4 @@
+import { BestSellerProducts } from "./best-seller-products";
 import { Categories } from "./categories";
 import { Hero } from "./hero";
 import { NewProducts } from "./new-products";
@@ -12,6 +13,7 @@ export const HomePage = ({}: HomePageProps) => {
       <Categories />
       <SaleProducts />
       <NewProducts />
+      <BestSellerProducts />
     </>
   );
 };

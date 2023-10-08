@@ -42,7 +42,9 @@ export const ProductCard = ({ product, className }: ProductCardProps) => {
                 )
             )}
             {product.colors.length > 3 && (
-              <li className="font-medium text-center text-sm md:text-base">+</li>
+              <li className="font-medium text-center text-sm md:text-base">
+                +
+              </li>
             )}
           </ul>
         )}
