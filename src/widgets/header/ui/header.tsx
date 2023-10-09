@@ -1,5 +1,5 @@
 import logoImage from "@/assets/images/logo.png";
-import { GET_CATEGORIES_QUERY } from "@/shared/api";
+import { GET_CATEGORIES } from "@/shared/api";
 import {
   BLOG_ROUTE,
   CONTACT_ROUTE,
@@ -54,7 +54,7 @@ interface HeaderProps {}
 
 export const Header = ({}: HeaderProps) => {
   const isMd = useMediaQuery("(min-width: 768px)");
-  const { data } = useQuery(GET_CATEGORIES_QUERY);
+  const { data } = useQuery(GET_CATEGORIES);
   const [navLinks, setNavLinks] = useState(NAVIGATION_LINKS);
 
   useEffect(() => {

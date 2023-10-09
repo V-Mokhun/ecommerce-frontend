@@ -1,4 +1,4 @@
-import { GET_CATEGORIES_QUERY } from "@/shared/api";
+import { GET_CATEGORIES } from "@/shared/api";
 import { imageBuilder } from "@/shared/lib/image-builder";
 import { Container, Section } from "@/shared/ui";
 import { useQuery } from "@apollo/client";
@@ -7,7 +7,7 @@ import { NavLink } from "react-router-dom";
 interface CategoriesProps {}
 
 export const Categories = ({}: CategoriesProps) => {
-  const { data } = useQuery(GET_CATEGORIES_QUERY);
+  const { data } = useQuery(GET_CATEGORIES);
 
   return (
     data && (

@@ -1,6 +1,7 @@
 import { PRODUCTS_ROUTE } from "@/shared/consts";
-import { Breadcrumbs, Container } from "@/shared/ui";
+import { Benefits, Breadcrumbs, Container } from "@/shared/ui";
 import { useParams } from "react-router-dom";
+import { ProductsCategories } from "./products-categories";
 
 interface ProductsPageProps {}
 
@@ -17,6 +18,8 @@ export const ProductsPage = ({}: ProductsPageProps) => {
             { label: "Products", route: `${PRODUCTS_ROUTE}/${category}` },
           ]}
         />
+        <ProductsCategories />
+        <Benefits noContainer />
       </Container>
     </section>
   );

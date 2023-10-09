@@ -1,6 +1,6 @@
 import { graphql } from "..";
 
-export const GET_CATEGORIES_QUERY = graphql(
+export const GET_CATEGORIES = graphql(
   `
     query GetCategories {
       allCategory {
