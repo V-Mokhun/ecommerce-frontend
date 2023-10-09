@@ -2,14 +2,16 @@ import { cn } from "@/shared/lib";
 import { Menubar, Popover, PopoverContent, PopoverTrigger } from "@/shared/ui";
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { NavigationLink } from "./header";
+import { PRODUCTS_ROUTE } from "@/shared/consts";
 
 interface HeaderNavProps {
   links: NavigationLink[];
 }
 
 export const HeaderNav = ({ links }: HeaderNavProps) => {
+  const { pathname } = useLocation();
   const [open, setOpen] = useState(false);
 
   return (
@@ -39,7 +41,12 @@ export const HeaderNav = ({ links }: HeaderNavProps) => {
                 onOpenChange={(op) => setOpen(op)}
                 key={link.label}
               >
-                <PopoverTrigger className="group flex p-2 select-none items-center text-base font-light hover:text-primary transition-colors border-b border-solid border-b-transparent hover:border-b-primary-100 outline-none data-[state=open]:text-primary data-[state=open]:border-b-primary">
+                <PopoverTrigger
+                  className={cn(
+                    "group flex p-2 select-none items-center text-base font-light hover:text-primary transition-colors border-b border-solid border-b-transparent hover:border-b-primary-100 outline-none data-[state=open]:text-primary data-[state=open]:border-b-primary",
+                    pathname.includes(PRODUCTS_ROUTE) && "text-primary"
+                  )}
+                >
                   {link.label}{" "}
                   <ChevronDown className="transition-transform group-data-[state=open]:-rotate-180 ml-1" />
                 </PopoverTrigger>
