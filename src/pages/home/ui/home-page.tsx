@@ -10,6 +10,7 @@ import { useMediaQuery } from "@/shared/lib/hooks";
 import { Container, Section } from "@/shared/ui";
 import { NavLink } from "react-router-dom";
 import { PRODUCTS_ROUTE } from "@/shared/consts";
+import { Brands } from "./brands";
 
 interface HomePageProps {}
 
@@ -25,6 +26,7 @@ export const HomePage = ({}: HomePageProps) => {
       <Hero />
       <Categories />
       <SaleProducts />
+      <NewProducts />
       <Section>
         <Container>
           {mediumBanner && smallBanner && (
@@ -59,8 +61,8 @@ export const HomePage = ({}: HomePageProps) => {
           )}
         </Container>
       </Section>
-      <NewProducts />
       <BestSellerProducts />
+      <Brands />
       <Section>
         <Container>
           {largeBanner && (
