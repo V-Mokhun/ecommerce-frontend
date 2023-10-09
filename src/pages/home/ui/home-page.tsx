@@ -11,6 +11,7 @@ import { Container, Section } from "@/shared/ui";
 import { NavLink } from "react-router-dom";
 import { PRODUCTS_ROUTE } from "@/shared/consts";
 import { Brands } from "./brands";
+import { Benefits } from "./benefits";
 
 interface HomePageProps {}
 
@@ -78,6 +79,7 @@ export const HomePage = ({}: HomePageProps) => {
           )}
         </Container>
       </Section>
+      <Benefits />
     </>
   );
 };
