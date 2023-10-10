@@ -1,16 +1,18 @@
 import { useQuery } from "@apollo/client";
-import { BestSellerProducts } from "./best-seller-products";
-import { Categories } from "./categories";
-import { Hero } from "./hero";
-import { NewProducts } from "./new-products";
-import { SaleProducts } from "./sale-products";
 import { GET_HOME_BANNERS } from "@/shared/api";
 import { imageBuilder } from "@/shared/lib/image-builder";
 import { useMediaQuery } from "@/shared/lib/hooks";
 import { Benefits, Container, Section } from "@/shared/ui";
 import { NavLink } from "react-router-dom";
 import { PRODUCTS_ROUTE } from "@/shared/consts";
-import { Brands } from "./brands";
+import {
+  Hero,
+  Categories,
+  SaleProducts,
+  NewProducts,
+  BestSellerProducts,
+  Brands,
+} from "./ui";
 
 interface HomePageProps {}
 

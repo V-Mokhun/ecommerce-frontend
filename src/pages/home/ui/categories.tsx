@@ -1,4 +1,5 @@
 import { GET_CATEGORIES } from "@/shared/api";
+import { PRODUCTS_ROUTE } from "@/shared/consts";
 import { imageBuilder } from "@/shared/lib/image-builder";
 import { Container, Section } from "@/shared/ui";
 import { useQuery } from "@apollo/client";
@@ -20,7 +21,7 @@ export const Categories = ({}: CategoriesProps) => {
             >
               <NavLink
                 className="block"
-                to={`/category/${category.slug?.current}`}
+                to={`${PRODUCTS_ROUTE}/${category.slug?.current}`}
               >
                 <div className="mb-2 md:mb-3 w-full flex justify-center">
                   <img

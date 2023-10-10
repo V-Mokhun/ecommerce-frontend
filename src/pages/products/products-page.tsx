@@ -1,13 +1,12 @@
 import { PRODUCTS_ROUTE } from "@/shared/consts";
 import { Benefits, Breadcrumbs, Container } from "@/shared/ui";
 import { useParams } from "react-router-dom";
-import { ProductsCategories } from "./products-categories";
+import { ProductsCategories, ProductsContent } from "./ui";
 
 interface ProductsPageProps {}
 
 export const ProductsPage = ({}: ProductsPageProps) => {
   const { category } = useParams();
-  console.log(category);
 
   return (
     <section>
@@ -19,6 +18,7 @@ export const ProductsPage = ({}: ProductsPageProps) => {
           ]}
         />
         <ProductsCategories />
+        <ProductsContent />
         <Benefits noContainer />
       </Container>
     </section>
