@@ -6,6 +6,7 @@ import {
   AccordionTrigger,
   Button,
   Checkbox,
+  Switch,
 } from "@/shared/ui";
 import { useQuery } from "@apollo/client";
 import { ProductsFiltersAccordionItem } from "./products-filters-accordion-item";
@@ -58,10 +59,14 @@ export const ProductsFilters = ({}: ProductsFiltersProps) => {
             </li>
           ))}
         </ProductsFiltersAccordionItem>
-        <div className="border-b border-b-gray-400">
-          <div className="p-4 font-light text-base md:text-lg lg:text-xl">
-            
-          </div>
+        <div className="border-b border-b-gray-400 p-4 font-light text-base md:text-lg lg:text-xl flex items-center gap-2 justify-between">
+          <label
+            className="flex-1 cursor-pointer peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+            htmlFor="isSale"
+          >
+            Discount
+          </label>
+          <Switch id="isSale" />
         </div>
       </Accordion>
     </aside>
