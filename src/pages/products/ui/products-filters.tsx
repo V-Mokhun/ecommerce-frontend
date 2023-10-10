@@ -1,26 +1,58 @@
 import { GET_BRANDS, GET_COLORS } from "@/shared/api";
 import {
   Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
   Button,
   Checkbox,
+  Sheet,
+  SheetContent,
   Switch,
 } from "@/shared/ui";
 import { useQuery } from "@apollo/client";
 import { ProductsFiltersAccordionItem } from "./products-filters-accordion-item";
+import { ReactNode } from "react";
 
-interface ProductsFiltersProps {}
+interface ProductsFiltersProps {
+  isOpen: boolean;
+  onOpen: (open: boolean) => void;
+  isMd: boolean;
+}
 
 // Brand, Color, Price, Rating, Discount
 
-export const ProductsFilters = ({}: ProductsFiltersProps) => {
+const ParentComponent = ({
+  isMd,
+  children,
+  isOpen,
+  onOpen,
+}: {
+  isMd: boolean;
+  children: ReactNode;
+  isOpen: boolean;
+  onOpen: (open: boolean) => void;
+}) =>
+  isMd ? (
+    <aside className="md:w-72">{children}</aside>
+  ) : (
+    <Sheet open={isOpen} onOpenChange={(open) => onOpen(open)}>
+      <SheetContent
+        overlayClassName="z-[60]"
+        className="w-full z-[60] max-w-none sm:max-w-none"
+      >
+        {children}
+      </SheetContent>
+    </Sheet>
+  );
+
+export const ProductsFilters = ({
+  isOpen,
+  onOpen,
+  isMd,
+}: ProductsFiltersProps) => {
   const { data: brands } = useQuery(GET_BRANDS);
   const { data: colors } = useQuery(GET_COLORS);
 
   return (
-    <aside className="md:w-72">
+    <ParentComponent isMd={isMd} isOpen={isOpen} onOpen={onOpen}>
       <div className="p-4 flex items-center justify-between">
         <h2 className="text-xl font-semibold">Filters</h2>
         <Button variant="text">Clear All</Button>
@@ -68,7 +100,11 @@ export const ProductsFilters = ({}: ProductsFiltersProps) => {
           </label>
           <Switch id="isSale" />
         </div>
+        <ProductsFiltersAccordionItem
+          label="Price"
+          value="price"
+        ></ProductsFiltersAccordionItem>
       </Accordion>
-    </aside>
+    </ParentComponent>
   );
 };
