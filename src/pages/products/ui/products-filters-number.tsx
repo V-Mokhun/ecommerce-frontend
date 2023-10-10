@@ -10,6 +10,8 @@ interface ProductsFiltersNumberProps {
   onChange: (key: string, value: number) => void;
   minKey: string;
   maxKey: string;
+  step?: number;
+  minStepsBetweenThumbs?: number;
 }
 
 export const ProductsFiltersNumber = ({
@@ -20,6 +22,8 @@ export const ProductsFiltersNumber = ({
   onChange,
   maxKey,
   minKey,
+  minStepsBetweenThumbs = 1,
+  step = 1,
 }: ProductsFiltersNumberProps) => {
   const [minValue, setMinValue] = useState<number | undefined>(initialMinValue);
   const [maxValue, setMaxValue] = useState<number | undefined>(initialMaxValue);
@@ -99,7 +103,8 @@ export const ProductsFiltersNumber = ({
           setMaxValue(max);
         }}
         value={[minValue ?? min, maxValue ?? max]}
-        minStepsBetweenThumbs={1}
+        minStepsBetweenThumbs={minStepsBetweenThumbs}
+        step={step}
         defaultValue={[initialMinValue, initialMaxValue]}
         min={min}
         max={max}

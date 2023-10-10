@@ -1,7 +1,14 @@
 import { useMediaQuery } from "@/shared/lib/hooks";
 import { ProductsFilters } from "./products-filters";
 import { useState } from "react";
-import { Icon } from "@/shared/ui";
+import {
+  Icon,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/shared/ui";
 
 interface ProductsContentProps {}
 
@@ -21,7 +28,17 @@ export const ProductsContent = ({}: ProductsContentProps) => {
           <Icon name="filters" className="w-4 h-4" />
           <span className="font-light">Filters</span>
         </button>
-        <button>Sort</button>
+        <Select defaultValue="rating">
+          <SelectTrigger className="flex-auto md:max-w-xs">
+            <SelectValue placeholder="Sort by..." />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="rating">Rating</SelectItem>
+            <SelectItem value="priceAsc">Price: ascending</SelectItem>
+            <SelectItem value="priceDesc">Price: descending</SelectItem>
+            <SelectItem value="new">New arrivals</SelectItem>
+          </SelectContent>
+        </Select>
       </div>
       <div className="flex gap-6 mb-4 md:mb-6">
         <ProductsFilters

@@ -11,3 +11,4 @@ export * from "./heading";
 export * from "./checkbox";
 export * from "./switch";
 export * from "./slider";
+export * from './select';

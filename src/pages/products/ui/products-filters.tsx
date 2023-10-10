@@ -117,6 +117,21 @@ export const ProductsFilters = ({
             }}
           />
         </ProductsFiltersAccordionItem>
+        <ProductsFiltersAccordionItem label="Rating" value="rating">
+          <ProductsFiltersNumber
+            min={1}
+            max={5}
+            minValue={1}
+            maxValue={5}
+            minKey="minRating"
+            maxKey="maxRating"
+            step={0.1}
+            minStepsBetweenThumbs={0.1}
+            onChange={(key, value) => {
+              console.log(key, value);
+            }}
+          />
+        </ProductsFiltersAccordionItem>
       </Accordion>
     </ParentComponent>
   );
