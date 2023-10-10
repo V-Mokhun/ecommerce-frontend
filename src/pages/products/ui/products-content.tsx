@@ -29,7 +29,7 @@ export const ProductsContent = ({}: ProductsContentProps) => {
           <span className="font-light">Filters</span>
         </button>
         <Select defaultValue="rating">
-          <SelectTrigger className="flex-auto md:max-w-xs">
+          <SelectTrigger className="flex-auto w-auto md:w-full md:max-w-xs">
             <SelectValue placeholder="Sort by..." />
           </SelectTrigger>
           <SelectContent>
