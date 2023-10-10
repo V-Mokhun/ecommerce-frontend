@@ -22,7 +22,7 @@ export const ProductsFiltersAccordionItem = ({
         {label}
       </AccordionTrigger>
       <AccordionContent asChild>
-        <ul className="p-4 pt-0 space-y-4">{children}</ul>
+        <ul className="p-4 pt-0 space-y-4 max-h-80 overflow-y-auto">{children}</ul>
       </AccordionContent>
     </AccordionItem>
   );

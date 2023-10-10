@@ -4,12 +4,15 @@ import {
   Button,
   Checkbox,
   Sheet,
+  SheetClose,
   SheetContent,
+  Slider,
   Switch,
 } from "@/shared/ui";
 import { useQuery } from "@apollo/client";
 import { ProductsFiltersAccordionItem } from "./products-filters-accordion-item";
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
+import { ProductsFiltersNumber } from "./products-filters-number";
 
 interface ProductsFiltersProps {
   isOpen: boolean;
@@ -36,6 +39,7 @@ const ParentComponent = ({
     <Sheet open={isOpen} onOpenChange={(open) => onOpen(open)}>
       <SheetContent
         overlayClassName="z-[60]"
+        closeButtonClassName="top-4"
         className="w-full z-[60] max-w-none sm:max-w-none"
       >
         {children}
@@ -53,11 +57,11 @@ export const ProductsFilters = ({
 
   return (
     <ParentComponent isMd={isMd} isOpen={isOpen} onOpen={onOpen}>
-      <div className="p-4 flex items-center justify-between">
+      <div className="p-4 mt-4 md:mt-0 mb-4 flex items-center justify-between">
         <h2 className="text-xl font-semibold">Filters</h2>
         <Button variant="text">Clear All</Button>
       </div>
-      <Accordion type="multiple" className="w-full">
+      <Accordion type="multiple" className="w-full" defaultValue={["price"]}>
         <ProductsFiltersAccordionItem label="Brand" value="brands">
           {brands?.allBrand.map((brand) => (
             <li
@@ -100,10 +104,19 @@ export const ProductsFilters = ({
           </label>
           <Switch id="isSale" />
         </div>
-        <ProductsFiltersAccordionItem
-          label="Price"
-          value="price"
-        ></ProductsFiltersAccordionItem>
+        <ProductsFiltersAccordionItem label="Price" value="price">
+          <ProductsFiltersNumber
+            min={1}
+            max={999_99}
+            minValue={1}
+            maxValue={999_99}
+            minKey="minPrice"
+            maxKey="maxPrice"
+            onChange={(key, value) => {
+              console.log(key, value);
+            }}
+          />
+        </ProductsFiltersAccordionItem>
       </Accordion>
     </ParentComponent>
   );

@@ -58,6 +58,7 @@ interface SheetContentProps
   extends React.ComponentPropsWithoutRef<typeof SheetPrimitive.Content>,
     VariantProps<typeof sheetVariants> {
   overlayClassName?: string;
+  closeButtonClassName?: string;
 }
 
 const SheetContent = React.forwardRef<
@@ -65,7 +66,14 @@ const SheetContent = React.forwardRef<
   SheetContentProps
 >(
   (
-    { side = "right", className, children, overlayClassName, ...props },
+    {
+      side = "right",
+      className,
+      children,
+      overlayClassName,
+      closeButtonClassName,
+      ...props
+    },
     ref
   ) => (
     <SheetPortal>
@@ -76,7 +84,12 @@ const SheetContent = React.forwardRef<
         {...props}
       >
         {children}
-        <SheetPrimitive.Close className="absolute right-4 top-8 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none">
+        <SheetPrimitive.Close
+          className={cn(
+            "absolute right-4 top-8 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none",
+            closeButtonClassName
+          )}
+        >
           <Icon name="close-circle" className="w-6 h-6" />
           <span className="sr-only">Close</span>
         </SheetPrimitive.Close>
