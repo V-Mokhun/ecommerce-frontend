@@ -8,4 +8,5 @@ export * from "./accordion";
 export * from "./section";
 export * from "./separator";
 export * from "./heading";
-export * from './checkbox';
+export * from "./checkbox";
+export * from "./switch";

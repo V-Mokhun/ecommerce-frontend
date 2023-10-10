@@ -18,6 +18,7 @@ const documents = {
     "\n  query GetHomeBanners {\n    largeBanner: allBanner(\n      where: { showOn: { eq: \"home\" }, size: { eq: \"lg\" } }\n      limit: 1\n    ) {\n\t\t\ttitle\n      desktopImage {\n        ...ImageFields\n      }\n      mobileImage {\n        ...ImageFields\n      }\n      link\n      size\n    }\n\n    mediumBanner: allBanner(\n      where: { showOn: { eq: \"home\" }, size: { eq: \"md\" } }\n      limit: 1\n    ) {\n\t\t\ttitle\n      desktopImage {\n        ...ImageFields\n      }\n      mobileImage {\n        ...ImageFields\n      }\n      link\n      size\n    }\n\n    smallBanner: allBanner(\n      where: { showOn: { eq: \"home\" }, size: { eq: \"sm\" } }\n      limit: 1\n    ) {\n\t\t\ttitle\n      desktopImage {\n        ...ImageFields\n      }\n      mobileImage {\n        ...ImageFields\n      }\n      link\n      size\n    }\n  }\n": types.GetHomeBannersDocument,
     "\n  query GetBrands {\n    allBrand {\n      _id\n      name\n      slug {\n        current\n      }\n      logo {\n        ...ImageFields\n      }\n    }\n  }\n": types.GetBrandsDocument,
     "\n    query GetCategories {\n      allCategory {\n        _id\n        name\n        shortName\n        slug {\n          current\n        }\n        icon {\n          ...ImageFields\n        }\n        image {\n          ...ImageFields\n        }\n      }\n    }\n  ": types.GetCategoriesDocument,
+    "\n  query GetColors {\n    allColorItem {\n      _id\n      name\n      value {\n        hex\n      }\n    }\n  }\n": types.GetColorsDocument,
     "\n  query GetSaleProducts {\n    allProduct(where: { isOnSale: { eq: true } }, limit: 10) {\n      ...ProductFields\n    }\n  }\n": types.GetSaleProductsDocument,
     "\n  query GetNewProducts {\n    allProduct(\n      where: { isNew: { eq: true } }\n      limit: 4\n      sort: { rating: DESC }\n    ) {\n      ...ProductFields\n    }\n  }\n": types.GetNewProductsDocument,
     "\n  query GetBestSellerProducts {\n    allProduct(\n      where: { isBestSeller: { eq: true } }\n      limit: 4\n      sort: { rating: DESC }\n    ) {\n      ...ProductFields\n    }\n  }\n": types.GetBestSellerProductsDocument,
@@ -57,6 +58,10 @@ export function graphql(source: "\n  query GetBrands {\n    allBrand {\n      _i
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n    query GetCategories {\n      allCategory {\n        _id\n        name\n        shortName\n        slug {\n          current\n        }\n        icon {\n          ...ImageFields\n        }\n        image {\n          ...ImageFields\n        }\n      }\n    }\n  "): (typeof documents)["\n    query GetCategories {\n      allCategory {\n        _id\n        name\n        shortName\n        slug {\n          current\n        }\n        icon {\n          ...ImageFields\n        }\n        image {\n          ...ImageFields\n        }\n      }\n    }\n  "];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query GetColors {\n    allColorItem {\n      _id\n      name\n      value {\n        hex\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetColors {\n    allColorItem {\n      _id\n      name\n      value {\n        hex\n      }\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
