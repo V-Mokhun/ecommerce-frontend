@@ -1,5 +1,18 @@
 import { graphql } from "..";
 
+export const GET_PRODUCTS = graphql(`
+  query GetProducts(
+    $filters: ProductFilter
+    $sort: [ProductSorting!]
+    $limit: Int = 15
+    $offset: Int = 0
+  ) {
+    allProduct(where: $filters, sort: $sort, limit: $limit, offset: $offset) {
+      ...ProductFields
+    }
+  }
+`);
+
 export const GET_SALE_PRODUCTS = graphql(`
   query GetSaleProducts {
     allProduct(where: { isOnSale: { eq: true } }, limit: 10) {

@@ -1,12 +1,14 @@
-import { PRODUCTS_ROUTE } from "@/shared/consts";
+import { HOME_ROUTE, PRODUCTS_ROUTE } from "@/shared/consts";
 import { Benefits, Breadcrumbs, Container } from "@/shared/ui";
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import { ProductsCategories, ProductsContent } from "./ui";
 
 interface ProductsPageProps {}
 
 export const ProductsPage = ({}: ProductsPageProps) => {
   const { category } = useParams();
+
+  if (!category) return <Navigate to={HOME_ROUTE} />;
 
   return (
     <section>
@@ -18,7 +20,7 @@ export const ProductsPage = ({}: ProductsPageProps) => {
           ]}
         />
         <ProductsCategories />
-        <ProductsContent />
+        <ProductsContent category={category} />
         <Benefits noContainer />
       </Container>
     </section>
