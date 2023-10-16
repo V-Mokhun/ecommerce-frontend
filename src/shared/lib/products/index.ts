@@ -48,7 +48,8 @@ export const stringifyFiltersToSearchParams = (
     }
 
     if (key === "colors" || key === "brands") {
-      if (filters[key].length > 0) params.set(key, filters[key].join(","));
+      if (filters[key] && filters[key]!.length > 0)
+        params.set(key, filters[key]!.join(","));
       else params.delete(key);
     } else {
       if (filters[key] === DEFAULT_PRODUCT_FILTERS[key]) params.delete(key);

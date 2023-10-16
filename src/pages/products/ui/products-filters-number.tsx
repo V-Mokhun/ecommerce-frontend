@@ -1,3 +1,4 @@
+import { ProductFilters } from "@/shared/api";
 import { useDebouncedValue } from "@/shared/lib/hooks";
 import { Slider } from "@/shared/ui";
 import { useEffect, useState } from "react";
@@ -7,9 +8,9 @@ interface ProductsFiltersNumberProps {
   maxValue: number;
   min: number;
   max: number;
-  onChange: (key: string, value: number) => void;
-  minKey: string;
-  maxKey: string;
+  onChange: (key: keyof ProductFilters, value: number) => void;
+  minKey: keyof ProductFilters;
+  maxKey: keyof ProductFilters;
   step?: number;
   minStepsBetweenThumbs?: number;
 }

@@ -14,7 +14,10 @@ import { GET_PRODUCTS, Product, SortFields } from "@/shared/api";
 import { ProductCard } from "@/entities";
 import { SortOrder } from "@/shared/api/generated/graphql";
 import { useSearchParams } from "react-router-dom";
-import { parseSortFromSearchParams } from "@/shared/lib";
+import {
+  parseFiltersFromSearchParams,
+  parseSortFromSearchParams,
+} from "@/shared/lib";
 
 interface ProductsContentProps {
   category: string;
@@ -26,6 +29,7 @@ export const ProductsContent = ({ category }: ProductsContentProps) => {
 
   const [searchParams, setSearchParams] = useSearchParams();
   const sort = parseSortFromSearchParams(searchParams);
+  const filters = parseFiltersFromSearchParams(searchParams);
 
   const {
     data: products,
@@ -33,7 +37,9 @@ export const ProductsContent = ({ category }: ProductsContentProps) => {
     loading,
   } = useQuery(GET_PRODUCTS, {
     variables: {
-      filters: { category: { slug: { current: { eq: category } } } },
+      filters: {
+        category: { slug: { current: { eq: category } } },
+      },
       sort,
       limit: 5,
     },
