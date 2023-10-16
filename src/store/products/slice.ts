@@ -17,7 +17,18 @@ export const productsSlice = createSlice({
     setFilters: (state, action: PayloadAction<ProductFilters>) => {
       state.filters = { ...state.filters, ...action.payload };
     },
+    updateFilters: (
+      state,
+      action: PayloadAction<{
+        key: keyof ProductFilters;
+        value: ProductFilters[keyof ProductFilters];
+      }>
+    ) => {
+      const { key, value } = action.payload;
+
+      state.filters = { ...state.filters, [key]: value };
+    },
   },
 });
 
-export const { setFilters } = productsSlice.actions;
+export const { setFilters, updateFilters } = productsSlice.actions;

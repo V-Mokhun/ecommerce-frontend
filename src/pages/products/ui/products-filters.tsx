@@ -20,7 +20,10 @@ import {
   useAppDispatch,
   useAppSelector,
 } from "@/store";
-import { parseFiltersFromSearchParams } from "@/shared/lib";
+import {
+  parseFiltersFromSearchParams,
+  stringifyFiltersToSearchParams,
+} from "@/shared/lib";
 
 interface ProductsFiltersProps {
   isOpen: boolean;
@@ -64,6 +67,14 @@ export const ProductsFilters = ({
   const { data: brands } = useQuery(GET_BRANDS);
   const { data: colors } = useQuery(GET_COLORS);
   const dispatch = useAppDispatch();
+  const filters = useAppSelector(productsFiltersSelector);
+
+  useEffect(() => {
+    setSearchParams((prev) => {
+      const params = stringifyFiltersToSearchParams(filters, prev);
+      return params;
+    });
+  }, [filters]);
 
   useEffect(() => {
     const filters = parseFiltersFromSearchParams(searchParams);
@@ -83,7 +94,9 @@ export const ProductsFilters = ({
               className="flex items-center gap-4 cursor-pointer"
               key={brand._id}
             >
-              <Checkbox onCheckedChange={(e) => {}} id={brand.slug!.current!} />
+              <Checkbox onCheckedChange={(e) => {
+                
+              }} id={brand.slug!.current!} />
               <label
                 htmlFor={brand.slug!.current!}
                 className="flex-1 cursor-pointer text-sm font-light md:text-base lg:text-lg peer-disabled:cursor-not-allowed peer-disabled:opacity-70"

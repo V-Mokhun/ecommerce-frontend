@@ -22,5 +22,39 @@ export const parseFiltersFromSearchParams = (
 ): ProductFilters => {
   const filters = { ...DEFAULT_PRODUCT_FILTERS };
 
+  for (const key of Object.keys(filters) as Array<keyof ProductFilters>) {
+    const value = params.get(key);
+
+    if (key === "brands" || key === "colors") {
+      filters[key] = value ? value.split(",") : [];
+    } else if (key === "onSale") {
+      filters[key] = value === "true";
+    } else {
+      filters[key] = Number(value);
+    }
+  }
+
   return filters;
+};
+
+export const stringifyFiltersToSearchParams = (
+  filters: ProductFilters,
+  params: URLSearchParams
+) => {
+  for (const key of Object.keys(filters) as Array<keyof ProductFilters>) {
+    if (!filters[key]) {
+      params.delete(key);
+      continue;
+    }
+
+    if (key === "colors" || key === "brands") {
+      if (filters[key].length > 0) params.set(key, filters[key].join(","));
+      else params.delete(key);
+    } else {
+      if (filters[key] === DEFAULT_PRODUCT_FILTERS[key]) params.delete(key);
+      else params.set(key, String(filters[key]));
+    }
+  }
+
+  return params;
 };
