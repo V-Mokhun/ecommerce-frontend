@@ -10,17 +10,23 @@ import {
   SelectValue,
 } from "@/shared/ui";
 import { useQuery } from "@apollo/client";
-import { GET_PRODUCTS, Product } from "@/shared/api";
+import { GET_PRODUCTS, Product, SortFields } from "@/shared/api";
 import { ProductCard } from "@/entities";
 import { SortOrder } from "@/shared/api/generated/graphql";
+import { useSearchParams } from "react-router-dom";
+import { parseSortFromSearchParams } from "@/shared/lib";
 
 interface ProductsContentProps {
   category: string;
 }
 
 export const ProductsContent = ({ category }: ProductsContentProps) => {
-  const isMd = useMediaQuery("(min-width: 768px)");
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const isMd = useMediaQuery("(min-width: 768px)");
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const sort = parseSortFromSearchParams(searchParams);
+
   const {
     data: products,
     fetchMore,
@@ -28,12 +34,24 @@ export const ProductsContent = ({ category }: ProductsContentProps) => {
   } = useQuery(GET_PRODUCTS, {
     variables: {
       filters: { category: { slug: { current: { eq: category } } } },
-      sort: { rating: SortOrder.Desc },
+      sort,
       limit: 5,
     },
   });
 
-  console.log(products);
+  const onSortChange = (value: SortFields) => {
+    if (value === SortFields.RATING_DESC) {
+      setSearchParams((prev) => {
+        prev.delete("sort");
+        return prev;
+      });
+    } else {
+      setSearchParams((prev) => {
+        prev.set("sort", value);
+        return prev;
+      });
+    }
+  };
 
   return (
     <div>
@@ -47,15 +65,22 @@ export const ProductsContent = ({ category }: ProductsContentProps) => {
           <Icon name="filters" className="w-4 h-4" />
           <span className="font-light">Filters</span>
         </button>
-        <Select defaultValue="rating">
+        <Select
+          onValueChange={onSortChange}
+          defaultValue={searchParams.get("sort") ?? SortFields.RATING_DESC}
+        >
           <SelectTrigger className="flex-auto w-auto md:w-full md:max-w-xs">
             <SelectValue placeholder="Sort by..." />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="rating">Rating</SelectItem>
-            <SelectItem value="priceAsc">Price: ascending</SelectItem>
-            <SelectItem value="priceDesc">Price: descending</SelectItem>
-            <SelectItem value="new">New arrivals</SelectItem>
+            <SelectItem value={SortFields.RATING_DESC}>Rating</SelectItem>
+            <SelectItem value={SortFields.PRICE_ASC}>
+              Price: ascending
+            </SelectItem>
+            <SelectItem value={SortFields.PRICE_DESC}>
+              Price: descending
+            </SelectItem>
+            <SelectItem value={SortFields.IS_NEW_DESC}>New arrivals</SelectItem>
           </SelectContent>
         </Select>
       </div>
