@@ -1,5 +1,6 @@
-import { SortFields } from "@/shared/api";
+import { ProductFilters, SortFields } from "@/shared/api";
 import { ProductSorting, SortOrder } from "@/shared/api/generated/graphql";
+import { DEFAULT_PRODUCT_FILTERS } from "@/shared/consts";
 import { URLSearchParams } from "url";
 
 export const parseSortFromSearchParams = (
@@ -14,4 +15,12 @@ export const parseSortFromSearchParams = (
   else if (sort === SortFields.IS_NEW_DESC) return { isNew: SortOrder.Desc };
 
   return { rating: SortOrder.Desc };
+};
+
+export const parseFiltersFromSearchParams = (
+  params: URLSearchParams
+): ProductFilters => {
+  const filters = { ...DEFAULT_PRODUCT_FILTERS };
+
+  return filters;
 };

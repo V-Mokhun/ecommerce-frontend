@@ -1,5 +1,4 @@
 import { SanityImageObject } from "@sanity/image-url/lib/types/types";
-import { ProductSorting } from "../generated/graphql";
 
 export type Product = {
   _id: string;
@@ -22,4 +21,14 @@ export enum SortFields {
   PRICE_DESC = "price.desc",
   RATING_DESC = "rating.desc",
   IS_NEW_DESC = "isNew.desc",
+}
+
+export interface ProductFilters {
+  brands: string[];
+  colors: string[];
+  onSale: boolean;
+  priceMin: number;
+  priceMax: number;
+  ratingMin: number;
+  ratingMax: number;
 }

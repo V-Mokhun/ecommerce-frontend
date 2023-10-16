@@ -11,16 +11,22 @@ import {
 } from "@/shared/ui";
 import { useQuery } from "@apollo/client";
 import { ProductsFiltersAccordionItem } from "./products-filters-accordion-item";
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { ProductsFiltersNumber } from "./products-filters-number";
+import { useSearchParams } from "react-router-dom";
+import {
+  productsFiltersSelector,
+  setFilters,
+  useAppDispatch,
+  useAppSelector,
+} from "@/store";
+import { parseFiltersFromSearchParams } from "@/shared/lib";
 
 interface ProductsFiltersProps {
   isOpen: boolean;
   onOpen: (open: boolean) => void;
   isMd: boolean;
 }
-
-// Brand, Color, Price, Rating, Discount
 
 const ParentComponent = ({
   isMd,
@@ -47,13 +53,22 @@ const ParentComponent = ({
     </Sheet>
   );
 
+// setFilters -> useEffect setSearchParams ->
+
 export const ProductsFilters = ({
   isOpen,
   onOpen,
   isMd,
 }: ProductsFiltersProps) => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const { data: brands } = useQuery(GET_BRANDS);
   const { data: colors } = useQuery(GET_COLORS);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    const filters = parseFiltersFromSearchParams(searchParams);
+    dispatch(setFilters(filters));
+  }, [searchParams]);
 
   return (
     <ParentComponent isMd={isMd} isOpen={isOpen} onOpen={onOpen}>
