@@ -23,6 +23,7 @@ import { ReactNode, useEffect, useRef } from "react";
 import { useSearchParams } from "react-router-dom";
 import { ProductsFiltersAccordionItem } from "./products-filters-accordion-item";
 import { ProductsFiltersNumber } from "./products-filters-number";
+import { MAX_PRICE, MAX_RATING, MIN_PRICE, MIN_RATING } from "@/shared/consts";
 
 interface ProductsFiltersProps {
   isOpen: boolean;
@@ -76,6 +77,7 @@ export const ProductsFilters = ({
       isMounted.current = true;
       return;
     }
+    console.log("filters", filters);
 
     setSearchParams((prev) => {
       const params = stringifyFiltersToSearchParams(filters, prev);
@@ -98,7 +100,6 @@ export const ProductsFilters = ({
             >
               <Checkbox
                 checked={
-                  filters.brands &&
                   filters.brands.find((b) => b === brand.slug!.current)
                     ? true
                     : false
@@ -134,34 +135,35 @@ export const ProductsFilters = ({
             Discount
           </label>
           <Switch
+            checked={filters.onSale}
             onCheckedChange={(checked) =>
-              updateFilters({ key: "onSale", value: checked })
+              dispatch(updateFilters({ key: "onSale", value: checked }))
             }
             id="isSale"
           />
         </div>
         <ProductsFiltersAccordionItem label="Price" value="price">
           <ProductsFiltersNumber
-            min={1}
-            max={999_99}
-            minValue={1}
-            maxValue={999_99}
+            min={MIN_PRICE}
+            max={MAX_PRICE}
+            minValue={filters.priceMin}
+            maxValue={filters.priceMax}
             minKey="priceMin"
             maxKey="priceMax"
-            onChange={(key, value) => updateFilters({ key, value })}
+            onChange={(key, value) => dispatch(updateFilters({ key, value }))}
           />
         </ProductsFiltersAccordionItem>
         <ProductsFiltersAccordionItem label="Rating" value="rating">
           <ProductsFiltersNumber
-            min={1}
-            max={5}
-            minValue={1}
-            maxValue={5}
+            min={MIN_RATING}
+            max={MAX_RATING}
+            minValue={filters.ratingMin}
+            maxValue={filters.ratingMax}
             minKey="ratingMin"
             maxKey="ratingMax"
             step={0.1}
             minStepsBetweenThumbs={0.1}
-            onChange={(key, value) => updateFilters({ key, value })}
+            onChange={(key, value) => dispatch(updateFilters({ key, value }))}
           />
         </ProductsFiltersAccordionItem>
       </Accordion>

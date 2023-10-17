@@ -32,6 +32,14 @@ export const ProductsFiltersNumber = ({
   const [debouncedMaxValue] = useDebouncedValue(maxValue, 1000);
 
   useEffect(() => {
+    setMinValue(initialMinValue);
+  }, [initialMinValue]);
+
+  useEffect(() => {
+    setMaxValue(initialMaxValue);
+  }, [initialMaxValue]);
+
+  useEffect(() => {
     if (!debouncedMaxValue || debouncedMaxValue > max) {
       setMaxValue(max);
       onChange(maxKey, max);
