@@ -72,7 +72,7 @@ export const Pagination = ({
         </>
       )}
 
-      {currentPage > 1 && (
+      {currentPage > 1 && offset < totalPages * limit && (
         <>
           {currentPage - 2 > 1 && (
             <li

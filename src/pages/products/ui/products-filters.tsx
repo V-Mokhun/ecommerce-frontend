@@ -44,7 +44,7 @@ const ParentComponent = ({
   onOpen: (open: boolean) => void;
 }) =>
   isMd ? (
-    <aside className="md:w-72">{children}</aside>
+    <aside className="md:w-64">{children}</aside>
   ) : (
     <Sheet open={isOpen} onOpenChange={(open) => onOpen(open)}>
       <SheetContent
@@ -117,6 +117,7 @@ export const ProductsFilters = ({
                           ),
                     })
                   );
+                  searchParams.delete("offset");
                 }}
                 id={brand.slug!.current!}
               />
@@ -138,9 +139,10 @@ export const ProductsFilters = ({
           </label>
           <Switch
             checked={filters.onSale}
-            onCheckedChange={(checked) =>
-              dispatch(updateFilters({ key: "onSale", value: checked }))
-            }
+            onCheckedChange={(checked) => {
+              dispatch(updateFilters({ key: "onSale", value: checked }));
+              searchParams.delete("offset");
+            }}
             id="isSale"
           />
         </div>
@@ -152,7 +154,10 @@ export const ProductsFilters = ({
             maxValue={filters.priceMax}
             minKey="priceMin"
             maxKey="priceMax"
-            onChange={(key, value) => dispatch(updateFilters({ key, value }))}
+            onChange={(key, value) => {
+              dispatch(updateFilters({ key, value }));
+              searchParams.delete("offset");
+            }}
           />
         </ProductsFiltersAccordionItem>
         <ProductsFiltersAccordionItem label="Rating" value="rating">
@@ -165,7 +170,10 @@ export const ProductsFilters = ({
             maxKey="ratingMax"
             step={0.1}
             minStepsBetweenThumbs={0.1}
-            onChange={(key, value) => dispatch(updateFilters({ key, value }))}
+            onChange={(key, value) => {
+              dispatch(updateFilters({ key, value }));
+              searchParams.delete("offset");
+            }}
           />
         </ProductsFiltersAccordionItem>
       </Accordion>
