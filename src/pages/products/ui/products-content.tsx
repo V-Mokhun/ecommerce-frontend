@@ -19,6 +19,8 @@ import {
   parseFiltersFromSearchParams,
   parseSortFromSearchParams,
 } from "@/shared/lib";
+import { Pagination } from "@/widgets";
+import { PRODUCTS_LIMIT } from "@/shared/consts";
 
 interface ProductsContentProps {
   category: string;
@@ -34,18 +36,17 @@ export const ProductsContent = ({ category }: ProductsContentProps) => {
 
   const filtersQuery = makeFiltersQuery(filters);
 
-  const {
-    data: products,
-    fetchMore,
-    loading,
-  } = useQuery(GET_PRODUCTS, {
+  const { data, fetchMore, loading } = useQuery(GET_PRODUCTS, {
     variables: {
       filters: {
         category: { slug: { current: { eq: category } } },
         ...filtersQuery,
       },
       sort,
-      limit: 5,
+      limit: PRODUCTS_LIMIT,
+      offset: searchParams.get("offset")
+        ? Number(searchParams.get("offset"))
+        : 0,
     },
   });
 
@@ -58,6 +59,20 @@ export const ProductsContent = ({ category }: ProductsContentProps) => {
     } else {
       setSearchParams((prev) => {
         prev.set("sort", value);
+        return prev;
+      });
+    }
+  };
+
+  const onPaginateChange = (offset: number) => {
+    if (offset === 0) {
+      setSearchParams((prev) => {
+        prev.delete("offset");
+        return prev;
+      });
+    } else {
+      setSearchParams((prev) => {
+        prev.set("offset", offset + "");
         return prev;
       });
     }
@@ -100,16 +115,32 @@ export const ProductsContent = ({ category }: ProductsContentProps) => {
           isMd={isMd}
           onOpen={(open) => setIsFilterOpen(open)}
         />
-        <ul className="flex flex-wrap gap-4 md:gap-6 flex-1">
-          {products?.allProduct.map((product) => (
-            <li
-              className="flex-[0_1_calc(50%-8px)] md:flex-[0_1_calc(33.3%-18px)]"
-              key={product._id}
-            >
-              <ProductCard product={product as Product} />
-            </li>
-          ))}
-        </ul>
+        <div className="flex-1">
+          <ul className="flex flex-wrap gap-4 md:gap-6 flex-1 mb-4 md:mb-6 lg:mb-8">
+            {data?.products.map((product) => (
+              <li
+                className="flex-[0_1_calc(50%-8px)] md:flex-[0_1_calc(33.3%-18px)]"
+                key={product._id}
+              >
+                <ProductCard product={product as Product} />
+              </li>
+            ))}
+          </ul>
+          <Pagination
+            onChange={onPaginateChange}
+            limit={PRODUCTS_LIMIT}
+            offset={
+              searchParams.get("offset")
+                ? Number(searchParams.get("offset"))
+                : 0
+            }
+            totalPages={
+              data?.productsCount.length
+                ? Math.ceil(data?.productsCount.length / PRODUCTS_LIMIT)
+                : 1
+            }
+          />
+        </div>
       </div>
     </div>
   );

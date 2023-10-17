@@ -7,8 +7,16 @@ export const GET_PRODUCTS = graphql(`
     $limit: Int = 15
     $offset: Int = 0
   ) {
-    allProduct(where: $filters, sort: $sort, limit: $limit, offset: $offset) {
+    products: allProduct(
+      where: $filters
+      sort: $sort
+      limit: $limit
+      offset: $offset
+    ) {
       ...ProductFields
+    }
+    productsCount: allProduct(where: $filters) {
+      _id
     }
   }
 `);
