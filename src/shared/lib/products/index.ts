@@ -25,7 +25,7 @@ export const parseFiltersFromSearchParams = (
   for (const key of Object.keys(filters) as Array<keyof ProductFilters>) {
     const value = params.get(key);
 
-    if (key === "brands" || key === "colors") {
+    if (key === "brands") {
       filters[key] = value ? value.split(",") : [];
     } else if (key === "onSale") {
       filters[key] = value === "true";
@@ -47,7 +47,7 @@ export const stringifyFiltersToSearchParams = (
       continue;
     }
 
-    if (key === "colors" || key === "brands") {
+    if (key === "brands") {
       if (filters[key] && filters[key]!.length > 0)
         params.set(key, filters[key]!.join(","));
       else params.delete(key);

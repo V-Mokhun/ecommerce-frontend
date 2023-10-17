@@ -25,7 +25,6 @@ export enum SortFields {
 
 export interface ProductFilters {
   brands: string[];
-  colors: string[];
   onSale: boolean;
   priceMin: number;
   priceMax: number;

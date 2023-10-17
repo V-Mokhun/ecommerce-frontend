@@ -63,7 +63,6 @@ export const ProductsFilters = ({
   const isMounted = useRef(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const { data: brands } = useQuery(GET_BRANDS);
-  const { data: colors } = useQuery(GET_COLORS);
   const dispatch = useAppDispatch();
   const filters = useAppSelector(productsFiltersSelector);
 
@@ -123,43 +122,6 @@ export const ProductsFilters = ({
                 className="flex-1 cursor-pointer text-sm font-light md:text-base lg:text-lg peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
               >
                 {brand.name}
-              </label>
-            </li>
-          ))}
-        </ProductsFiltersAccordionItem>
-        <ProductsFiltersAccordionItem label="Color" value="colors">
-          {colors?.allColorItem.map((color) => (
-            <li className="flex items-center gap-4" key={color._id}>
-              <Checkbox
-                checked={
-                  filters.colors &&
-                  filters.colors.find((c) => c === color.name!.toLowerCase())
-                    ? true
-                    : false
-                }
-                onCheckedChange={(e) => {
-                  dispatch(
-                    updateFilters({
-                      key: "colors",
-                      value: e
-                        ? [...filters.colors, color.name!.toLowerCase()]
-                        : filters.colors.filter(
-                            (c) => c !== color.name!.toLowerCase()
-                          ),
-                    })
-                  );
-                }}
-                id={color.name!}
-              />
-              <label
-                htmlFor={color.name!}
-                className="cursor-pointer flex flex-1 items-center gap-2 text-sm font-light md:text-base lg:text-lg peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-              >
-                <span>{color.name}</span>
-                <span
-                  className="w-5 h-5 rounded-full border"
-                  style={{ backgroundColor: color.value!.hex! }}
-                />
               </label>
             </li>
           ))}

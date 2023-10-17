@@ -7,7 +7,6 @@ export const MAX_RATING = 5;
 
 export const DEFAULT_PRODUCT_FILTERS: ProductFilters = {
   brands: [],
-  colors: [],
   onSale: false,
   priceMax: MAX_PRICE,
   priceMin: MIN_PRICE,
