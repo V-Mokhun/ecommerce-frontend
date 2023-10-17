@@ -1,5 +1,9 @@
 import { ProductFilters, SortFields } from "@/shared/api";
-import { ProductSorting, SortOrder } from "@/shared/api/generated/graphql";
+import {
+  ProductFilter,
+  ProductSorting,
+  SortOrder,
+} from "@/shared/api/generated/graphql";
 import { DEFAULT_PRODUCT_FILTERS } from "@/shared/consts";
 import { URLSearchParams } from "url";
 
@@ -30,7 +34,7 @@ export const parseFiltersFromSearchParams = (
     } else if (key === "onSale") {
       filters[key] = value === "true";
     } else {
-      filters[key] = Number(value);
+      if (value) filters[key] = Number(value);
     }
   }
 
@@ -58,4 +62,28 @@ export const stringifyFiltersToSearchParams = (
   }
 
   return params;
+};
+
+// TODO: Change salePrice to oldPrice
+export const makeFiltersQuery = (filters: ProductFilters) => {
+  const filtersQuery: ProductFilter = {
+    price: {
+      lte: filters.priceMax,
+      gte: filters.priceMin,
+    },
+    rating: {
+      lte: filters.ratingMax,
+      gte: filters.ratingMin,
+    },
+  };
+
+  if (filters.onSale) {
+    filtersQuery.isOnSale = { eq: true };
+  }
+
+  if (filters.brands.length > 0) {
+    filtersQuery.brand = { slug: { current: { in: filters.brands } } };
+  }
+
+  return filtersQuery;
 };

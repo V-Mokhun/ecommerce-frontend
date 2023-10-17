@@ -13,6 +13,7 @@ import {
 } from "@/shared/ui";
 import {
   productsFiltersSelector,
+  resetFilters,
   setFilters,
   updateFilters,
   useAppDispatch,
@@ -77,7 +78,6 @@ export const ProductsFilters = ({
       isMounted.current = true;
       return;
     }
-    console.log("filters", filters);
 
     setSearchParams((prev) => {
       const params = stringifyFiltersToSearchParams(filters, prev);
@@ -89,7 +89,9 @@ export const ProductsFilters = ({
     <ParentComponent isMd={isMd} isOpen={isOpen} onOpen={onOpen}>
       <div className="p-4 mt-4 md:mt-0 mb-4 flex items-center justify-between">
         <h2 className="text-xl font-semibold">Filters</h2>
-        <Button variant="text">Clear All</Button>
+        <Button onClick={() => dispatch(resetFilters())} variant="text">
+          Clear All
+        </Button>
       </div>
       <Accordion type="multiple" className="w-full" defaultValue={["price"]}>
         <ProductsFiltersAccordionItem label="Brand" value="brands">

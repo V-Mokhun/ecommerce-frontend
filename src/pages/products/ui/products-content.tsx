@@ -15,6 +15,7 @@ import { ProductCard } from "@/entities";
 import { SortOrder } from "@/shared/api/generated/graphql";
 import { useSearchParams } from "react-router-dom";
 import {
+  makeFiltersQuery,
   parseFiltersFromSearchParams,
   parseSortFromSearchParams,
 } from "@/shared/lib";
@@ -31,6 +32,8 @@ export const ProductsContent = ({ category }: ProductsContentProps) => {
   const sort = parseSortFromSearchParams(searchParams);
   const filters = parseFiltersFromSearchParams(searchParams);
 
+  const filtersQuery = makeFiltersQuery(filters);
+
   const {
     data: products,
     fetchMore,
@@ -39,6 +42,7 @@ export const ProductsContent = ({ category }: ProductsContentProps) => {
     variables: {
       filters: {
         category: { slug: { current: { eq: category } } },
+        ...filtersQuery,
       },
       sort,
       limit: 5,
