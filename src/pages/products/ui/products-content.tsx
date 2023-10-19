@@ -22,6 +22,7 @@ import {
 } from "@/shared/lib";
 import { Pagination } from "@/widgets";
 import { PRODUCTS_LIMIT } from "@/shared/consts";
+import { updateFilters, useAppDispatch } from "@/store";
 
 interface ProductsContentProps {
   category: string;
@@ -30,6 +31,7 @@ interface ProductsContentProps {
 export const ProductsContent = ({ category }: ProductsContentProps) => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const isMd = useMediaQuery("(min-width: 768px)");
+  const dispatch = useAppDispatch();
 
   const [searchParams, setSearchParams] = useSearchParams();
   const sort = parseSortFromSearchParams(searchParams);
@@ -81,7 +83,26 @@ export const ProductsContent = ({ category }: ProductsContentProps) => {
 
   return (
     <div>
-      <ul className="mb-6 md:mb-8"></ul>
+      <ul className="flex items-center gap-2 md:flex-wrap overflow-x-auto mb-6 md:mb-8">
+        {filters.brands.map((brand) => (
+          <li
+            className="p-2 border border-black rounded-lg inline-flex items-center justify-between gap-2 transition-colors hover:border-primary hover:text-primary cursor-pointer"
+            key={brand}
+            onClick={() => {
+              dispatch(
+                updateFilters({
+                  key: "brands",
+                  value: filters.brands.filter((b) => b !== brand),
+                })
+              );
+              searchParams.delete("offset");
+            }}
+          >
+            <span>{`${brand[0].toUpperCase()}${brand.substring(1)}`}</span>
+            <Icon name="close-square" className="md:w-6 md:h-6 text-inherit" />
+          </li>
+        ))}
+      </ul>
       <div className="flex items-center md:justify-end gap-4 mb-4 md:mb-6">
         <button
           className="flex-auto p-2 shadow-md bg-white rounded-lg inline-flex items-center gap-2 md:hidden"
