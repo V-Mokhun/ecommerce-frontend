@@ -16,6 +16,10 @@ export type Product = {
   isGuaranteed: boolean;
 };
 
+export type CartProduct = Omit<Product, "colors"> & {
+  color: string;
+};
+
 export enum SortFields {
   PRICE_ASC = "price.asc",
   PRICE_DESC = "price.desc",

@@ -1,6 +1,6 @@
 import { ProductFilters } from "../api";
 
-export const PRODUCTS_LIMIT = 1;
+export const PRODUCTS_LIMIT = 15;
 export const MIN_PRICE = 1;
 export const MAX_PRICE = 99_999;
 export const MIN_RATING = 1;
