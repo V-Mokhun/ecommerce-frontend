@@ -14,14 +14,17 @@ import { MenuIcon } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { NavigationLink } from "./header";
 import { cn } from "@/shared/lib";
+import { useState } from "react";
 
 interface HeaderMobileMenuProps {
   links: NavigationLink[];
 }
 
 export const HeaderMobileMenu = ({ links }: HeaderMobileMenuProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <Sheet>
+    <Sheet open={isOpen} onOpenChange={(open) => setIsOpen(open)}>
       <SheetTrigger>
         <MenuIcon className="inline-block w-10 h-8 py-1 px-2" />
       </SheetTrigger>
@@ -36,6 +39,7 @@ export const HeaderMobileMenu = ({ links }: HeaderMobileMenuProps) => {
               return (
                 <li className="px-3 py-1" key={link.label}>
                   <NavLink
+                    onClick={() => setIsOpen(false)}
                     className={({ isActive }) =>
                       cn("font-light", isActive && "text-primary")
                     }
@@ -70,6 +74,7 @@ export const HeaderMobileMenu = ({ links }: HeaderMobileMenuProps) => {
                               className="w-4 h-4"
                             />
                             <NavLink
+                              onClick={() => setIsOpen(false)}
                               className={({ isActive }) =>
                                 cn(
                                   "inline-block font-light hover:text-primary transition-colors text-sm",

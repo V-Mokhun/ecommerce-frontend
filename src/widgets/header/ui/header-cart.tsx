@@ -50,13 +50,13 @@ export const HeaderCart = ({}: HeaderCartProps) => {
         </span>
       </PopoverTrigger>
       <PopoverContent
-        className="w-screen h-[calc(100vh-96px)] flex flex-col mt-4 md:mt-0 border-none md:border-t rounded-none md:rounded-md shadow-none md:shadow-md md:w-[512px] md:h-auto pb-0"
+        className="w-screen h-[calc(100vh-96px)] flex flex-col mt-4 md:mt-0 border-none md:border-t rounded-none md:rounded-md shadow-none md:shadow-md md:w-[512px] md:h-auto pb-0 px-0"
         sideOffset={28.5}
       >
-        <p className="font-medium mb-4 md:mb-5 md:font-light md:text-lg">
+        <p className="font-medium mb-4 md:mb-5 md:font-light md:text-lg px-4">
           {cartQuantity} item{cartQuantity > 1 && "s"}
         </p>
-        <ul className="flex flex-col gap-2 md:gap-3 max-h-[60vh] overflow-y-auto">
+        <ul className="flex flex-col gap-2 md:gap-3 max-h-[60vh] overflow-y-auto px-4">
           {products.map(({ product, quantity }) => (
             <li
               className="p-3 md:p-4 bg-white shadow-md flex items-center flex-1 gap-3 md:gap-3"
@@ -133,7 +133,7 @@ export const HeaderCart = ({}: HeaderCartProps) => {
             </li>
           ))}
         </ul>
-        <div className="flex items-center justify-between gap-6 py-5 md:pt-3 -mx-4 px-4 bg-gray-100 md:bg-transparent fixed bottom-0 left-4 right-4 md:static">
+        <div className="flex items-center justify-between gap-6 py-5 md:pt-3 px-4 bg-gray-100 md:bg-transparent fixed bottom-0 left-0 right-0 md:static">
           <div className="flex flex-col text-center">
             <span className="text-xs md:text-sm font-light text-gray-900 whitespace-nowrap">
               Grand total
