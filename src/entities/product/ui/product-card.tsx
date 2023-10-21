@@ -3,7 +3,12 @@ import { SINGLE_PRODUCT_ROUTE } from "@/shared/consts";
 import { cn } from "@/shared/lib";
 import { imageBuilder } from "@/shared/lib/image-builder";
 import { Button, Icon } from "@/shared/ui";
-import { Plus } from "lucide-react";
+import {
+  addProductToCart,
+  cartProductsSelector,
+  useAppDispatch,
+  useAppSelector,
+} from "@/store";
 import { NavLink } from "react-router-dom";
 
 interface ProductCardProps {
@@ -12,6 +17,9 @@ interface ProductCardProps {
 }
 
 export const ProductCard = ({ product, className }: ProductCardProps) => {
+  const dispatch = useAppDispatch();
+  const { colors, ...cartProduct } = product;
+
   return (
     <div
       className={cn(
@@ -85,7 +93,13 @@ export const ProductCard = ({ product, className }: ProductCardProps) => {
         </div>
       </div>
       <div className="hidden justify-end md:group-hover:flex">
-        <Button onClick={() => {}} className="gap-1" variant="outline">
+        <Button
+          onClick={() =>
+            dispatch(addProductToCart({ ...cartProduct, color: colors[0] }))
+          }
+          className="gap-1"
+          variant="outline"
+        >
           <Icon name="shopping-cart" className="w-6 h-6" />
           <span>Add to Cart</span>
         </Button>

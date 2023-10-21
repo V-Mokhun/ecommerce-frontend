@@ -1,5 +1,7 @@
 import { SanityImageObject } from "@sanity/image-url/lib/types/types";
 
+export type Color = { name: string; value: { hex: string } };
+
 export type Product = {
   _id: string;
   name: string;
@@ -8,7 +10,7 @@ export type Product = {
   salePrice?: number;
   salePercentage?: number;
   isOnSale: boolean;
-  colors: { name: string; value: { hex: string } }[] | null;
+  colors: Color[];
   slug: { current: string };
   mainImage: SanityImageObject;
   isFreeDelivery: boolean;
@@ -17,7 +19,7 @@ export type Product = {
 };
 
 export type CartProduct = Omit<Product, "colors"> & {
-  color: string;
+  color: Color;
 };
 
 export enum SortFields {

@@ -4,6 +4,7 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 type CartStateProduct = { product: CartProduct; quantity: number };
 
 interface CartState {
+  isOpen: boolean;
   products: CartStateProduct[];
   totalPrice: number;
   totalQuantity: number;
@@ -13,12 +14,16 @@ const initialState: CartState = {
   products: [],
   totalPrice: 0,
   totalQuantity: 0,
+  isOpen: false,
 };
 
 export const cartSlice = createSlice({
   initialState,
   name: "cart",
   reducers: {
+    onChange: (state, action: PayloadAction<boolean>) => {
+      state.isOpen = action.payload;
+    },
     addProduct: (state, action: PayloadAction<CartProduct>) => {
       const product = action.payload;
       const existingProduct = state.products.find(
@@ -83,8 +88,9 @@ export const cartSlice = createSlice({
 });
 
 export const {
-  addProduct,
-  deleteProduct,
+  onChange: changeCartOpenState,
+  addProduct: addProductToCart,
+  deleteProduct: deleteProductFromCart,
   decrementProductQuantity,
   incrementProductQuantity,
 } = cartSlice.actions;

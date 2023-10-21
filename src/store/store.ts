@@ -1,7 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { productsSlice } from "./products";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import { cartSlice } from "./cart/slice";
 import {
   persistStore,
   persistReducer,
@@ -13,6 +12,7 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import { cartSlice } from "./cart";
 
 const persistConfig = {
   key: "e-commerce-react",
