@@ -73,10 +73,10 @@ export const ProductCard = ({ product, className }: ProductCardProps) => {
           {product.isOnSale ? (
             <>
               <span className="text-gray-600 text-xxs md:text-xs lg:text-sm line-through">
-                ${product.price.toFixed(2)}
+                ${product.oldPrice!.toFixed(2)}
               </span>
               <span className="text-xs md:text-sm lg:text-base">
-                ${product.salePrice?.toFixed(2)}
+                ${product.price.toFixed(2)}
               </span>
             </>
           ) : (

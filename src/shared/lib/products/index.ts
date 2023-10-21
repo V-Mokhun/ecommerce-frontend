@@ -64,7 +64,6 @@ export const stringifyFiltersToSearchParams = (
   return params;
 };
 
-// TODO: Change salePrice to oldPrice
 export const makeFiltersQuery = (filters: ProductFilters) => {
   const filtersQuery: ProductFilter = {
     price: {

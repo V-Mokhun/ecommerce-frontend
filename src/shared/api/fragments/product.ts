@@ -6,7 +6,7 @@ export const PRODUCT_FIELDS = graphql(`
     name
     rating
     price
-    salePrice
+    oldPrice
     salePercentage
     isOnSale
     colors {

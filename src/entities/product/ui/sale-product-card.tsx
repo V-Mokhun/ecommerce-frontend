@@ -43,12 +43,12 @@ export const SaleProductCard = ({
         {product.name}
       </NavLink>
       <div className="flex items-end justify-between gap-2 md:group-hover:hidden md:min-h-[36px]">
-        <span className="text-gray-600 text-xxs md:text-xs line-through">
-          ${product.price.toFixed(2)}
-        </span>
-        <span className="text-xs md:text-sm">
-          ${product.salePrice?.toFixed(2)}
-        </span>
+        {product.oldPrice && (
+          <span className="text-gray-600 text-xxs md:text-xs line-through">
+            ${product.oldPrice.toFixed(2)}
+          </span>
+        )}
+        <span className="text-xs md:text-sm">${product.price.toFixed(2)}</span>
       </div>
       <div className="hidden justify-end md:group-hover:flex">
         <Button
