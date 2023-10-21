@@ -52,3 +52,27 @@ export const GET_BEST_SELLER_PRODUCTS = graphql(`
     }
   }
 `);
+
+export const GET_SINGLE_PRODUCT = graphql(`
+  query GetSingleProduct($slug: String!) {
+    allProduct(where: { slug: { current: { eq: $slug } } }, limit: 1) {
+      ...ProductFields
+      brand {
+        name
+      }
+      images {
+        ...ImageFields
+      }
+      details {
+        name
+        value
+      }
+      category {
+        name
+        slug {
+          current
+        }
+      }
+    }
+  }
+`);

@@ -37,3 +37,21 @@ export interface ProductFilters {
   ratingMin: number;
   ratingMax: number;
 }
+
+export type SingleProduct = Product & {
+  brand: {
+    _id: string;
+    name: string;
+  };
+  images: SanityImageObject[];
+  details: {
+    name: string;
+    value: string;
+  }[];
+  category: {
+    name: string;
+    slug: {
+      current: string;
+    };
+  };
+};
