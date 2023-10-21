@@ -12,7 +12,7 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import { cartSlice } from "./cart";
+import { cartModalSlice, cartSlice } from "./cart";
 
 const persistConfig = {
   key: "e-commerce-react",
@@ -25,6 +25,7 @@ export const store = configureStore({
   reducer: {
     [productsSlice.name]: productsSlice.reducer,
     [cartSlice.name]: cartPersistedReducer,
+    [cartModalSlice.name]: cartModalSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
