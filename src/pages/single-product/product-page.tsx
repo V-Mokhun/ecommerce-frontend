@@ -23,7 +23,7 @@ export const ProductPage = ({}: ProductPageProps) => {
   const [product] = data.allProduct as [SingleProduct];
 
   return (
-    <section>
+    <section className="pb-6">
       <Container>
         <Breadcrumbs
           links={[
