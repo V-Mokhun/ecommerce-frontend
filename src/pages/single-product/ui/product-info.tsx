@@ -12,8 +12,8 @@ export const ProductInfo = ({ product }: ProductInfoProps) => {
   const [selectedColor, setSelectedColor] = useState(product.colors[0]);
 
   return (
-    <div className="flex flex-auto flex-col gap-6">
-      <div>
+    <div className="flex flex-[1_1_100%] flex-col lg:gap-6 order-3 lg:flex-auto lg:order-none">
+      <div className="mb-3 lg:mb-0">
         <h1 className="text-base md:text-lg lg:text-xl font-medium mb-2">
           {product.name}
         </h1>
@@ -24,7 +24,7 @@ export const ProductInfo = ({ product }: ProductInfoProps) => {
       </div>
       <ul
         className={cn(
-          "flex items-center flex-wrap gap-4",
+          "flex items-center flex-wrap gap-4 mb-3 lg:mb-0",
           product.isGuaranteed && product.isFreeDelivery && "justify-between"
         )}
       >
@@ -52,9 +52,9 @@ export const ProductInfo = ({ product }: ProductInfoProps) => {
           </li>
         )}
       </ul>
-      <div className="flex items-center gap-6 flex-wrap">
+      <div className="flex flex-col lg:flex-row lg:items-center gap-3 lg:gap-6 flex-wrap py-3 lg:py-0 mb-3 lg:mb-0 border-t border-b border-gray-200 lg:border-none">
         <span>Select Color:</span>
-        <ul className="flex items-center gap-2">
+        <ul className="flex items-center gap-4 lg:gap-2 flex-wrap">
           {product.colors.map((color) => (
             <li key={color.name} className="inline-flex items-center gap-1">
               <input
@@ -66,7 +66,7 @@ export const ProductInfo = ({ product }: ProductInfoProps) => {
                 onChange={() => setSelectedColor(color)}
               />
               <label
-                className="cursor-pointer inline-flex gap-1 relative peer-checked:[&>*:first-child>*]:opacity-100"
+                className="cursor-pointer inline-flex gap-1 items-center relative peer-checked:[&>*:first-child>*]:opacity-100 py-1 px-1.5 lg:p-0 border rounded-lg border-gray-200 lg:border-none peer-checked:border-primary"
                 htmlFor={`color-${color.name}`}
               >
                 <div
@@ -80,7 +80,7 @@ export const ProductInfo = ({ product }: ProductInfoProps) => {
                     )}
                   />
                 </div>
-                <span className="md:hidden font-light text-sm">
+                <span className="lg:hidden font-light text-sm">
                   {color.name}
                 </span>
               </label>

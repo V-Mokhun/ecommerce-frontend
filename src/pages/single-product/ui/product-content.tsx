@@ -9,7 +9,7 @@ interface ProductContentProps {
 
 export const ProductContent = ({ product }: ProductContentProps) => {
   return (
-    <div className="flex gap-6 items-start">
+    <div className="flex gap-4 md:gap-6 items-start flex-wrap lg:flex-nowrap">
       <ProductImages product={product} />
       <ProductInfo product={product} />
       <ProductBuying product={product} />

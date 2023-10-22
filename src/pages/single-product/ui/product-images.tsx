@@ -104,18 +104,18 @@ export const ProductImages = ({ product }: ProductImagesProps) => {
           </div>
         </DialogContent>
       </Dialog>
-      <div className="flex-[0_1_500px]">
+      <div className="flex-1 md:flex-[0_1_500px]">
         <button
-          className="mb-6 max-w-lg flex w-full justify-center"
+          className="md:mb-6 md:max-w-lg flex w-full justify-center"
           onClick={() => setIsModalActive(true)}
         >
           <img
             src={imageBuilder(activeImage).height(350).url()}
             alt={product.name}
-            className="object-cover h-full"
+            className="object-cover h-[200px] sm:h-[250px] md:h-full"
           />
         </button>
-        <ul className="flex gap-6">
+        <ul className="md:flex gap-6 hidden">
           {images.map((image, idx) => {
             if (idx < 4)
               return (
