@@ -2,12 +2,15 @@ import { SingleProduct } from "@/shared/api";
 import { cn } from "@/shared/lib";
 import { Icon } from "@/shared/ui";
 import { Check } from "lucide-react";
+import { useState } from "react";
 
 interface ProductInfoProps {
   product: SingleProduct;
 }
 
 export const ProductInfo = ({ product }: ProductInfoProps) => {
+  const [selectedColor, setSelectedColor] = useState(product.colors[0]);
+
   return (
     <div className="flex flex-auto flex-col gap-6">
       <div>
@@ -55,10 +58,12 @@ export const ProductInfo = ({ product }: ProductInfoProps) => {
           {product.colors.map((color) => (
             <li key={color.name} className="inline-flex items-center gap-1">
               <input
+                checked={selectedColor.name === color.name}
                 id={`color-${color.name}`}
                 className="sr-only peer"
                 type="radio"
                 name="color"
+                onChange={() => setSelectedColor(color)}
               />
               <label
                 className="cursor-pointer inline-flex gap-1 relative peer-checked:[&>*:first-child>*]:opacity-100"

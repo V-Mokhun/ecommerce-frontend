@@ -15,32 +15,34 @@ export const ProductImages = ({ product }: ProductImagesProps) => {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const images = [product.mainImage, ...product.images, ...product.images];
   const activeImage = images[activeImageIndex];
+
+  const [loaded, setLoaded] = useState(false);
   const options = useRef<KeenSliderOptions>({
     initial: activeImageIndex,
     slides: {
       perView: 5,
       spacing: 20,
     },
-    disabled: true,
-    created() {
+    created(slider) {
       setLoaded(true);
+
+      slider.slides.forEach((slide, idx) => {
+        slide.addEventListener("click", () => {
+          setActiveImageIndex(idx);
+        });
+      });
     },
     slideChanged(slider) {
       setActiveImageIndex(slider.track.details.rel);
     },
   });
-  const [loaded, setLoaded] = useState(false);
   const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>(
     options.current
   );
 
   useEffect(() => {
-    setTimeout(() => {
-      instanceRef.current?.update(
-        { ...options.current, disabled: false },
-        activeImageIndex
-      );
-    }, 0);
+    options.current.initial = activeImageIndex;
+    instanceRef.current?.update(options.current, activeImageIndex);
   }, [isModalActive]);
 
   return (
