@@ -1,7 +1,7 @@
 import { SingleProduct } from "@/shared/api";
 import { MutationPlugin, ThumbnailPlugin, cn } from "@/shared/lib";
 import { imageBuilder } from "@/shared/lib/image-builder";
-import { Dialog, DialogContent, SliderArrow } from "@/shared/ui";
+import { Dialog, DialogContent, Icon, SliderArrow } from "@/shared/ui";
 import { KeenSliderOptions, useKeenSlider } from "keen-slider/react";
 import { useEffect, useRef, useState } from "react";
 import "@/shared/styles/slider.css";
@@ -20,6 +20,12 @@ export const ProductImages = ({ product }: ProductImagesProps) => {
 
   const [loaded, setLoaded] = useState(false);
   const options = useRef<KeenSliderOptions>({
+    disabled: true,
+    breakpoints: {
+      "(min-width: 768px)": {
+        disabled: false,
+      },
+    },
     initial: activeImageIndex,
     slides: {
       perView: 5,
@@ -32,6 +38,7 @@ export const ProductImages = ({ product }: ProductImagesProps) => {
       slider.slides.forEach((slide, idx) => {
         slide.addEventListener("click", () => {
           setActiveImageIndex(idx);
+          slider.moveToIdx(idx);
         });
       });
     },
@@ -55,18 +62,28 @@ export const ProductImages = ({ product }: ProductImagesProps) => {
         onOpenChange={(open) => setIsModalActive(open)}
       >
         <DialogContent>
-          <div className="flex items-center justify-center">
+          <div className="flex items-center justify-center h-[200px] sm:h-[250px] md:h-full mt-10 md:mt-0">
             <img
               src={imageBuilder(activeImage).height(350).url()}
               alt={product.name}
               className="object-cover h-full"
             />
           </div>
-          <div ref={sliderRef} className="relative keen-slider px-10">
+          <div
+            ref={sliderRef}
+            className={cn(
+              isMd ? "relative keen-slider px-10" : "flex flex-wrap gap-4"
+            )}
+          >
             {images.map((image, idx) => (
               <div
+                onClick={() => {
+                  if (isMd) return;
+                  setActiveImageIndex(idx);
+                }}
                 className={cn(
-                  "keen-slider__slide flex justify-center border rounded-sm border-gray-400",
+                  "flex justify-center border rounded-sm border-gray-400",
+                  isMd ? "keen-slider__slide" : "flex-[0_1_calc(50%-10px)]",
                   idx === activeImageIndex && "border-primary"
                 )}
                 key={idx}
@@ -74,7 +91,7 @@ export const ProductImages = ({ product }: ProductImagesProps) => {
                 <img
                   src={imageBuilder(image).height(120).url()}
                   alt={product.name}
-                  className="object-cover h-full"
+                  className="object-cover h-[100px] md:h-full"
                 />
               </div>
             ))}
@@ -104,7 +121,13 @@ export const ProductImages = ({ product }: ProductImagesProps) => {
           </div>
         </DialogContent>
       </Dialog>
-      <div className="flex-1 md:flex-[0_1_500px]">
+      <div className="relative flex-1 md:flex-[0_1_500px]">
+        <div className="absolute md:hidden bottom-1 right-1 p-1 bg-primary-500 rounded-sm flex items-center gap-0.5">
+          <Icon name="gallery" className="w-3 h-3 text-white" />
+          <span className="text-white text-xxs font-medium">
+            {activeImageIndex + 1}/{images.length}
+          </span>
+        </div>
         <button
           className="md:mb-6 md:max-w-lg flex w-full justify-center"
           onClick={() => setIsModalActive(true)}
