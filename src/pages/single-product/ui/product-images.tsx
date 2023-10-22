@@ -1,10 +1,11 @@
 import { SingleProduct } from "@/shared/api";
 import { MutationPlugin, ThumbnailPlugin, cn } from "@/shared/lib";
 import { imageBuilder } from "@/shared/lib/image-builder";
-import { Dialog, DialogContent } from "@/shared/ui";
+import { Dialog, DialogContent, SliderArrow } from "@/shared/ui";
 import { KeenSliderOptions, useKeenSlider } from "keen-slider/react";
 import { useEffect, useRef, useState } from "react";
 import "@/shared/styles/slider.css";
+import { useMediaQuery } from "@/shared/lib/hooks";
 
 interface ProductImagesProps {
   product: SingleProduct;
@@ -13,8 +14,9 @@ interface ProductImagesProps {
 export const ProductImages = ({ product }: ProductImagesProps) => {
   const [isModalActive, setIsModalActive] = useState(false);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
-  const images = [product.mainImage, ...product.images, ...product.images];
+  const images = [product.mainImage, ...product.images];
   const activeImage = images[activeImageIndex];
+  const isMd = useMediaQuery("(min-width: 768px)");
 
   const [loaded, setLoaded] = useState(false);
   const options = useRef<KeenSliderOptions>({
@@ -22,6 +24,7 @@ export const ProductImages = ({ product }: ProductImagesProps) => {
     slides: {
       perView: 5,
       spacing: 20,
+      origin: "center",
     },
     created(slider) {
       setLoaded(true);
@@ -59,7 +62,7 @@ export const ProductImages = ({ product }: ProductImagesProps) => {
               className="object-cover h-full"
             />
           </div>
-          <div ref={sliderRef} className="keen-slider">
+          <div ref={sliderRef} className="relative keen-slider px-10">
             {images.map((image, idx) => (
               <div
                 className={cn(
@@ -75,6 +78,29 @@ export const ProductImages = ({ product }: ProductImagesProps) => {
                 />
               </div>
             ))}
+
+            {isMd && loaded && instanceRef.current && (
+              <>
+                <SliderArrow
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    instanceRef.current?.prev();
+                  }}
+                  disabled={activeImageIndex === 0}
+                />
+
+                <SliderArrow
+                  right
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    instanceRef.current?.next();
+                  }}
+                  disabled={
+                    activeImageIndex >= instanceRef.current.slides.length - 1
+                  }
+                />
+              </>
+            )}
           </div>
         </DialogContent>
       </Dialog>

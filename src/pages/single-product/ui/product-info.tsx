@@ -47,12 +47,12 @@ export const ProductInfo = ({ product }: ProductInfoProps) => {
         )}
         {product.isFreeDelivery && (
           <li className="inline-flex items-center gap-1 font-medium text-gray-600 text-xs">
-            <Icon name="delivery" className="w-5 h-5" />
+            <Icon name="delivery" className="w-5 h-5 text-primary" />
             <span>Free Delivery</span>
           </li>
         )}
       </ul>
-      <div className="flex items-center gap-6">
+      <div className="flex items-center gap-6 flex-wrap">
         <span>Select Color:</span>
         <ul className="flex items-center gap-2">
           {product.colors.map((color) => (

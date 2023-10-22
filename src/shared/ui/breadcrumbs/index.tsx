@@ -15,7 +15,7 @@ export const Breadcrumbs = ({ links }: BreadcrumbsProps) => {
   const allLinks = [{ label: "Home", route: HOME_ROUTE }, ...links];
 
   return (
-    <ul className="flex items-center overflow-x-auto md:flex-wrap md:gap-y-4 pt-4 md:pt-6 pb-4 md:pb-8 lg:pb-10">
+    <ul className="flex items-center whitespace-nowrap md:whitespace-normal overflow-x-auto md:flex-wrap md:gap-y-4 pt-4 md:pt-6 pb-4 md:pb-8 lg:pb-10">
       {allLinks.map((link, index, arr) => (
         <li className="inline-flex items-center" key={link.label}>
           <NavLink
