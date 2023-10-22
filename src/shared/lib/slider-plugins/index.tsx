@@ -27,7 +27,7 @@ export const ThumbnailPlugin = (
       });
     }
     function addActive(idx: number) {
-      slider.slides[idx].classList.add("active");
+      slider.slides.length > 0 && slider.slides[idx].classList.add("active");
     }
 
     function addClickEvents() {
@@ -40,7 +40,7 @@ export const ThumbnailPlugin = (
 
     slider.on("created", () => {
       if (!mainRef.current) return;
-      addActive(slider.track.details.rel);
+      addActive(slider.track.details?.rel);
       addClickEvents();
       mainRef.current.on("animationStarted", (main) => {
         removeActive();

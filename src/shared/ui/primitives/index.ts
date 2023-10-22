@@ -13,3 +13,4 @@ export * from "./switch";
 export * from "./slider";
 export * from "./select";
 export * from "./skeleton";
+export * from "./dialog";

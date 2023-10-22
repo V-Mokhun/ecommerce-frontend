@@ -20,7 +20,6 @@ export const SaleProducts = ({}: SaleProductsProps) => {
   const isMd = useMediaQuery("(min-width: 768px)");
   const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>(
     {
-      breakpoints: {},
       slides: {
         perView: "auto",
       },

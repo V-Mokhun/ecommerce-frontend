@@ -90,7 +90,7 @@ const SheetContent = React.forwardRef<
             closeButtonClassName
           )}
         >
-          <Icon name="close-circle" className="w-6 h-6" />
+          <Icon name="close-circle" className="w-6 h-6 text-gray-800" />
           <span className="sr-only">Close</span>
         </SheetPrimitive.Close>
       </SheetPrimitive.Content>
