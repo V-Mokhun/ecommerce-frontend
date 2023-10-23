@@ -25,10 +25,14 @@ export const ProductContent = ({ product }: ProductContentProps) => {
         <ProductBuying color={selectedColor} product={product} />
       </div>
       <ProductDetails details={product.details} />
-      <div className="py-2 md:py-4 lg:py-6">
-        <h2 className="mb-1 md:mb-4 lg:mb-6">Similar Products</h2>
-        <ProductsCarousel products={product.similarProducts} />
-      </div>
+      {product.similarProducts && product.similarProducts.length > 0 && (
+        <div className="py-2 md:py-4 lg:py-6">
+          <h2 className="mb-1 md:mb-4 lg:mb-6 text-sm md:text-base lg:text-xl font-medium">
+            Similar Products
+          </h2>
+          <ProductsCarousel products={product.similarProducts} />
+        </div>
+      )}
     </>
   );
 };

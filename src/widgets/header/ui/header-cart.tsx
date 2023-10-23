@@ -1,3 +1,4 @@
+import { CartItem } from "@/entities";
 import { CART_ROUTE } from "@/shared/consts";
 import { useMediaQuery } from "@/shared/lib/hooks";
 import {
@@ -17,7 +18,6 @@ import {
   useAppSelector,
 } from "@/store";
 import { NavLink } from "react-router-dom";
-import { HeaderCartItem } from "./header-cart-item";
 
 interface HeaderCartProps {}
 
@@ -52,12 +52,13 @@ export const HeaderCart = ({}: HeaderCartProps) => {
       >
         {cartQuantity > 0 ? (
           <>
-            <p className="font-medium mb-4 md:mb-5 md:font-light md:text-lg px-4">
+            <p className="font-medium mb-2 md:mb-3 md:font-light md:text-lg px-4">
               {cartQuantity} item{cartQuantity !== 1 && "s"}
             </p>
-            <ul className="flex flex-col gap-2 md:gap-3 max-h-[60vh] overflow-y-auto px-4">
+            <ul className="flex flex-col gap-2 md:gap-3 max-h-[60vh] overflow-y-auto px-4 py-2">
               {products.map(({ product, quantity }) => (
-                <HeaderCartItem
+                <CartItem
+                  size="sm"
                   product={product}
                   quantity={quantity}
                   key={product._id + product.color.name}
