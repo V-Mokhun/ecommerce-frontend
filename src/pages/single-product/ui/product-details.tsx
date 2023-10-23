@@ -20,7 +20,7 @@ export const ProductDetails = ({
     : initialDetails.slice(0, DETAILS_TO_SHOW);
 
   return (
-    <div id="details">
+    <div className="pb-2 md:pb-4 lg:pb-6">
       <h2 className="text-sm font-medium md:text-lg lg:text-xl mb-4">
         Technical Details
       </h2>

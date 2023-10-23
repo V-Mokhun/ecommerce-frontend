@@ -56,4 +56,5 @@ export type SingleProduct = Product & {
       current: string;
     };
   };
+  similarProducts: Product[];
 };

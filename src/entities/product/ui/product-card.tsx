@@ -81,7 +81,10 @@ export const ProductCard = ({ product, className }: ProductCardProps) => {
           )}
         </div>
         <div className="flex items-center gap-1">
-          <Icon name="star" className="w-4 h-4 md:w-5 md:h-5" />
+          <Icon
+            name="star"
+            className="w-4 h-4 md:w-5 md:h-5 text-primary-500"
+          />
           <span className="text-medium text-primary-500 text-sm md:text-base">
             {product.rating}
           </span>

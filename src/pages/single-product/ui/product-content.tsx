@@ -4,6 +4,7 @@ import { ProductImages } from "./product-images";
 import { ProductInfo } from "./product-info";
 import { ProductDetails } from "./product-details";
 import { useState } from "react";
+import { ProductsCarousel } from "@/widgets";
 
 interface ProductContentProps {
   product: SingleProduct;
@@ -24,6 +25,10 @@ export const ProductContent = ({ product }: ProductContentProps) => {
         <ProductBuying color={selectedColor} product={product} />
       </div>
       <ProductDetails details={product.details} />
+      <div className="py-2 md:py-4 lg:py-6">
+        <h2 className="mb-1 md:mb-4 lg:mb-6">Similar Products</h2>
+        <ProductsCarousel products={product.similarProducts} />
+      </div>
     </>
   );
 };
