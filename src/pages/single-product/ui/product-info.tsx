@@ -1,16 +1,19 @@
-import { SingleProduct } from "@/shared/api";
+import { Color, SingleProduct } from "@/shared/api";
 import { cn } from "@/shared/lib";
 import { Icon } from "@/shared/ui";
 import { Check } from "lucide-react";
-import { useState } from "react";
 
 interface ProductInfoProps {
   product: SingleProduct;
+  selectedColor: Color;
+  setSelectedColor: (color: Color) => void;
 }
 
-export const ProductInfo = ({ product }: ProductInfoProps) => {
-  const [selectedColor, setSelectedColor] = useState(product.colors[0]);
-
+export const ProductInfo = ({
+  product,
+  selectedColor,
+  setSelectedColor,
+}: ProductInfoProps) => {
   return (
     <div className="flex flex-[1_1_100%] flex-col lg:gap-6 order-3 lg:flex-auto lg:order-none">
       <div className="mb-3 lg:mb-0">

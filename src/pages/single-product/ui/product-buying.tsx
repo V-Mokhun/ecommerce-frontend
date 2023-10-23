@@ -1,11 +1,22 @@
-import { SingleProduct } from "@/shared/api";
+import { Color, SingleProduct } from "@/shared/api";
+import { CART_ROUTE } from "@/shared/consts";
 import { Button, Icon } from "@/shared/ui";
+import { addProductToCart, useAppDispatch } from "@/store";
+import { useNavigate } from "react-router-dom";
 
 interface ProductBuyingProps {
   product: SingleProduct;
+  color: Color;
 }
 
-export const ProductBuying = ({ product }: ProductBuyingProps) => {
+export const ProductBuying = ({ product, color }: ProductBuyingProps) => {
+  const { colors, ...restProduct } = product;
+
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const addToCart = () => dispatch(addProductToCart({ ...restProduct, color }));
+
   return (
     <div className="flex md:flex-col items-center md:items-stretch justify-center gap-4 flex-auto lg:max-w-[240px] lg:w-full p-6 px-3 md:px-6 bg-gray-100 md:bg-background shadow-md rounded-lg fixed left-0 right-0 bottom-0 md:static z-10">
       <div>
@@ -38,8 +49,17 @@ export const ProductBuying = ({ product }: ProductBuyingProps) => {
         </span>
       </div>
       <div className="flex flex-col gap-2 flex-auto max-w-xs md:max-w-none -order-1 md:order-none">
-        <Button>Buy Now</Button>
-        <Button variant="outline">Add to Cart</Button>
+        <Button
+          onClick={() => {
+            addToCart();
+            navigate(CART_ROUTE);
+          }}
+        >
+          Buy Now
+        </Button>
+        <Button onClick={addToCart} variant="outline">
+          Add to Cart
+        </Button>
       </div>
     </div>
   );

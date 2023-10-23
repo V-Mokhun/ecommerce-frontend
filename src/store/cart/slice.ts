@@ -22,7 +22,9 @@ export const cartSlice = createSlice({
     addProduct: (state, action: PayloadAction<CartProduct>) => {
       const product = action.payload;
       const existingProduct = state.products.find(
-        (p) => p.product._id === product._id
+        (p) =>
+          p.product._id === product._id &&
+          p.product.color.name === product.color.name
       );
 
       if (existingProduct) {
@@ -34,28 +36,35 @@ export const cartSlice = createSlice({
       state.totalPrice += product.price;
       state.totalQuantity += 1;
     },
-    deleteProduct: (state, action: PayloadAction<CartProduct["_id"]>) => {
-      const productId = action.payload;
+    deleteProduct: (
+      state,
+      action: PayloadAction<{ id: CartProduct["_id"]; color: string }>
+    ) => {
+      const { id, color } = action.payload;
       const existingProduct = state.products.find(
-        (p) => p.product._id === productId
+        (p) => p.product._id === id && p.product.color.name === color
+      );
+      const productIdx = state.products.findIndex(
+        (p) => p.product._id === id && p.product.color.name === color
       );
 
       if (existingProduct) {
         state.totalPrice -=
           existingProduct.product.price * existingProduct.quantity;
         state.totalQuantity -= existingProduct.quantity;
-        state.products = state.products.filter(
-          (p) => p.product._id !== productId
-        );
+
+        state.products = state.products
+          .slice(0, productIdx)
+          .concat(state.products.slice(productIdx + 1));
       }
     },
     incrementProductQuantity: (
       state,
-      action: PayloadAction<CartProduct["_id"]>
+      action: PayloadAction<{ id: CartProduct["_id"]; color: string }>
     ) => {
-      const productId = action.payload;
+      const { id, color } = action.payload;
       const existingProduct = state.products.find(
-        (p) => p.product._id === productId
+        (p) => p.product._id === id && p.product.color.name === color
       );
 
       if (existingProduct) {
@@ -66,11 +75,11 @@ export const cartSlice = createSlice({
     },
     decrementProductQuantity: (
       state,
-      action: PayloadAction<CartProduct["_id"]>
+      action: PayloadAction<{ id: CartProduct["_id"]; color: string }>
     ) => {
-      const productId = action.payload;
+      const { id, color } = action.payload;
       const existingProduct = state.products.find(
-        (p) => p.product._id === productId
+        (p) => p.product._id === id && p.product.color.name === color
       );
 
       if (existingProduct && existingProduct.quantity > 1) {

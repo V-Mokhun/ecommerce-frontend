@@ -27,6 +27,7 @@ export const ProductDetails = ({
       <ul className="flex flex-col md:gap-1">
         {details.map((detail, idx) => (
           <li
+            key={detail.name}
             className={cn(
               "flex items-center justify-between gap-2 p-2 md:px-3 md:py-4 rounded-lg text-xs md:text-sm lg:text-base",
               idx % 2 !== 0 && "bg-gray-50"

@@ -3,12 +3,7 @@ import { SINGLE_PRODUCT_ROUTE } from "@/shared/consts";
 import { cn } from "@/shared/lib";
 import { imageBuilder } from "@/shared/lib/image-builder";
 import { Button, Icon } from "@/shared/ui";
-import {
-  addProductToCart,
-  cartProductsSelector,
-  useAppDispatch,
-  useAppSelector,
-} from "@/store";
+import { addProductToCart, useAppDispatch } from "@/store";
 import { NavLink } from "react-router-dom";
 
 interface ProductCardProps {
