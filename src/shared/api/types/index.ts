@@ -38,16 +38,18 @@ export interface ProductFilters {
   ratingMax: number;
 }
 
+export interface ProductDetail {
+  name: string;
+  value: string;
+}
+
 export type SingleProduct = Product & {
   brand: {
     _id: string;
     name: string;
   };
   images: SanityImageObject[];
-  details: {
-    name: string;
-    value: string;
-  }[];
+  details: ProductDetail[];
   category: {
     name: string;
     slug: {
