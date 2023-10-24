@@ -1,1 +1,1 @@
-export * from "./ui";
+export { ContactPage } from "./contact-page";
