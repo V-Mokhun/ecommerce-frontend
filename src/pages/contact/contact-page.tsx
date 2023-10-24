@@ -1,9 +1,14 @@
+import { GET_CONTACTS } from "@/shared/api";
 import { CONTACT_ROUTE } from "@/shared/consts";
 import { Breadcrumbs, Container, Icon } from "@/shared/ui";
+import { useQuery } from "@apollo/client";
 
 interface ContactPageProps {}
 
 export const ContactPage = ({}: ContactPageProps) => {
+  const { data } = useQuery(GET_CONTACTS);
+  const contacts = data ? data.allContact[0] : null;
+
   return (
     <section className="pb-6">
       <Container>
@@ -18,7 +23,7 @@ export const ContactPage = ({}: ContactPageProps) => {
               Office
             </h2>
             <p className="text-xxs md:text-sm lg:text-base font-medium md:font-light text-gray-600">
-              123 Main Street, <br /> Anytown,USA
+              {contacts?.address}
             </p>
           </li>
           <li className="flex flex-col items-center gap-1 md:gap-2 text-center">
@@ -28,10 +33,10 @@ export const ContactPage = ({}: ContactPageProps) => {
             />
             <h2 className="font-medium text-sm md:text-lg lg:text-xl">Email</h2>
             <a
-              href="mailto:ecommerce@gmail.com"
+              href={`mailto:${contacts?.email}`}
               className="text-xxs md:text-sm lg:text-base font-medium md:font-light text-gray-600 transition-colors hover:text-primary"
             >
-              ecommerce@gmail.com
+              {contacts?.email}
             </a>
           </li>
           <li className="flex flex-col items-center gap-1 md:gap-2 text-center">
@@ -41,10 +46,10 @@ export const ContactPage = ({}: ContactPageProps) => {
             />
             <h2 className="font-medium text-sm md:text-lg lg:text-xl">Phone</h2>
             <a
-              href="tel:+15551234567"
+              href={`tel:${contacts?.phoneShort}`}
               className="text-xxs md:text-sm lg:text-base font-medium md:font-light text-gray-600 transition-colors hover:text-primary"
             >
-              +1 (555) 123-4567
+              {contacts?.phone}
             </a>
           </li>
         </ul>

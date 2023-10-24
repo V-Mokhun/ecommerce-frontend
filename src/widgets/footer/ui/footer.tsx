@@ -12,15 +12,20 @@ import {
 import { ChevronRight, ChevronUp } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { FooterSocials } from "./footer-socials";
+import { useQuery } from "@apollo/client";
+import { GET_CONTACTS } from "@/shared/api";
 
 interface FooterProps {}
 
 export const Footer = ({}: FooterProps) => {
   const isMd = useMediaQuery("(min-width: 768px)");
+  const { data } = useQuery(GET_CONTACTS);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
+
+  const contacts = data ? data.allContact[0] : null;
 
   return (
     <footer>
@@ -137,17 +142,17 @@ export const Footer = ({}: FooterProps) => {
                     <ul className="space-y-4 md:space-y-2 text-gray-300 font-light text-sm md:text-base">
                       <li className="inline-flex items-center gap-1">
                         <Icon name="location" className="w-5 h-5" />
-                        <span>123 Main Street, Anytown,USA</span>
+                        <span>{contacts?.address}</span>
                       </li>
                       <li>
                         <a
                           className={
                             "hover:text-white transition-colors inline-flex items-center gap-1"
                           }
-                          href="tel:15551234567"
+                          href={`tel:${contacts?.phoneShort}`}
                         >
                           <Icon name="call" className="w-5 h-5" />
-                          <span>+1 (555) 123-4567</span>
+                          <span>{contacts?.phone}</span>
                         </a>
                       </li>
                       <li>
@@ -155,10 +160,10 @@ export const Footer = ({}: FooterProps) => {
                           className={
                             "hover:text-white transition-colors inline-flex items-center gap-1"
                           }
-                          href="mailto:ecommerce@gmail.com"
+                          href={`mailto:${contacts?.email}`}
                         >
                           <Icon name="sms-edit" className="w-5 h-5" />
-                          <span>ecommerce@gmail.com</span>
+                          <span>{contacts?.email}</span>
                         </a>
                       </li>
                     </ul>
