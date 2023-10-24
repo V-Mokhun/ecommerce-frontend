@@ -21,13 +21,15 @@ export const CartItem = ({ product, quantity, size = "md" }: CartItemProps) => {
   return (
     <li
       className={cn(
-        "p-3 md:p-4 bg-white shadow-md flex flex-1 gap-4 md:gap-6",
-        size === "sm" && "gap-2 md:gap-4 items-center"
+        "p-2 pl-0 md:p-4 bg-white shadow-md flex flex-1 gap-4 md:gap-6",
+        size === "sm"
+          ? "gap-2 md:gap-4 items-center"
+          : "items-center md:items-stretch"
       )}
     >
       <div
         className={cn(
-          "h-full w-32 md:w-44 md:h-48 flex-[0_0_8rem] md:flex-[0_0_11rem]",
+          "h-auto w-28 md:w-44 md:h-48 flex-[0_0_7rem] md:flex-[0_0_11rem]",
           size === "sm" &&
             "w-28 md:h-32 md:w-40 flex-[0_0_7rem] md:flex-[0_0_10rem]"
         )}
@@ -47,7 +49,7 @@ export const CartItem = ({ product, quantity, size = "md" }: CartItemProps) => {
         >
           {product.name}
         </p>
-        <div className={cn(size === "md" && "space-y-2")}>
+        <div className={cn(size === "md" && "md:space-y-2")}>
           <div className="flex items-center gap-1 text-gray-600 font-light md:font-medium text-xs mb-1">
             {size === "md" && (
               <span
@@ -65,7 +67,7 @@ export const CartItem = ({ product, quantity, size = "md" }: CartItemProps) => {
           <ul
             className={cn(
               "flex flex-col gap-1",
-              size === "md" ? "mb-4" : "mb-2"
+              size === "md" ? "mb-4 md:gap-2" : "mb-2"
             )}
           >
             {product.isFreeDelivery && (
@@ -80,14 +82,27 @@ export const CartItem = ({ product, quantity, size = "md" }: CartItemProps) => {
                 <span>Guaranteed</span>
               </li>
             )}
+            {size === "md" && (
+              <li className="flex items-center gap-1 md:font-medium text-xs text-gray-600">
+                <Icon
+                  name="stock"
+                  className={cn(
+                    product.isInStock ? "text-primary" : "text-destructive"
+                  )}
+                />
+                <span>
+                  {product.isInStock ? "In Stock" : "Currently Unavailable"}
+                </span>
+              </li>
+            )}
           </ul>
         </div>
         <div
           className={cn(
-            "flex items-center",
+            "flex",
             size === "md"
-              ? "flex-col md:flex-row md:justify-between gap-4 md:gap-2"
-              : "justify-between gap-2"
+              ? "flex-col md:items-center md:flex-row md:justify-between gap-4 md:gap-2"
+              : "justify-between gap-2 items-center"
           )}
         >
           <div className="flex items-center gap-2">
