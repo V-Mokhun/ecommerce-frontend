@@ -1,4 +1,4 @@
-import { BLOG_ROUTE, HOME_ROUTE } from "@/shared/consts";
+import { ABOUT_ROUTE, BLOG_ROUTE, HOME_ROUTE } from "@/shared/consts";
 import { cn } from "@/shared/lib";
 import { useMediaQuery } from "@/shared/lib/hooks";
 import {
@@ -50,7 +50,7 @@ export const Footer = ({}: FooterProps) => {
                       <li>
                         <NavLink
                           className={"hover:text-white transition-colors"}
-                          to={HOME_ROUTE}
+                          to={ABOUT_ROUTE}
                         >
                           About Us
                         </NavLink>
