@@ -20,6 +20,7 @@ const documents = {
     "\n    query GetCategories {\n      allCategory {\n        _id\n        name\n        shortName\n        slug {\n          current\n        }\n        icon {\n          ...ImageFields\n        }\n        image {\n          ...ImageFields\n        }\n      }\n    }\n  ": types.GetCategoriesDocument,
     "\n  query GetColors {\n    allColorItem {\n      _id\n      name\n      value {\n        hex\n      }\n    }\n  }\n": types.GetColorsDocument,
     "\n  query GetContacts {\n    allContact(limit: 1) {\n      address\n      phone\n      phoneShort\n      _id\n      email\n    }\n  }\n": types.GetContactsDocument,
+    "\n  query GetFaqTopics {\n    allFaqTopic(sort: { _updatedAt: ASC }) {\n      _id\n      name\n      items {\n        title\n        content\n      }\n    }\n  }\n": types.GetFaqTopicsDocument,
     "\n  query GetProducts(\n    $filters: ProductFilter\n    $sort: [ProductSorting!]\n    $limit: Int = 15\n    $offset: Int = 0\n  ) {\n    products: allProduct(\n      where: $filters\n      sort: $sort\n      limit: $limit\n      offset: $offset\n    ) {\n      ...ProductFields\n    }\n    productsCount: allProduct(where: $filters) {\n      _id\n    }\n  }\n": types.GetProductsDocument,
     "\n  query GetSaleProducts {\n    allProduct(where: { isOnSale: { eq: true } }, limit: 10) {\n      ...ProductFields\n    }\n  }\n": types.GetSaleProductsDocument,
     "\n  query GetNewProducts {\n    allProduct(\n      where: { isNew: { eq: true } }\n      limit: 4\n      sort: { rating: DESC }\n    ) {\n      ...ProductFields\n    }\n  }\n": types.GetNewProductsDocument,
@@ -69,6 +70,10 @@ export function graphql(source: "\n  query GetColors {\n    allColorItem {\n    
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  query GetContacts {\n    allContact(limit: 1) {\n      address\n      phone\n      phoneShort\n      _id\n      email\n    }\n  }\n"): (typeof documents)["\n  query GetContacts {\n    allContact(limit: 1) {\n      address\n      phone\n      phoneShort\n      _id\n      email\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query GetFaqTopics {\n    allFaqTopic(sort: { _updatedAt: ASC }) {\n      _id\n      name\n      items {\n        title\n        content\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetFaqTopics {\n    allFaqTopic(sort: { _updatedAt: ASC }) {\n      _id\n      name\n      items {\n        title\n        content\n      }\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
