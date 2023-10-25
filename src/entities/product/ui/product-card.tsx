@@ -9,9 +9,16 @@ import { NavLink } from "react-router-dom";
 interface ProductCardProps {
   product: Product;
   className?: string;
+  onButtonClick?: () => void;
+  onProductClick?: () => void;
 }
 
-export const ProductCard = ({ product, className }: ProductCardProps) => {
+export const ProductCard = ({
+  product,
+  className,
+  onButtonClick,
+  onProductClick,
+}: ProductCardProps) => {
   const dispatch = useAppDispatch();
   const { colors, ...cartProduct } = product;
 
@@ -28,6 +35,7 @@ export const ProductCard = ({ product, className }: ProductCardProps) => {
         </span>
       )}
       <NavLink
+        onClick={onProductClick}
         to={`${SINGLE_PRODUCT_ROUTE}/${product.slug.current}`}
         className="flex justify-center items-center pb-2 mb-2 md:pb-4 md:mb-4 relative z-0 after:w-full after:h-px after:absolute after:bottom-0 after:bg-gray-400 after:left-0 after:right-0 after:transition-colors group-hover:after:bg-primary md:p-2"
       >
@@ -58,6 +66,7 @@ export const ProductCard = ({ product, className }: ProductCardProps) => {
         />
       </NavLink>
       <NavLink
+        onClick={onProductClick}
         to={`${SINGLE_PRODUCT_ROUTE}/${product.slug.current}`}
         className="flex-1 font-light line-clamp-1 md:line-clamp-2 mb-2 md:mb-4 group-hover:text-primary-500 transition-colors text-xs md:text-sm lg:text-base"
       >
@@ -92,9 +101,10 @@ export const ProductCard = ({ product, className }: ProductCardProps) => {
       </div>
       <div className="hidden justify-end md:group-hover:flex">
         <Button
-          onClick={() =>
-            dispatch(addProductToCart({ ...cartProduct, color: colors[0] }))
-          }
+          onClick={() => {
+            dispatch(addProductToCart({ ...cartProduct, color: colors[0] }));
+            if (onButtonClick) onButtonClick();
+          }}
           className="gap-1"
           variant="outline"
         >

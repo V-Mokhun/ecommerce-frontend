@@ -1,4 +1,5 @@
 import { CartProduct } from "@/shared/api";
+import { SINGLE_PRODUCT_ROUTE } from "@/shared/consts";
 import { cn } from "@/shared/lib";
 import { imageBuilder } from "@/shared/lib/image-builder";
 import { Icon } from "@/shared/ui";
@@ -8,14 +9,21 @@ import {
   incrementProductQuantity,
   useAppDispatch,
 } from "@/store";
+import { NavLink } from "react-router-dom";
 
 interface CartItemProps {
   product: CartProduct;
   quantity: number;
   size?: "sm" | "md";
+  onProductClick?: () => void;
 }
 
-export const CartItem = ({ product, quantity, size = "md" }: CartItemProps) => {
+export const CartItem = ({
+  product,
+  quantity,
+  size = "md",
+  onProductClick,
+}: CartItemProps) => {
   const dispatch = useAppDispatch();
 
   return (
@@ -27,7 +35,9 @@ export const CartItem = ({ product, quantity, size = "md" }: CartItemProps) => {
           : "items-center md:items-stretch"
       )}
     >
-      <div
+      <NavLink
+        onClick={onProductClick}
+        to={`${SINGLE_PRODUCT_ROUTE}/${product.slug.current}`}
         className={cn(
           "h-auto w-28 md:w-44 md:h-48 flex-[0_0_7rem] md:flex-[0_0_11rem]",
           size === "sm" &&
@@ -39,17 +49,23 @@ export const CartItem = ({ product, quantity, size = "md" }: CartItemProps) => {
           src={imageBuilder(product.mainImage).url()}
           alt={product.name}
         />
-      </div>
+      </NavLink>
       <div className="flex flex-col flex-auto justify-between">
-        <p
+        <NavLink
+          onClick={onProductClick}
+          to={`${SINGLE_PRODUCT_ROUTE}/${product.slug.current}`}
           className={cn(
             "font-medium text-sm md:text-base mb-2",
             size === "md" ? "line-clamp-1 md:line-clamp-none" : "break-words"
           )}
         >
           {product.name}
-        </p>
-        <div className={cn(size === "md" && "md:space-y-2")}>
+        </NavLink>
+        <NavLink
+          onClick={onProductClick}
+          to={`${SINGLE_PRODUCT_ROUTE}/${product.slug.current}`}
+          className={cn(size === "md" && "md:space-y-2")}
+        >
           <div className="flex items-center gap-1 text-gray-600 font-light md:font-medium text-xs mb-1">
             {size === "md" && (
               <span
@@ -96,7 +112,7 @@ export const CartItem = ({ product, quantity, size = "md" }: CartItemProps) => {
               </li>
             )}
           </ul>
-        </div>
+        </NavLink>
         <div
           className={cn(
             "flex",

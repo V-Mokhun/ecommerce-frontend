@@ -56,6 +56,7 @@ export const Header = ({}: HeaderProps) => {
   const isMd = useMediaQuery("(min-width: 768px)");
   const { data } = useQuery(GET_CATEGORIES);
   const [navLinks, setNavLinks] = useState(NAVIGATION_LINKS);
+  const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
 
   useEffect(() => {
     const productsLink = navLinks.find((link) => link.label === "Products");
@@ -104,19 +105,33 @@ export const Header = ({}: HeaderProps) => {
               <HeaderMobileMenu
                 links={navLinks.filter((link) => link.label !== "Home")}
               />
-              <NavLink className="text-primary-300 font-medium" to={HOME_ROUTE}>
+              <NavLink
+                onClick={() => setIsSearchModalOpen(false)}
+                className="text-primary-300 font-medium"
+                to={HOME_ROUTE}
+              >
                 Ecommerce
               </NavLink>
             </>
           )}
           <div className="flex items-center gap-2">
-            {isMd && <HeaderSearch isMd={isMd} />}
+            {isMd && (
+              <HeaderSearch
+                isOpen={isSearchModalOpen}
+                setIsOpen={(open) => setIsSearchModalOpen(open)}
+                isMd={true}
+              />
+            )}
             <HeaderCart />
           </div>
         </div>
         {!isMd && (
           <div className="flex items-center gap-2 mx-2">
-            <HeaderSearch isMd={isMd} />
+            <HeaderSearch
+              isOpen={isSearchModalOpen}
+              setIsOpen={(open) => setIsSearchModalOpen(open)}
+              isMd={false}
+            />
           </div>
         )}
       </Container>
