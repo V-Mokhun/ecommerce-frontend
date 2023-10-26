@@ -12,7 +12,7 @@ export const NewProducts = ({}: NewProductsProps) => {
   return (
     <Section>
       <Container>
-        <SectionHeading viewAllLink={PRODUCTS_ROUTE}>
+        <SectionHeading viewAllLink={`${PRODUCTS_ROUTE}/?sort=isNew.desc`}>
           New Products
         </SectionHeading>
         <ul className="flex flex-wrap gap-4 md:gap-6 mt-2 md:mt-4">

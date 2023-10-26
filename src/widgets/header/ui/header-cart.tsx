@@ -42,8 +42,8 @@ export const HeaderCart = ({}: HeaderCartProps) => {
     >
       <PopoverTrigger className="p-2 relative">
         <Icon name="cart" className="w-6 h-6" />
-        <span className="text-xs md:text-base absolute inline-flex justify-center items-center w-4 h-4 md:w-5 md:h-5 bg-primary rounded-full right-0.5 bottom-0 text-white font-light">
-          {cartQuantity}
+        <span className="text-xs md:text-sm absolute inline-flex justify-center items-center w-4 h-4 md:w-5 md:h-5 bg-primary rounded-full right-0.5 bottom-0 text-white font-light">
+          {cartQuantity > 9 ? "9+" : cartQuantity}
         </span>
       </PopoverTrigger>
       <PopoverContent

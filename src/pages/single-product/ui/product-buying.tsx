@@ -1,7 +1,13 @@
 import { Color, SingleProduct } from "@/shared/api";
 import { CART_ROUTE } from "@/shared/consts";
 import { Button, Icon } from "@/shared/ui";
-import { addProductToCart, useAppDispatch } from "@/store";
+import {
+  addProductToCart,
+  cartProductsSelector,
+  changeCartOpenState,
+  useAppDispatch,
+  useAppSelector,
+} from "@/store";
 import { useNavigate } from "react-router-dom";
 
 interface ProductBuyingProps {
@@ -11,9 +17,12 @@ interface ProductBuyingProps {
 
 export const ProductBuying = ({ product, color }: ProductBuyingProps) => {
   const { colors, ...restProduct } = product;
-
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const cartProducts = useAppSelector(cartProductsSelector);
+  const items = cartProducts.filter((p) => p.product._id === product._id);
+  const cartItem = items.find((p) => p.product.color.name === color.name);
+  const itemsQuantity = items.reduce((acc, item) => acc + item.quantity, 0);
 
   const addToCart = () => dispatch(addProductToCart({ ...restProduct, color }));
 
@@ -52,6 +61,8 @@ export const ProductBuying = ({ product, color }: ProductBuyingProps) => {
         <Button
           disabled={product.quantity === 0}
           onClick={() => {
+            if (itemsQuantity >= product.quantity) return navigate(CART_ROUTE);
+
             addToCart();
             navigate(CART_ROUTE);
           }}
@@ -60,10 +71,17 @@ export const ProductBuying = ({ product, color }: ProductBuyingProps) => {
         </Button>
         <Button
           disabled={product.quantity === 0}
-          onClick={addToCart}
+          onClick={() => {
+            if (cartItem) {
+              dispatch(changeCartOpenState(true));
+              return;
+            }
+
+            addToCart();
+          }}
           variant="outline"
         >
-          Add to Cart
+          {cartItem ? "Open Cart" : "Add to Cart"}
         </Button>
       </div>
     </div>

@@ -25,7 +25,7 @@ export const CartPage = ({}: CartPageProps) => {
             <ul className="w-full md:w-auto flex flex-col md:flex-[0_1_700px]">
               {cartProducts.map(({ product, quantity }) => (
                 <CartItem
-                  key={product._id}
+                  key={product._id + product.color.name}
                   product={product}
                   quantity={quantity}
                 />

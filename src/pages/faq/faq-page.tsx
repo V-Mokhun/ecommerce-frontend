@@ -47,7 +47,7 @@ export const FaqPage = ({}: FaqPageProps) => {
                 <TabsList asChild>
                   <ul className="flex flex-col gap-2 md:gap-3 font-light text-sm md:text-base">
                     {topics.map((topic) => (
-                      <li>
+                      <li key={topic.name}>
                         <TabsTrigger value={topic.name!} key={topic.name}>
                           {topic.name}
                         </TabsTrigger>
@@ -61,6 +61,7 @@ export const FaqPage = ({}: FaqPageProps) => {
                   <Accordion
                     defaultValue={[topic.items![0]!.title!]}
                     type="multiple"
+                    key={topic.name}
                   >
                     <TabsContent value={topic.name!} key={topic.name}>
                       {topic.items?.map((item) => (

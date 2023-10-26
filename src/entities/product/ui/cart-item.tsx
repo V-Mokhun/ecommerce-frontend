@@ -4,10 +4,12 @@ import { cn } from "@/shared/lib";
 import { imageBuilder } from "@/shared/lib/image-builder";
 import { Icon } from "@/shared/ui";
 import {
+  cartProductsSelector,
   decrementProductQuantity,
   deleteProductFromCart,
   incrementProductQuantity,
   useAppDispatch,
+  useAppSelector,
 } from "@/store";
 import { NavLink } from "react-router-dom";
 
@@ -25,6 +27,9 @@ export const CartItem = ({
   onProductClick,
 }: CartItemProps) => {
   const dispatch = useAppDispatch();
+  const cartProducts = useAppSelector(cartProductsSelector);
+  const items = cartProducts.filter((p) => p.product._id === product._id);
+  const itemsQuantity = items.reduce((acc, item) => acc + item.quantity, 0);
 
   return (
     <li
@@ -170,7 +175,7 @@ export const CartItem = ({
               </button>
               <span>{quantity}</span>
               <button
-                disabled={quantity >= product.quantity}
+                disabled={itemsQuantity >= product.quantity}
                 onClick={() =>
                   dispatch(
                     incrementProductQuantity({

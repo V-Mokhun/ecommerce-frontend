@@ -3,7 +3,13 @@ import { SINGLE_PRODUCT_ROUTE } from "@/shared/consts";
 import { cn } from "@/shared/lib";
 import { imageBuilder } from "@/shared/lib/image-builder";
 import { Button, Icon } from "@/shared/ui";
-import { addProductToCart, useAppDispatch } from "@/store";
+import {
+  addProductToCart,
+  cartProductsSelector,
+  changeCartOpenState,
+  useAppDispatch,
+  useAppSelector,
+} from "@/store";
 import { NavLink } from "react-router-dom";
 
 interface SaleProductCardProps {
@@ -16,6 +22,8 @@ export const SaleProductCard = ({
   className,
 }: SaleProductCardProps) => {
   const dispatch = useAppDispatch();
+  const cartProducts = useAppSelector(cartProductsSelector);
+  const cartItem = cartProducts.find((p) => p.product._id === product._id);
   const { colors, ...cartProduct } = product;
 
   return (
@@ -58,14 +66,19 @@ export const SaleProductCard = ({
       <div className="hidden justify-end md:group-hover:flex">
         <Button
           disabled={product.quantity === 0}
-          onClick={() =>
-            dispatch(addProductToCart({ ...cartProduct, color: colors[0] }))
-          }
+          onClick={() => {
+            if (cartItem) {
+              dispatch(changeCartOpenState(true));
+              return;
+            }
+
+            dispatch(addProductToCart({ ...cartProduct, color: colors[0] }));
+          }}
           className="gap-1 px-2 md:px-2 py-1"
           variant="outline"
         >
           <Icon name="shopping-cart" className="w-6 h-6" />
-          <span>Add to Cart</span>
+          <span>{cartItem ? "Open Cart" : "Add to Cart"}</span>
         </Button>
       </div>
     </div>
