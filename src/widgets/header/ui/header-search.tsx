@@ -29,7 +29,7 @@ export const HeaderSearch = ({
 
   const { data, loading, refetch } = useQuery(GET_PRODUCTS, {
     variables: {
-      limit: 15,
+      limit: 12,
     },
   });
 
@@ -81,7 +81,10 @@ export const HeaderSearch = ({
         {debouncedSearchInput.trim().length > 0 && products.length > 0 && (
           <ul className="flex flex-wrap gap-4">
             {products.map((product) => (
-              <li className="flex-[0_1_calc(33.3%-12px)]" key={product._id}>
+              <li
+                className="flex-[0_1_calc(50%-8px)] xs:flex-[0_1_calc(33.3%-12px)]"
+                key={product._id}
+              >
                 <ProductCard
                   onProductClick={() => setIsOpen(false)}
                   product={product as Product}
@@ -139,7 +142,7 @@ export const HeaderSearch = ({
           </PopoverAnchor>
           <PopoverContent
             onOpenAutoFocus={(e) => e.preventDefault()}
-            className="w-screen h-[calc(100vh-92px)] flex flex-col border-none rounded-none shadow-none pb-0 px-6"
+            className="w-screen h-[calc(100vh-92px)] flex flex-col overflow-y-auto border-none rounded-none shadow-none pb-6 px-6"
           >
             {content}
           </PopoverContent>

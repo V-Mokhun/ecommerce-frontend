@@ -25,7 +25,7 @@ import { PRODUCTS_LIMIT } from "@/shared/consts";
 import { updateFilters, useAppDispatch } from "@/store";
 
 interface ProductsContentProps {
-  category: string;
+  category: string | undefined;
 }
 
 export const ProductsContent = ({ category }: ProductsContentProps) => {

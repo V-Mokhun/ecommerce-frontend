@@ -10,6 +10,7 @@ import { Footer, Header } from "@/widgets";
 import { Suspense } from "react";
 import { lazily } from "react-lazily";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { ScrollToTop } from "./scroll-to-top";
 
 const {
   HomePage,
@@ -26,13 +27,14 @@ export const App = () => {
   return (
     <div className="flex flex-col h-full">
       <BrowserRouter>
+        <ScrollToTop />
         <Header />
         <main className="flex-1">
           <Suspense fallback={<div>Loading...</div>}>
             <Routes>
               <Route path={HOME_ROUTE} element={<HomePage />} />
               <Route path={PRODUCTS_ROUTE}>
-                <Route path="" element={<NotFoundPage />} />
+                <Route path={``} element={<ProductsPage />} />
                 <Route path={`:category`} element={<ProductsPage />} />
                 <Route path={`product/:slug`} element={<ProductPage />} />
               </Route>

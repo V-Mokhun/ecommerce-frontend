@@ -20,6 +20,7 @@ export const Breadcrumbs = ({ links }: BreadcrumbsProps) => {
         <li className="inline-flex items-center" key={link.label}>
           <NavLink
             to={link.route}
+            end
             className={({ isActive }) =>
               cn(
                 "text-xs md:text-base lg:text-lg inline-block font-light hover:text-primary transition-colors pb-0.5",

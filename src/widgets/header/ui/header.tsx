@@ -106,7 +106,10 @@ export const Header = ({}: HeaderProps) => {
                 links={navLinks.filter((link) => link.label !== "Home")}
               />
               <NavLink
-                onClick={() => setIsSearchModalOpen(false)}
+                onClick={() => {
+                  setIsSearchModalOpen(false);
+                  document.body.classList.remove("overflow-hidden");
+                }}
                 className="text-primary-300 font-medium"
                 to={HOME_ROUTE}
               >
