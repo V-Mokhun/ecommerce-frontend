@@ -3,12 +3,13 @@ import { PRODUCTS_ROUTE } from "@/shared/consts";
 import { cn } from "@/shared/lib";
 import { imageBuilder } from "@/shared/lib/image-builder";
 import { useQuery } from "@apollo/client";
-import { NavLink } from "react-router-dom";
+import { NavLink, useSearchParams } from "react-router-dom";
 
 interface ProductsCategoriesProps {}
 
 export const ProductsCategories = ({}: ProductsCategoriesProps) => {
   const { data } = useQuery(GET_CATEGORIES);
+  const [params] = useSearchParams();
 
   return (
     <ul className="flex overflow-x-auto md:flex-wrap items-center md:justify-center gap-3 md:gap-4 pb-6 md:pb-9 lg:pb-12">
@@ -21,7 +22,10 @@ export const ProductsCategories = ({}: ProductsCategoriesProps) => {
                 isActive && `border-b-primary`
               )
             }
-            to={`${PRODUCTS_ROUTE}/${category.slug?.current}`}
+            to={{
+              pathname: `${PRODUCTS_ROUTE}/${category.slug?.current}`,
+              search: params.toString(),
+            }}
           >
             <img
               className="w-9 h-9 md:w-12 md:h-12 object-cover"
