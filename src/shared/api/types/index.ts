@@ -7,6 +7,7 @@ export type Product = {
   name: string;
   price: number;
   rating: number;
+  quantity: number;
   oldPrice?: number;
   salePercentage?: number;
   isOnSale: boolean;

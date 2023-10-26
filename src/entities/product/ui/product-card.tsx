@@ -26,6 +26,7 @@ export const ProductCard = ({
     <div
       className={cn(
         "flex flex-col rounded-sm p-2 md:p-4 bg-white group text-black relative group h-full shadow-md hover:shadow-sm transition-shadow",
+        product.quantity === 0 && "opacity-50 cursor-not-allowed",
         className
       )}
     >
@@ -101,6 +102,7 @@ export const ProductCard = ({
       </div>
       <div className="hidden justify-end md:group-hover:flex">
         <Button
+          disabled={product.quantity === 0}
           onClick={() => {
             dispatch(addProductToCart({ ...cartProduct, color: colors[0] }));
             if (onButtonClick) onButtonClick();

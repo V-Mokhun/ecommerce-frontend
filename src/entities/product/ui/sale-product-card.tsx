@@ -3,6 +3,7 @@ import { SINGLE_PRODUCT_ROUTE } from "@/shared/consts";
 import { cn } from "@/shared/lib";
 import { imageBuilder } from "@/shared/lib/image-builder";
 import { Button, Icon } from "@/shared/ui";
+import { addProductToCart, useAppDispatch } from "@/store";
 import { NavLink } from "react-router-dom";
 
 interface SaleProductCardProps {
@@ -14,10 +15,14 @@ export const SaleProductCard = ({
   product,
   className,
 }: SaleProductCardProps) => {
+  const dispatch = useAppDispatch();
+  const { colors, ...cartProduct } = product;
+
   return (
     <div
       className={cn(
         "flex flex-col rounded-sm p-2 bg-white group text-black relative group h-full",
+        product.quantity === 0 && "opacity-50 cursor-not-allowed",
         className
       )}
     >
@@ -52,7 +57,10 @@ export const SaleProductCard = ({
       </div>
       <div className="hidden justify-end md:group-hover:flex">
         <Button
-          onClick={() => {}}
+          disabled={product.quantity === 0}
+          onClick={() =>
+            dispatch(addProductToCart({ ...cartProduct, color: colors[0] }))
+          }
           className="gap-1 px-2 md:px-2 py-1"
           variant="outline"
         >

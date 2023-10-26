@@ -50,6 +50,7 @@ export const ProductBuying = ({ product, color }: ProductBuyingProps) => {
       </div>
       <div className="flex flex-col gap-2 flex-auto max-w-xs md:max-w-none -order-1 md:order-none">
         <Button
+          disabled={product.quantity === 0}
           onClick={() => {
             addToCart();
             navigate(CART_ROUTE);
@@ -57,7 +58,11 @@ export const ProductBuying = ({ product, color }: ProductBuyingProps) => {
         >
           Buy Now
         </Button>
-        <Button onClick={addToCart} variant="outline">
+        <Button
+          disabled={product.quantity === 0}
+          onClick={addToCart}
+          variant="outline"
+        >
           Add to Cart
         </Button>
       </div>

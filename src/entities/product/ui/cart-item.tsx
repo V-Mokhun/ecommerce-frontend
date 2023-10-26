@@ -32,7 +32,8 @@ export const CartItem = ({
         "p-2 pl-0 md:p-4 bg-white shadow-md flex flex-1 gap-4 md:gap-6",
         size === "sm"
           ? "gap-2 md:gap-4 items-center"
-          : "items-center md:items-stretch"
+          : "items-center md:items-stretch",
+        product.quantity === 0 && "opacity-50 cursor-not-allowed"
       )}
     >
       <NavLink
@@ -138,6 +139,7 @@ export const CartItem = ({
           </div>
           <div className="flex items-center gap-1">
             <button
+              disabled={product.quantity === 0}
               onClick={() =>
                 dispatch(
                   deleteProductFromCart({
@@ -168,6 +170,7 @@ export const CartItem = ({
               </button>
               <span>{quantity}</span>
               <button
+                disabled={quantity >= product.quantity}
                 onClick={() =>
                   dispatch(
                     incrementProductQuantity({
