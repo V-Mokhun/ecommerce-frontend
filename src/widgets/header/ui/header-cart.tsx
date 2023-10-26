@@ -55,7 +55,7 @@ export const HeaderCart = ({}: HeaderCartProps) => {
             <p className="font-medium mb-2 md:mb-3 md:font-light md:text-lg px-4">
               {cartQuantity} item{cartQuantity !== 1 && "s"}
             </p>
-            <ul className="flex flex-col gap-2 md:gap-3 max-h-[60vh] overflow-y-auto px-4 py-2">
+            <ul className="flex flex-col gap-2 md:gap-3 md:max-h-[60vh] overflow-y-auto pb-24 md:pb-2 px-4 py-2">
               {products.map(({ product, quantity }) => (
                 <CartItem
                   onProductClick={() => dispatch(changeCartOpenState(false))}

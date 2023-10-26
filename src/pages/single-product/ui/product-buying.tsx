@@ -27,7 +27,7 @@ export const ProductBuying = ({ product, color }: ProductBuyingProps) => {
   const addToCart = () => dispatch(addProductToCart({ ...restProduct, color }));
 
   return (
-    <div className="flex md:flex-col items-center md:items-stretch justify-center gap-4 flex-auto lg:max-w-[240px] lg:w-full p-6 px-3 md:px-6 bg-gray-100 md:bg-background shadow-md rounded-lg fixed left-0 right-0 bottom-0 md:static z-10">
+    <div className="flex md:flex-col items-center md:items-stretch justify-center gap-4 flex-auto lg:max-w-[240px] lg:w-full p-6 px-3 md:px-6 bg-gray-100 md:bg-background shadow-md rounded-lg fixed left-0 right-0 bottom-0 md:static z-[3]">
       <div>
         <div className="flex items-center justify-between gap-2 mb-1">
           <span className="text-xl font-medium hidden md:block">
@@ -70,7 +70,10 @@ export const ProductBuying = ({ product, color }: ProductBuyingProps) => {
           Buy Now
         </Button>
         <Button
-          disabled={product.quantity === 0}
+          disabled={
+            product.quantity === 0 ||
+            (itemsQuantity >= product.quantity && !cartItem)
+          }
           onClick={() => {
             if (cartItem) {
               dispatch(changeCartOpenState(true));
