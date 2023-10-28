@@ -1,6 +1,6 @@
 import { CartItem } from "@/entities";
-import { HOME_ROUTE } from "@/shared/consts";
-import { Button, Container, Heading } from "@/shared/ui";
+import { CHECKOUT_ROUTE, HOME_ROUTE } from "@/shared/consts";
+import { Container, Heading, buttonVariants } from "@/shared/ui";
 import {
   cartProductsSelector,
   cartTotalPriceSelector,
@@ -39,7 +39,13 @@ export const CartPage = ({}: CartPageProps) => {
                 <span>Grand Total</span>
                 <span>${totalPrice.toFixed(2)}</span>
               </div>
-              <Button className="w-full">Proceed to checkout</Button>
+
+              <NavLink
+                to={CHECKOUT_ROUTE}
+                className={buttonVariants({ className: "w-full" })}
+              >
+                Proceed to checkout
+              </NavLink>
             </div>
           </div>
         ) : (
