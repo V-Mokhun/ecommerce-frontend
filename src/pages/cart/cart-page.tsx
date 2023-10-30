@@ -6,20 +6,27 @@ import {
   cartTotalPriceSelector,
   useAppSelector,
 } from "@/store";
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { CartNav } from "./ui";
 
-interface CartPageProps {}
+export enum CartSteps {
+  Cart = "Cart",
+  Checkout = "Checkout",
+  Payment = "Payment",
+}
 
-export const CartPage = ({}: CartPageProps) => {
+export const CartPage = () => {
+  const [activeStep, setActiveStep] = useState<keyof typeof CartSteps>(
+    CartSteps.Cart
+  );
   const cartProducts = useAppSelector(cartProductsSelector);
   const totalPrice = useAppSelector(cartTotalPriceSelector);
 
   return (
     <section className="py-6">
       <Container>
-        <Heading className="mb-6 md:mb-8" as="h2">
-          Your Cart
-        </Heading>
+        <CartNav activeStep={activeStep} />
         {cartProducts.length > 0 ? (
           <div className="flex flex-col items-center md:flex-row md:justify-between md:items-start gap-6">
             <ul className="w-full md:w-auto flex flex-col md:flex-[0_1_700px]">
