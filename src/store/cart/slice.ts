@@ -1,7 +1,7 @@
 import { CartProduct } from "@/shared/api";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-type CartStateProduct = { product: CartProduct; quantity: number };
+export type CartStateProduct = { product: CartProduct; quantity: number };
 
 interface CartState {
   products: CartStateProduct[];

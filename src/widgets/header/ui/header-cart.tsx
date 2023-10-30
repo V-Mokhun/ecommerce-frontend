@@ -58,7 +58,10 @@ export const HeaderCart = ({}: HeaderCartProps) => {
             <ul className="flex flex-col gap-2 md:gap-3 md:max-h-[60vh] overflow-y-auto pb-24 md:pb-2 px-4 py-2">
               {products.map(({ product, quantity }) => (
                 <CartItem
-                  onProductClick={() => dispatch(changeCartOpenState(false))}
+                  onProductClick={() => {
+                    dispatch(changeCartOpenState(false));
+                    document.body.classList.remove("overflow-hidden");
+                  }}
                   size="sm"
                   product={product}
                   quantity={quantity}

@@ -41,7 +41,6 @@ export const App = () => {
                 <Route path={`product/:slug`} element={<ProductPage />} />
               </Route>
               <Route path={CART_ROUTE} element={<CartPage />} />
-              <Route path={CHECKOUT_ROUTE} element={<CheckoutPage />} />
               <Route path={FAQ_ROUTE} element={<FaqPage />} />
               <Route path={ABOUT_ROUTE} element={<AboutPage />} />
               <Route path={CONTACT_ROUTE} element={<ContactPage />} />
