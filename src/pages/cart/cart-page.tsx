@@ -38,7 +38,8 @@ export const CartPage = () => {
           <CartCheckout
             products={cartProducts}
             totalPrice={totalPrice}
-            goNext={() => setActiveStep(CartSteps.Checkout)}
+            goNext={() => setActiveStep(CartSteps.Payment)}
+            goPrev={() => setActiveStep(CartSteps.Cart)}
           />
         )}
       </Container>

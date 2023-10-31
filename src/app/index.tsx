@@ -1,7 +1,6 @@
 import {
   ABOUT_ROUTE,
   CART_ROUTE,
-  CHECKOUT_ROUTE,
   CONTACT_ROUTE,
   FAQ_ROUTE,
   HOME_ROUTE,
@@ -17,7 +16,6 @@ const {
   HomePage,
   AboutPage,
   CartPage,
-  CheckoutPage,
   ContactPage,
   FaqPage,
   ProductPage,

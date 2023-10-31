@@ -15,3 +15,6 @@ export * from "./select";
 export * from "./skeleton";
 export * from "./dialog";
 export * from "./tabs";
+export * from "./form";
+export * from "./label";
+export * from "./input";
