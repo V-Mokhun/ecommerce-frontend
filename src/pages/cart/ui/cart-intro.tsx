@@ -1,21 +1,20 @@
 import { CartItem } from "@/entities";
-import { CartProduct } from "@/shared/api";
-import { HOME_ROUTE, PRODUCTS_ROUTE } from "@/shared/consts";
+import { PRODUCTS_ROUTE } from "@/shared/consts";
 import { Button, Heading, buttonVariants } from "@/shared/ui";
-import { CartStateProduct } from "@/store";
 import { NavLink } from "react-router-dom";
+import { useCartContext } from ".";
 
 interface CartIntroProps {
-  products: CartStateProduct[];
-  totalPrice: number;
   goNext: () => void;
 }
 
-export const CartIntro = ({ products, totalPrice, goNext }: CartIntroProps) => {
-  return products.length > 0 ? (
+export const CartIntro = ({ goNext }: CartIntroProps) => {
+  const { cartProducts, productsPrice } = useCartContext();
+
+  return cartProducts.length > 0 ? (
     <div className="flex flex-col items-center md:flex-row md:justify-between md:items-start gap-6">
       <ul className="w-full md:w-auto flex flex-col md:flex-[0_1_700px]">
-        {products.map(({ product, quantity }) => (
+        {cartProducts.map(({ product, quantity }) => (
           <CartItem
             key={product._id + product.color.name}
             product={product}
@@ -29,7 +28,7 @@ export const CartIntro = ({ products, totalPrice, goNext }: CartIntroProps) => {
         </h2>
         <div className="flex items-center justify-between font-medium text-sm md:text-base px-2 md:px-0">
           <span>Grand Total</span>
-          <span>${totalPrice.toFixed(2)}</span>
+          <span>${productsPrice.toFixed(2)}</span>
         </div>
 
         <Button

@@ -17,10 +17,9 @@ import z from "zod";
 import { CartOrder } from "./cart-order";
 import { useEffect, useState } from "react";
 import { cn } from "@/shared/lib";
+import { useCartContext } from ".";
 
 interface CartCheckoutProps {
-  products: CartStateProduct[];
-  totalPrice: number;
   goNext: () => void;
   goPrev: () => void;
 }
@@ -49,12 +48,7 @@ const formSchema = z.object({
     .min(2, { message: "Postal code must be at least 2 characters" }),
 });
 
-export const CartCheckout = ({
-  goNext,
-  goPrev,
-  products,
-  totalPrice,
-}: CartCheckoutProps) => {
+export const CartCheckout = ({ goNext, goPrev }: CartCheckoutProps) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -67,10 +61,8 @@ export const CartCheckout = ({
     },
   });
   const { data } = useQuery(GET_SHIPPINGS);
+  const { selectedShipping, setSelectedShipping } = useCartContext();
   const { toast } = useToast();
-  const [selectedShipping, setSelectedShipping] = useState<
-    Shipping | undefined
-  >(undefined);
 
   useEffect(() => {
     if (!selectedShipping && data?.allShipping[0]) {
@@ -243,6 +235,7 @@ export const CartCheckout = ({
       <CartOrder
         onButtonClick={() => {
           if (!form.formState.isValid || !selectedShipping) {
+            form.handleSubmit(onSubmit)();
             toast({
               title: `You must fill all fields providing address details ${
                 !selectedShipping ? "and select shipping method" : ""
@@ -253,10 +246,6 @@ export const CartCheckout = ({
             goNext();
           }
         }}
-        products={products}
-        productsPrice={totalPrice}
-        shipmentPrice={selectedShipping?.price ?? 0}
-        totalPrice={totalPrice + (selectedShipping?.price ?? 0)}
       />
     </div>
   );

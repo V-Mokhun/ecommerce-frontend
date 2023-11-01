@@ -4,29 +4,23 @@ import { imageBuilder } from "@/shared/lib/image-builder";
 import { Button } from "@/shared/ui";
 import { CartStateProduct } from "@/store";
 import { NavLink } from "react-router-dom";
+import { useCartContext } from ".";
 
 interface CartOrderProps {
-  products: CartStateProduct[];
-  productsPrice: number;
-  shipmentPrice: number;
-  totalPrice: number;
   onButtonClick: () => void;
 }
 
-export const CartOrder = ({
-  products,
-  productsPrice,
-  shipmentPrice,
-  totalPrice,
-  onButtonClick,
-}: CartOrderProps) => {
+export const CartOrder = ({ onButtonClick }: CartOrderProps) => {
+  const { cartProducts, productsPrice, selectedShipping } = useCartContext();
+  const totalPrice = productsPrice + (selectedShipping?.price || 0);
+
   return (
     <div className="md:p-4 lg:p-6 md:border border-gray-200 flex flex-col flex-1 w-full md:flex-[0_1_400px] md:w-auto">
       <h2 className="text-base font-medium mb-3 md:text-xl md:mb-4 lg:text-2xl">
         Your Order
       </h2>
       <ul className="flex overflow-x-auto md:flex-col gap-3 md:gap-4 mb-6 md:mb-8 lg:mb-10 rounded-lg bg-gray-100 md:bg-background p-2 md:p-0 -mr-4 md:mr-0 md:max-h-[40vh] md:overflow-y-auto">
-        {products.map(({ product, quantity }) => (
+        {cartProducts.map(({ product, quantity }) => (
           <li key={product._id + product.color.name}>
             <NavLink
               to={`${SINGLE_PRODUCT_ROUTE}/${product.slug.current}`}
@@ -79,7 +73,9 @@ export const CartOrder = ({
             </li>
             <li className="flex items-center justify-between gap-2 text-xs font-light md:text-sm text-gray-600">
               <span>Shipment cost</span>
-              <span className="text-right">${shipmentPrice.toFixed(2)}</span>
+              <span className="text-right">
+                ${selectedShipping?.price.toFixed(2) || 0}
+              </span>
             </li>
           </ul>
           <div className="flex items-center justify-between text-sm md:text-base font-medium gap-2">
