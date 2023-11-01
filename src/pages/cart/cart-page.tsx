@@ -1,13 +1,10 @@
-import { CartItem } from "@/entities";
-import { CHECKOUT_ROUTE, HOME_ROUTE } from "@/shared/consts";
-import { Button, Container, Heading, buttonVariants } from "@/shared/ui";
+import { Container } from "@/shared/ui";
 import {
   cartProductsSelector,
   cartTotalPriceSelector,
   useAppSelector,
 } from "@/store";
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
 import { CartCheckout, CartIntro, CartNav } from "./ui";
 
 export enum CartSteps {
@@ -18,7 +15,7 @@ export enum CartSteps {
 
 export const CartPage = () => {
   const [activeStep, setActiveStep] = useState<keyof typeof CartSteps>(
-    CartSteps.Cart
+    CartSteps.Checkout
   );
   const cartProducts = useAppSelector(cartProductsSelector);
   const totalPrice = useAppSelector(cartTotalPriceSelector);

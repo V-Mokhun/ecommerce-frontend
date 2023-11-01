@@ -26,6 +26,7 @@ const documents = {
     "\n  query GetNewProducts {\n    allProduct(\n      where: { isNew: { eq: true } }\n      limit: 4\n      sort: { rating: DESC }\n    ) {\n      ...ProductFields\n    }\n  }\n": types.GetNewProductsDocument,
     "\n  query GetBestSellerProducts {\n    allProduct(\n      where: { isBestSeller: { eq: true } }\n      limit: 4\n      sort: { rating: DESC }\n    ) {\n      ...ProductFields\n    }\n  }\n": types.GetBestSellerProductsDocument,
     "\n  query GetSingleProduct($slug: String!) {\n    allProduct(where: { slug: { current: { eq: $slug } } }, limit: 1) {\n      ...ProductFields\n      brand {\n        name\n      }\n      images {\n        ...ImageFields\n      }\n      details {\n        name\n        value\n      }\n      category {\n        name\n        slug {\n          current\n        }\n      }\n      similarProducts {\n        ...ProductFields\n      }\n    }\n  }\n": types.GetSingleProductDocument,
+    "\n\tquery GetShippings {\n\t\tallShipping(sort: { price: ASC }) {\n\t\t\t_id\n\t\t\tname\n\t\t\tprice\n\t\t\tdescription\n\t\t}\n\t}\n": types.GetShippingsDocument,
 };
 
 /**
@@ -94,6 +95,10 @@ export function graphql(source: "\n  query GetBestSellerProducts {\n    allProdu
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  query GetSingleProduct($slug: String!) {\n    allProduct(where: { slug: { current: { eq: $slug } } }, limit: 1) {\n      ...ProductFields\n      brand {\n        name\n      }\n      images {\n        ...ImageFields\n      }\n      details {\n        name\n        value\n      }\n      category {\n        name\n        slug {\n          current\n        }\n      }\n      similarProducts {\n        ...ProductFields\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetSingleProduct($slug: String!) {\n    allProduct(where: { slug: { current: { eq: $slug } } }, limit: 1) {\n      ...ProductFields\n      brand {\n        name\n      }\n      images {\n        ...ImageFields\n      }\n      details {\n        name\n        value\n      }\n      category {\n        name\n        slug {\n          current\n        }\n      }\n      similarProducts {\n        ...ProductFields\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n\tquery GetShippings {\n\t\tallShipping(sort: { price: ASC }) {\n\t\t\t_id\n\t\t\tname\n\t\t\tprice\n\t\t\tdescription\n\t\t}\n\t}\n"): (typeof documents)["\n\tquery GetShippings {\n\t\tallShipping(sort: { price: ASC }) {\n\t\t\t_id\n\t\t\tname\n\t\t\tprice\n\t\t\tdescription\n\t\t}\n\t}\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

@@ -27,7 +27,7 @@ export const CartOrder = ({
       </h2>
       <ul className="flex overflow-x-auto md:flex-col gap-3 md:gap-4 mb-6 md:mb-8 lg:mb-10 rounded-lg bg-gray-100 md:bg-background p-2 md:p-0 -mr-4 md:mr-0 md:max-h-[40vh] md:overflow-y-auto">
         {products.map(({ product, quantity }) => (
-          <li key={product._id}>
+          <li key={product._id + product.color.name}>
             <NavLink
               to={`${SINGLE_PRODUCT_ROUTE}/${product.slug.current}`}
               className="group flex flex-col md:flex-row gap-2 p-1 md:p-1.5 md:border-b border-gray-100 rounded-sm bg-background"

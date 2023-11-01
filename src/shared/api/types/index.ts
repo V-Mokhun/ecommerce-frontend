@@ -59,3 +59,10 @@ export type SingleProduct = Product & {
   };
   similarProducts: Product[] | null;
 };
+
+export type Shipping = {
+  _id: string;
+  name: string;
+  price: number;
+  description: string;
+};
