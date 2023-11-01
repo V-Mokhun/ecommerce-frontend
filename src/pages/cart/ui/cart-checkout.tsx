@@ -7,6 +7,7 @@ import {
   FormItem,
   FormMessage,
   Input,
+  useToast,
 } from "@/shared/ui";
 import { CartStateProduct } from "@/store";
 import { useQuery } from "@apollo/client";
@@ -66,6 +67,7 @@ export const CartCheckout = ({
     },
   });
   const { data } = useQuery(GET_SHIPPINGS);
+  const { toast } = useToast();
   const [selectedShipping, setSelectedShipping] = useState<
     Shipping | undefined
   >(undefined);
@@ -77,20 +79,20 @@ export const CartCheckout = ({
   }, [data?.allShipping, selectedShipping]);
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+    // Some logic to send form data to backend
   }
 
   return (
     <div className="flex flex-col md:flex-row gap-4 md:gap-6 items-start">
-      <div className="flex-auto">
-        <div className="md:px-6 md:py-4 lg:px-8 lg:py-6 border border-gray-200 rounded-lg">
+      <div className="flex-1 w-full md:flex-auto md:w-auto">
+        <div className="md:px-6 md:py-4 lg:px-8 lg:py-6 md:border border-gray-200 rounded-lg">
           <h2 className="font-medium md:text-lg lg:text-xl mb-2 md:mb-3">
             Address details
           </h2>
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}
-              className="space-y-4 mb-3 md:mb-6 lg:mb-8"
+              className="space-y-4 mb-4 md:mb-6 lg:mb-8"
             >
               <FormField
                 control={form.control}
@@ -160,6 +162,22 @@ export const CartCheckout = ({
               </div>
               <FormField
                 control={form.control}
+                name="street"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <Input
+                        onClear={() => field.onChange("")}
+                        placeholder="Street name and house number"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
                 name="postalCode"
                 render={({ field }) => (
                   <FormItem>
@@ -177,7 +195,7 @@ export const CartCheckout = ({
             </form>
           </Form>
           <h2 className="font-medium md:text-lg lg:text-xl mb-2 md:mb-3">
-            Shiping Method
+            Shipping Method
           </h2>
           <ul className="space-y-2">
             {data?.allShipping.map((shipping) => (
@@ -224,8 +242,13 @@ export const CartCheckout = ({
       </div>
       <CartOrder
         onButtonClick={() => {
-          if (!form.formState.isValid) {
-            //
+          if (!form.formState.isValid || !selectedShipping) {
+            toast({
+              title: `You must fill all fields providing address details ${
+                !selectedShipping ? "and select shipping method" : ""
+              }`,
+              variant: "destructive",
+            });
           } else {
             goNext();
           }

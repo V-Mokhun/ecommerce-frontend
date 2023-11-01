@@ -5,7 +5,7 @@ import {
   useAppSelector,
 } from "@/store";
 import { useState } from "react";
-import { CartCheckout, CartIntro, CartNav } from "./ui";
+import { CartCheckout, CartIntro, CartNav, CartPayment } from "./ui";
 
 export enum CartSteps {
   Cart = "Cart",
@@ -36,6 +36,13 @@ export const CartPage = () => {
             products={cartProducts}
             totalPrice={totalPrice}
             goNext={() => setActiveStep(CartSteps.Payment)}
+            goPrev={() => setActiveStep(CartSteps.Cart)}
+          />
+        )}
+        {activeStep === CartSteps.Payment && (
+          <CartPayment
+            products={cartProducts}
+            totalPrice={totalPrice}
             goPrev={() => setActiveStep(CartSteps.Cart)}
           />
         )}

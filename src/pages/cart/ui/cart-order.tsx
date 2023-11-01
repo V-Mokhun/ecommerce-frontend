@@ -21,7 +21,7 @@ export const CartOrder = ({
   onButtonClick,
 }: CartOrderProps) => {
   return (
-    <div className="md:p-4 lg:p-6 md:border border-gray-200 flex flex-col flex-1 md:flex-[0_1_400px]">
+    <div className="md:p-4 lg:p-6 md:border border-gray-200 flex flex-col flex-1 w-full md:flex-[0_1_400px] md:w-auto">
       <h2 className="text-base font-medium mb-3 md:text-xl md:mb-4 lg:text-2xl">
         Your Order
       </h2>

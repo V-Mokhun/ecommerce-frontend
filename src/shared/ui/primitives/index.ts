@@ -18,3 +18,4 @@ export * from "./tabs";
 export * from "./form";
 export * from "./label";
 export * from "./input";
+export * from "./toast";

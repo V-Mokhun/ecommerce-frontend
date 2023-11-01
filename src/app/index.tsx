@@ -11,6 +11,7 @@ import { Suspense } from "react";
 import { lazily } from "react-lazily";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ScrollToTop } from "./scroll-to-top";
+import { Toaster } from "@/shared/ui";
 
 const {
   HomePage,
@@ -28,6 +29,7 @@ export const App = () => {
     <div className="flex flex-col h-full">
       <BrowserRouter>
         <ScrollToTop />
+        <Toaster />
         <Header />
         <main className="flex-1 pt-24">
           <Suspense fallback={<div>Loading...</div>}>
