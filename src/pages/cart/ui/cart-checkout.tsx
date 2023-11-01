@@ -61,7 +61,8 @@ export const CartCheckout = ({ goNext, goPrev }: CartCheckoutProps) => {
     },
   });
   const { data } = useQuery(GET_SHIPPINGS);
-  const { selectedShipping, setSelectedShipping } = useCartContext();
+  const { selectedShipping, setSelectedShipping, updateCheckoutInfo } =
+    useCartContext();
   const { toast } = useToast();
 
   useEffect(() => {
@@ -71,7 +72,11 @@ export const CartCheckout = ({ goNext, goPrev }: CartCheckoutProps) => {
   }, [data?.allShipping, selectedShipping]);
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // Some logic to send form data to backend
+    updateCheckoutInfo({
+      email: "",
+      fullName: values.fullName,
+      phoneNumber: values.phoneNumber,
+    });
   }
 
   return (
@@ -234,6 +239,8 @@ export const CartCheckout = ({ goNext, goPrev }: CartCheckoutProps) => {
       </div>
       <CartOrder
         onButtonClick={() => {
+          console.log(form.formState.isValid, selectedShipping);
+
           if (!form.formState.isValid || !selectedShipping) {
             form.handleSubmit(onSubmit)();
             toast({
@@ -243,6 +250,7 @@ export const CartCheckout = ({ goNext, goPrev }: CartCheckoutProps) => {
               variant: "destructive",
             });
           } else {
+            form.handleSubmit(onSubmit)();
             goNext();
           }
         }}

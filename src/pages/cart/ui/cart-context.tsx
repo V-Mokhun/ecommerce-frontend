@@ -7,11 +7,15 @@ import {
 } from "@/store";
 import { createContext, useContext, useState } from "react";
 
+type CheckoutInfo = { fullName: string; email: string; phoneNumber: string };
+
 export type CartContextState = {
   selectedShipping: Shipping | undefined;
   setSelectedShipping: (shipping: Shipping) => void;
   cartProducts: CartStateProduct[];
   productsPrice: number;
+  checkoutInfo: CheckoutInfo | undefined;
+  updateCheckoutInfo: (checkoutInfo: CheckoutInfo | undefined) => void;
 };
 
 export const CartContext = createContext<CartContextState | null>(null);
@@ -24,6 +28,9 @@ export const CartContextProvider = ({
   const [selectedShipping, setSelectedShipping] = useState<
     Shipping | undefined
   >(undefined);
+  const [checkoutInfo, setCheckoutInfo] = useState<CheckoutInfo | undefined>(
+    undefined
+  );
   const cartProducts = useAppSelector(cartProductsSelector);
   const totalPrice = useAppSelector(cartTotalPriceSelector);
 
@@ -32,6 +39,8 @@ export const CartContextProvider = ({
       value={{
         selectedShipping,
         setSelectedShipping,
+        checkoutInfo,
+        updateCheckoutInfo: setCheckoutInfo,
         cartProducts,
         productsPrice: totalPrice,
       }}

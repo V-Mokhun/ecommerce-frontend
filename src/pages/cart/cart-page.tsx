@@ -1,9 +1,4 @@
 import { Container } from "@/shared/ui";
-import {
-  cartProductsSelector,
-  cartTotalPriceSelector,
-  useAppSelector,
-} from "@/store";
 import { useState } from "react";
 import {
   CartCheckout,

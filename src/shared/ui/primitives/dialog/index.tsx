@@ -48,7 +48,6 @@ const DialogContent = React.forwardRef<
         )}
         {...props}
       >
-        {children}
         <DialogPrimitive.Close
           className={cn(
             "absolute right-4 top-4 ring-offset-background text-gray-800 transition-colors hover:text-primary focus:outline-none disabled:pointer-events-none",
@@ -58,6 +57,7 @@ const DialogContent = React.forwardRef<
           <Icon name="close-circle" className="w-6 h-6 md:w-10 md:h-10" />
           <span className="sr-only">Close</span>
         </DialogPrimitive.Close>
+        {children}
       </DialogPrimitive.Content>
     </DialogPortal>
   )

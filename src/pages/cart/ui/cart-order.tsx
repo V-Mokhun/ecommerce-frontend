@@ -7,10 +7,11 @@ import { NavLink } from "react-router-dom";
 import { useCartContext } from ".";
 
 interface CartOrderProps {
-  onButtonClick: () => void;
+  onButtonClick?: () => void;
+  hideButton?: boolean;
 }
 
-export const CartOrder = ({ onButtonClick }: CartOrderProps) => {
+export const CartOrder = ({ onButtonClick, hideButton }: CartOrderProps) => {
   const { cartProducts, productsPrice, selectedShipping } = useCartContext();
   const totalPrice = productsPrice + (selectedShipping?.price || 0);
 
@@ -63,7 +64,7 @@ export const CartOrder = ({ onButtonClick }: CartOrderProps) => {
           </li>
         ))}
       </ul>
-      <div className="mb-6 md:mb-8 lg:mb-10">
+      <div className={cn(!hideButton && "mb-6 md:mb-8 lg:mb-10")}>
         <h3 className="font-medium mb-3 md:hidden">Payment details</h3>
         <div className="p-2">
           <ul className="flex flex-col gap-2 mb-3 pb-3 border-b border-gray-300">
@@ -84,9 +85,11 @@ export const CartOrder = ({ onButtonClick }: CartOrderProps) => {
           </div>
         </div>
       </div>
-      <Button onClick={onButtonClick} className="w-full">
-        Continue to pay
-      </Button>
+      {!hideButton && (
+        <Button onClick={onButtonClick} className="w-full">
+          Continue to pay
+        </Button>
+      )}
     </div>
   );
 };

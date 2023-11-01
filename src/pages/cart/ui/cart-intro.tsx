@@ -13,7 +13,7 @@ export const CartIntro = ({ goNext }: CartIntroProps) => {
 
   return cartProducts.length > 0 ? (
     <div className="flex flex-col items-center md:flex-row md:justify-between md:items-start gap-6">
-      <ul className="w-full md:w-auto flex flex-col md:flex-[0_1_700px]">
+      <ul className="w-full md:w-auto flex flex-col md:flex-[0_1_700px] gap-3 md:gap-4 lg:gap-6">
         {cartProducts.map(({ product, quantity }) => (
           <CartItem
             key={product._id + product.color.name}
