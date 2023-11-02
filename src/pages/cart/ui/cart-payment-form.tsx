@@ -39,8 +39,6 @@ export const CartPaymentForm = ({}: CartPaymentFormProps) => {
 
     updateCheckoutInfo({
       email,
-      fullName: checkoutInfo?.fullName ?? "",
-      phoneNumber: checkoutInfo?.phoneNumber ?? "",
     });
     setIsLoading(true);
 

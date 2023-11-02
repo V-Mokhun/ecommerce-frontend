@@ -49,20 +49,24 @@ const formSchema = z.object({
 });
 
 export const CartCheckout = ({ goNext, goPrev }: CartCheckoutProps) => {
+  const {
+    selectedShipping,
+    setSelectedShipping,
+    updateCheckoutInfo,
+    checkoutInfo,
+  } = useCartContext();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      fullName: "",
-      phoneNumber: "",
-      country: "",
-      city: "",
-      street: "",
-      postalCode: "",
+      fullName: checkoutInfo?.fullName ?? "",
+      phoneNumber: checkoutInfo?.phoneNumber ?? "",
+      country: checkoutInfo?.country ?? "",
+      city: checkoutInfo?.city ?? "",
+      street: checkoutInfo?.street ?? "",
+      postalCode: checkoutInfo?.postalCode ?? "",
     },
   });
   const { data } = useQuery(GET_SHIPPINGS);
-  const { selectedShipping, setSelectedShipping, updateCheckoutInfo } =
-    useCartContext();
   const { toast } = useToast();
 
   useEffect(() => {
@@ -72,11 +76,7 @@ export const CartCheckout = ({ goNext, goPrev }: CartCheckoutProps) => {
   }, [data?.allShipping, selectedShipping]);
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    updateCheckoutInfo({
-      email: "",
-      fullName: values.fullName,
-      phoneNumber: values.phoneNumber,
-    });
+    updateCheckoutInfo({ ...values });
   }
 
   return (
@@ -238,11 +238,11 @@ export const CartCheckout = ({ goNext, goPrev }: CartCheckoutProps) => {
         </Button>
       </div>
       <CartOrder
-        onButtonClick={() => {
-          console.log(form.formState.isValid, selectedShipping);
+        onButtonClick={async () => {
+          const isValid = await form.trigger();
 
-          if (!form.formState.isValid || !selectedShipping) {
-            form.handleSubmit(onSubmit)();
+          if (!isValid || !selectedShipping) {
+            await form.handleSubmit(onSubmit)();
             toast({
               title: `You must fill all fields providing address details ${
                 !selectedShipping ? "and select shipping method" : ""
@@ -250,7 +250,7 @@ export const CartCheckout = ({ goNext, goPrev }: CartCheckoutProps) => {
               variant: "destructive",
             });
           } else {
-            form.handleSubmit(onSubmit)();
+            await form.handleSubmit(onSubmit)();
             goNext();
           }
         }}
