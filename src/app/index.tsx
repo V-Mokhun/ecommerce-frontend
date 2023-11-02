@@ -12,6 +12,7 @@ import { lazily } from "react-lazily";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ScrollToTop } from "./scroll-to-top";
 import { Toaster } from "@/shared/ui";
+import { Loader2 } from "lucide-react";
 
 const {
   HomePage,
@@ -32,7 +33,13 @@ export const App = () => {
         <Toaster />
         <Header />
         <main className="flex-1 pt-24">
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense
+            fallback={
+              <div className="my-10 flex items-center justify-center">
+                <Loader2 className="w-20 h-20 text-primary animate-spin" />
+              </div>
+            }
+          >
             <Routes>
               <Route path={HOME_ROUTE} element={<HomePage />} />
               <Route path={PRODUCTS_ROUTE}>
