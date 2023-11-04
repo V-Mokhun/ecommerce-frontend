@@ -1,6 +1,11 @@
-interface BlogSidebarProps {}
+interface BlogSidebarProps {
+  category: string | null;
+	tag: string | null;
+}
 
-export const BlogSidebar = ({}: BlogSidebarProps) => {
+export const BlogSidebar = ({ category, tag }: BlogSidebarProps) => {
+	
+
   return (
     <aside className="flex flex-col gap-6 md:gap-8 lg:gap-10 flex-1 md:flex-[0_0_360px]">
       <div>

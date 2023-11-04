@@ -24,7 +24,7 @@ export const BlogPage = () => {
         <Breadcrumbs links={links} />
         <div className="flex flex-col md:flex-row gap-6">
           <div className="flex-auto"></div>
-          <BlogSidebar />
+          <BlogSidebar category={category} tag={tag} />
         </div>
       </Container>
     </section>
