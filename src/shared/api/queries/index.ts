@@ -6,3 +6,4 @@ export * from "./color";
 export * from "./contact";
 export * from "./faq-topic";
 export * from './shipping';
+export * from './blog';
