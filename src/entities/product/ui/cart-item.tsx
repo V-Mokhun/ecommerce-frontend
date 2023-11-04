@@ -45,13 +45,13 @@ export const CartItem = ({
         onClick={onProductClick}
         to={`${SINGLE_PRODUCT_ROUTE}/${product.slug.current}`}
         className={cn(
-          "h-auto w-28 md:w-44 md:h-48 flex-[0_0_7rem] md:flex-[0_0_11rem]",
+          "h-auto w-28 md:w-44 md:h-48 flex-[0_0_7rem] md:flex-[0_0_11rem] flex items-center justify-center",
           size === "sm" &&
             "w-28 md:h-32 md:w-40 flex-[0_0_7rem] md:flex-[0_0_10rem]"
         )}
       >
         <img
-          className="object-cover w-full h-full"
+          className="object-cover w-full"
           src={imageBuilder(product.mainImage).url()}
           alt={product.name}
         />

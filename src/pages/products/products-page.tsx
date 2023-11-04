@@ -10,10 +10,10 @@ export const ProductsPage = ({}: ProductsPageProps) => {
   const links = [{ label: "Products", route: `${PRODUCTS_ROUTE}` }];
   if (category)
     links.push({
-      label: `${category[0].toUpperCase()}${category.substring(
-        1,
-        category.length
-      )}`,
+      label: category
+        .split("-")
+        .map((word) => word[0].toUpperCase() + word.slice(1))
+        .join(" "),
       route: `${PRODUCTS_ROUTE}/${category}`,
     });
 

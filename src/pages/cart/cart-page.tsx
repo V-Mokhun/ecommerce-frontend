@@ -16,7 +16,7 @@ export enum CartSteps {
 
 export const CartPage = () => {
   const [activeStep, setActiveStep] = useState<keyof typeof CartSteps>(
-    CartSteps.Checkout
+    CartSteps.Cart
   );
 
   return (

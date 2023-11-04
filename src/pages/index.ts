@@ -6,3 +6,5 @@ export * from "./cart";
 export * from "./single-product";
 export * from "./about";
 export * from "./not-found";
+export * from "./blog";
+export * from "./blog-post";

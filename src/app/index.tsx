@@ -1,5 +1,6 @@
 import {
   ABOUT_ROUTE,
+  BLOG_ROUTE,
   CART_ROUTE,
   CONTACT_ROUTE,
   FAQ_ROUTE,
@@ -23,6 +24,8 @@ const {
   ProductPage,
   ProductsPage,
   NotFoundPage,
+  BlogPage,
+  BlogPostPage,
 } = lazily(() => import("@/pages"));
 
 export const App = () => {
@@ -48,6 +51,10 @@ export const App = () => {
                 <Route path={`product/:slug`} element={<ProductPage />} />
               </Route>
               <Route path={CART_ROUTE} element={<CartPage />} />
+              <Route path={BLOG_ROUTE}>
+                <Route path={``} element={<BlogPage />} />
+                <Route path={`:slug`} element={<BlogPostPage />} />
+              </Route>
               <Route path={FAQ_ROUTE} element={<FaqPage />} />
               <Route path={ABOUT_ROUTE} element={<AboutPage />} />
               <Route path={CONTACT_ROUTE} element={<ContactPage />} />
