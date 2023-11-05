@@ -8,6 +8,8 @@ export const BlogPage = () => {
   const links = [{ label: "Blog", route: `${BLOG_ROUTE}` }];
   const category = params.get("category");
   const tag = params.get("tag");
+	// const {data: postsData} = 
+
   if (category)
     links.push({
       label: category
@@ -23,7 +25,10 @@ export const BlogPage = () => {
         <h1 className="sr-only">Blog</h1>
         <Breadcrumbs links={links} />
         <div className="flex flex-col md:flex-row gap-6">
-          <div className="flex-auto"></div>
+          <div className="flex-auto">
+						<ul className="flex flex-wrap gap-3 md:gap-6">
+						</ul>
+					</div>
           <BlogSidebar category={category} tag={tag} />
         </div>
       </Container>

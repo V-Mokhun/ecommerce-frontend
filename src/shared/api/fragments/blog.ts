@@ -7,7 +7,9 @@ export const BLOG_POST_FIELDS_FRAGMENT = graphql(`
     slug {
       current
     }
+    description
     readTime
+    _createdAt
     image {
       ...ImageFields
     }

@@ -13,7 +13,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-    "\n  fragment BlogPostFields on BlogPost {\n    _id\n    title\n    slug {\n      current\n    }\n    readTime\n    image {\n      ...ImageFields\n    }\n  }\n": types.BlogPostFieldsFragmentDoc,
+    "\n  fragment BlogPostFields on BlogPost {\n    _id\n    title\n    slug {\n      current\n    }\n    description\n    readTime\n    _createdAt\n    image {\n      ...ImageFields\n    }\n  }\n": types.BlogPostFieldsFragmentDoc,
     "\n    fragment ImageFields on Image {\n      asset {\n        _id\n        url\n        path\n        assetId\n        extension\n      }\n      hotspot {\n        width\n        height\n        x\n        y\n      }\n      crop {\n        top\n        bottom\n        right\n        left\n      }\n    }\n  ": types.ImageFieldsFragmentDoc,
     "\n  fragment ProductFields on Product {\n    _id\n    name\n    rating\n    price\n    quantity\n    oldPrice\n    salePercentage\n    isOnSale\n    colors {\n      name\n      value {\n        hex\n      }\n    }\n    slug {\n      current\n    }\n    mainImage {\n      ...ImageFields\n    }\n    isFreeDelivery\n    isInStock\n    isGuaranteed\n  }\n": types.ProductFieldsFragmentDoc,
     "\n  query GetHomeBanners {\n    largeBanner: allBanner(\n      where: { showOn: { eq: \"home\" }, size: { eq: \"lg\" } }\n      limit: 1\n    ) {\n\t\t\ttitle\n      desktopImage {\n        ...ImageFields\n      }\n      mobileImage {\n        ...ImageFields\n      }\n      link\n      size\n    }\n\n    mediumBanner: allBanner(\n      where: { showOn: { eq: \"home\" }, size: { eq: \"md\" } }\n      limit: 1\n    ) {\n\t\t\ttitle\n      desktopImage {\n        ...ImageFields\n      }\n      mobileImage {\n        ...ImageFields\n      }\n      link\n      size\n    }\n\n    smallBanner: allBanner(\n      where: { showOn: { eq: \"home\" }, size: { eq: \"sm\" } }\n      limit: 1\n    ) {\n\t\t\ttitle\n      desktopImage {\n        ...ImageFields\n      }\n      mobileImage {\n        ...ImageFields\n      }\n      link\n      size\n    }\n  }\n": types.GetHomeBannersDocument,
@@ -50,7 +50,7 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  fragment BlogPostFields on BlogPost {\n    _id\n    title\n    slug {\n      current\n    }\n    readTime\n    image {\n      ...ImageFields\n    }\n  }\n"): (typeof documents)["\n  fragment BlogPostFields on BlogPost {\n    _id\n    title\n    slug {\n      current\n    }\n    readTime\n    image {\n      ...ImageFields\n    }\n  }\n"];
+export function graphql(source: "\n  fragment BlogPostFields on BlogPost {\n    _id\n    title\n    slug {\n      current\n    }\n    description\n    readTime\n    _createdAt\n    image {\n      ...ImageFields\n    }\n  }\n"): (typeof documents)["\n  fragment BlogPostFields on BlogPost {\n    _id\n    title\n    slug {\n      current\n    }\n    description\n    readTime\n    _createdAt\n    image {\n      ...ImageFields\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

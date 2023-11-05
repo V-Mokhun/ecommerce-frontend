@@ -33,6 +33,7 @@
     "@stripe/stripe-js": "^2.1.10",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
+    "date-fns": "^2.30.0",
     "graphql": "^16.8.1",
     "keen-slider": "^6.8.6",
     "lucide-react": "^0.279.0",

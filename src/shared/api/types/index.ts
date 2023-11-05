@@ -66,3 +66,15 @@ export type Shipping = {
   price: number;
   description: string;
 };
+
+export type BlogPost = {
+  _id: string;
+  title: string;
+  description: string;
+  slug: {
+    current: string;
+  };
+  readTime: number;
+  _createdAt: string;
+  image: SanityImageObject;
+};
