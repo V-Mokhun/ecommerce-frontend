@@ -18,7 +18,7 @@ export const BlogSidebar = ({ category }: BlogSidebarProps) => {
   const { data: recentPostsData } = useQuery(GET_RECENT_BLOG_POSTS);
 
   return (
-    <aside className="flex flex-col gap-6 md:gap-8 lg:gap-10 flex-1 md:flex-[0_0_360px] pb-4">
+    <aside className="flex flex-col gap-6 md:gap-8 lg:gap-10 flex-1 md:flex-[0_0_280px] lg:flex-[0_0_360px] pb-4">
       <div>
         <h3 className="font-medium md:text-lg lg:text-xl text-black mb-4 md:mb-6">
           Categories
@@ -29,6 +29,7 @@ export const BlogSidebar = ({ category }: BlogSidebarProps) => {
               <button
                 type="button"
                 onClick={() => {
+                  window.scrollTo({ top: 0, behavior: "smooth" });
                   setParams((prev) => {
                     prev.set("category", category.slug!.current!);
                     return prev;

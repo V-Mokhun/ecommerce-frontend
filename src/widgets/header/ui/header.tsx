@@ -129,7 +129,7 @@ export const Header = ({}: HeaderProps) => {
           </div>
         </div>
         {!isMd && (
-          <div className="flex items-center gap-2 mx-2">
+          <div className="flex items-center gap-2 mx-2 pb-2">
             <HeaderSearch
               isOpen={isSearchModalOpen}
               setIsOpen={(open) => setIsSearchModalOpen(open)}

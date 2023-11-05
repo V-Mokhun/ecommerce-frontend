@@ -47,7 +47,7 @@ export const HeaderCart = ({}: HeaderCartProps) => {
         </span>
       </PopoverTrigger>
       <PopoverContent
-        className="w-screen h-[calc(100vh-92px)] flex flex-col mt-5 md:mt-0 border-none md:border-t rounded-none md:rounded-md shadow-none md:shadow-md md:w-[512px] md:h-auto pb-0 px-0"
+        className="w-screen h-[calc(100vh-92px)] flex flex-col mt-4 md:mt-0 border-none md:border-t rounded-none md:rounded-md shadow-none md:shadow-md md:w-[512px] md:h-auto pb-0 px-0"
         sideOffset={28.5}
       >
         {cartQuantity > 0 ? (

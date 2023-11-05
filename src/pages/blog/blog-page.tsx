@@ -53,10 +53,10 @@ export const BlogPage = () => {
       <Container>
         <h1 className="sr-only">Blog</h1>
         <Breadcrumbs links={links} />
-        <div className="flex flex-col md:flex-row gap-6">
+        <div className="flex flex-col md:flex-row gap-6 pt-4 md:pt-0">
           <div className="flex-auto">
             {loading ? (
-              <ul className="flex flex-wrap gap-3 md:gap-6 mb-6 md:mb-10">
+              <ul className="flex flex-col md:flex-row flex-wrap gap-3 md:gap-6 mb-6 md:mb-10">
                 {[...Array(4)].map((_, i) => (
                   <Skeleton
                     className="flex-1 md:flex-[0_1_calc(50%-12px)] rounded-lg h-64 md:h-80"
@@ -68,11 +68,11 @@ export const BlogPage = () => {
               <Heading as="h3">No results found! Please, try again</Heading>
             ) : (
               <>
-                <ul className="flex flex-wrap gap-3 md:gap-6 mb-6 md:mb-10">
+                <ul className="flex flex-col xs:flex-row flex-wrap gap-3 md:gap-6 mb-6 md:mb-10">
                   {postsData?.blogPosts.map((post) => (
                     <li
                       key={post._id}
-                      className="flex-1 md:flex-[0_1_calc(50%-12px)]"
+                      className="flex-1 xs:flex-[0_1_calc(50%-12px)]"
                     >
                       <BlogPostCard blogPost={post as BlogPost} />
                     </li>

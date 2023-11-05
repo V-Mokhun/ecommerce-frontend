@@ -19,27 +19,30 @@ export const BlogPostCard = ({
 
   return (
     <article
-      className={cn("rounded-lg shadow-md hover:shadow-sm transition-shadow")}
+      className={cn(
+        "rounded-lg h-full shadow-md hover:shadow-sm transition-shadow"
+      )}
     >
       <NavLink
         className={cn(
-          "flex flex-col overflow-hidden group",
+          "flex flex-col h-full overflow-hidden group",
           size === "small" && "flex-row gap-2 md:gap-4"
         )}
         to={`${BLOG_ROUTE}/${blogPost.slug.current}`}
       >
         <div
           className={cn(
-            "max-h-36 md:max-h-44 lg:max-h-52",
             size === "small" &&
-              "max-h-24 md:max-h-32 lg:max-h-36 flex-[0_0_80px] md:flex-[0_0_140px] lg:flex-[0_0_180px]"
+              "flex-[0_0_80px] md:flex-[0_0_140px] lg:flex-[0_0_180px]"
           )}
         >
           <img
             className={cn(
               "w-full h-full object-cover",
-              size === "medium" && "rounded-t-lg aspect-[2/1]",
-              size === "small" && "rounded-tl-lg rounded-bl-lg"
+              size === "medium" &&
+                "rounded-t-lg aspect-[2/1] max-h-36 md:max-h-44 lg:max-h-52",
+              size === "small" &&
+                "rounded-tl-lg rounded-bl-lg max-h-24 md:max-h-32 lg:max-h-36 "
             )}
             alt={blogPost.title}
             src={imageBuilder(blogPost.image).url()}
@@ -47,7 +50,7 @@ export const BlogPostCard = ({
         </div>
         <div
           className={cn(
-            "p-4",
+            "p-4 flex flex-col h-full",
             size === "small" && "flex flex-col justify-center p-0 py-2 md:py-4"
           )}
         >
@@ -67,7 +70,7 @@ export const BlogPostCard = ({
           )}
           <p
             className={cn(
-              "font-light md:font-medium text-base md:text-lg lg:text-xl line-clamp-2 md:line-clamp-1 mb-2 group-hover:text-secondary transition-colors",
+              "font-light md:font-medium text-base md:text-lg lg:text-xl line-clamp-2 md:line-clamp-1 mb-2 group-hover:text-secondary transition-colors flex-1",
               size === "small" && "text-xs md:text-sm lg:text-base line-clamp-1"
             )}
           >
