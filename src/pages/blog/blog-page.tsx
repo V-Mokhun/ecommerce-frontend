@@ -56,14 +56,14 @@ export const BlogPage = () => {
         <div className="flex flex-col md:flex-row gap-6 pt-4 md:pt-0">
           <div className="flex-auto">
             {loading ? (
-              <ul className="flex flex-col md:flex-row flex-wrap gap-3 md:gap-6 mb-6 md:mb-10">
+              <div className="flex flex-col md:flex-row flex-wrap gap-3 md:gap-6 mb-6 md:mb-10">
                 {[...Array(4)].map((_, i) => (
                   <Skeleton
                     className="flex-1 md:flex-[0_1_calc(50%-12px)] rounded-lg h-64 md:h-80"
                     key={i}
                   />
                 ))}
-              </ul>
+              </div>
             ) : postsData?.blogPostsCount.length === 0 && !loading ? (
               <Heading as="h3">No results found! Please, try again</Heading>
             ) : (
@@ -97,7 +97,7 @@ export const BlogPage = () => {
               </>
             )}
           </div>
-          <BlogSidebar category={category} />
+          <BlogSidebar />
         </div>
       </Container>
     </section>
