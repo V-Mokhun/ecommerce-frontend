@@ -31,3 +31,18 @@ export const GET_RECENT_BLOG_POSTS = graphql(`
     }
   }
 `);
+
+export const GET_BLOG_POSTS = graphql(`
+  query GetBlogPosts(
+    $filters: BlogPostFilter
+    $limit: Int = 8
+    $offset: Int = 0
+  ) {
+    blogPosts: allBlogPost(where: $filters, limit: $limit, offset: $offset) {
+      ...BlogPostFields
+    }
+    blogPostsCount: allBlogPost(where: $filters) {
+      _id
+    }
+  }
+`);

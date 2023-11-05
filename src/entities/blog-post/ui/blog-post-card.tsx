@@ -37,9 +37,9 @@ export const BlogPostCard = ({
         >
           <img
             className={cn(
-              "w-full object-cover",
-              size === "medium" && "rounded-t-lg",
-              size === "small" && "h-full rounded-tl-lg rounded-bl-lg"
+              "w-full h-full object-cover",
+              size === "medium" && "rounded-t-lg aspect-[2/1]",
+              size === "small" && "rounded-tl-lg rounded-bl-lg"
             )}
             alt={blogPost.title}
             src={imageBuilder(blogPost.image).url()}
@@ -52,11 +52,11 @@ export const BlogPostCard = ({
           )}
         >
           {size === "medium" && (
-            <div className="flex items-center justify-between gap-2 text-xs font-light text-gray-500">
+            <div className="flex items-center justify-between gap-2 text-xs font-light text-gray-500 mb-2">
               <div className="flex items-center gap-0.5">
                 <Icon name="calendar" className="w-5 h-5 text-gray-600" />
                 <span>
-                  {format(new Date(blogPost._createdAt), "MMMM, D, YYYY")}
+                  {format(new Date(blogPost._createdAt), "MMMM, d, yyyy")}
                 </span>
               </div>
               <div className="flex items-center gap-0.5">
