@@ -46,3 +46,27 @@ export const GET_BLOG_POSTS = graphql(`
     }
   }
 `);
+
+export const GET_SINGLE_BLOG_POST = graphql(`
+  query GetSingleBlogPost($slug: String!) {
+    allBlogPost(where: { slug: { current: { eq: $slug } } }, limit: 1) {
+      ...BlogPostFields
+      bodyRaw
+      author {
+        name
+      }
+      category {
+        name
+        slug {
+          current
+        }
+      }
+      tags {
+        name
+        slug {
+          current
+        }
+      }
+    }
+  }
+`);

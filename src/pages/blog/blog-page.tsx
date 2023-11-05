@@ -1,11 +1,10 @@
 import { BLOG_POSTS_LIMIT, BLOG_ROUTE } from "@/shared/consts";
 import { Breadcrumbs, Container, Heading, Skeleton } from "@/shared/ui";
 import { useSearchParams } from "react-router-dom";
-import { BlogSidebar } from "./ui";
 import { useQuery } from "@apollo/client";
 import { BlogPost, GET_BLOG_POSTS } from "@/shared/api";
 import { BlogPostCard } from "@/entities";
-import { Pagination } from "@/widgets";
+import { BlogSidebar, Pagination } from "@/widgets";
 
 export const BlogPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -97,7 +96,7 @@ export const BlogPage = () => {
               </>
             )}
           </div>
-          <BlogSidebar />
+          <BlogSidebar selectedCategory={category} />
         </div>
       </Container>
     </section>

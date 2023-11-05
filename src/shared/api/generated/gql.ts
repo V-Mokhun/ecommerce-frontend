@@ -21,6 +21,7 @@ const documents = {
     "\n  query GetBlogTags {\n    allBlogTag {\n      _id\n      name\n      slug {\n        current\n      }\n    }\n  }\n": types.GetBlogTagsDocument,
     "\n  query GetRecentBlogPosts {\n    allBlogPost(sort: { _createdAt: DESC }, limit: 3) {\n      ...BlogPostFields\n    }\n  }\n": types.GetRecentBlogPostsDocument,
     "\n  query GetBlogPosts(\n    $filters: BlogPostFilter\n    $limit: Int = 8\n    $offset: Int = 0\n  ) {\n    blogPosts: allBlogPost(where: $filters, limit: $limit, offset: $offset) {\n      ...BlogPostFields\n    }\n    blogPostsCount: allBlogPost(where: $filters) {\n      _id\n    }\n  }\n": types.GetBlogPostsDocument,
+    "\n  query GetSingleBlogPost($slug: String!) {\n    allBlogPost(where: { slug: { current: { eq: $slug } } }, limit: 1) {\n      ...BlogPostFields\n      bodyRaw\n      author {\n        name\n      }\n      category {\n        name\n        slug {\n          current\n        }\n      }\n      tags {\n        name\n        slug {\n          current\n        }\n      }\n    }\n  }\n": types.GetSingleBlogPostDocument,
     "\n  query GetBrands {\n    allBrand {\n      _id\n      name\n      slug {\n        current\n      }\n      logo {\n        ...ImageFields\n      }\n    }\n  }\n": types.GetBrandsDocument,
     "\n    query GetCategories {\n      allCategory {\n        _id\n        name\n        shortName\n        slug {\n          current\n        }\n        icon {\n          ...ImageFields\n        }\n        image {\n          ...ImageFields\n        }\n      }\n    }\n  ": types.GetCategoriesDocument,
     "\n  query GetColors {\n    allColorItem {\n      _id\n      name\n      value {\n        hex\n      }\n    }\n  }\n": types.GetColorsDocument,
@@ -80,6 +81,10 @@ export function graphql(source: "\n  query GetRecentBlogPosts {\n    allBlogPost
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  query GetBlogPosts(\n    $filters: BlogPostFilter\n    $limit: Int = 8\n    $offset: Int = 0\n  ) {\n    blogPosts: allBlogPost(where: $filters, limit: $limit, offset: $offset) {\n      ...BlogPostFields\n    }\n    blogPostsCount: allBlogPost(where: $filters) {\n      _id\n    }\n  }\n"): (typeof documents)["\n  query GetBlogPosts(\n    $filters: BlogPostFilter\n    $limit: Int = 8\n    $offset: Int = 0\n  ) {\n    blogPosts: allBlogPost(where: $filters, limit: $limit, offset: $offset) {\n      ...BlogPostFields\n    }\n    blogPostsCount: allBlogPost(where: $filters) {\n      _id\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query GetSingleBlogPost($slug: String!) {\n    allBlogPost(where: { slug: { current: { eq: $slug } } }, limit: 1) {\n      ...BlogPostFields\n      bodyRaw\n      author {\n        name\n      }\n      category {\n        name\n        slug {\n          current\n        }\n      }\n      tags {\n        name\n        slug {\n          current\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetSingleBlogPost($slug: String!) {\n    allBlogPost(where: { slug: { current: { eq: $slug } } }, limit: 1) {\n      ...BlogPostFields\n      bodyRaw\n      author {\n        name\n      }\n      category {\n        name\n        slug {\n          current\n        }\n      }\n      tags {\n        name\n        slug {\n          current\n        }\n      }\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

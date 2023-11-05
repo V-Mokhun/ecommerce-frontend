@@ -4,13 +4,19 @@ import {
   GET_BLOG_CATEGORIES,
   GET_RECENT_BLOG_POSTS,
 } from "@/shared/api";
+import { BLOG_ROUTE } from "@/shared/consts";
 import { cn } from "@/shared/lib";
-import { Skeleton } from "@/shared/ui";
+import { Button, Skeleton } from "@/shared/ui";
 import { useQuery } from "@apollo/client";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-export const BlogSidebar = () => {
-  const [params, setParams] = useSearchParams();
+interface BlogSidebarProps {
+  selectedCategory?: string | null;
+  tags?: string[];
+}
+
+export const BlogSidebar = ({ selectedCategory, tags }: BlogSidebarProps) => {
+  const navigate = useNavigate();
   const { data: categoriesData, loading: categoriesLoading } =
     useQuery(GET_BLOG_CATEGORIES);
   const { data: recentPostsData, loading: recentPostsLoading } = useQuery(
@@ -36,15 +42,14 @@ export const BlogSidebar = () => {
                 <button
                   type="button"
                   onClick={() => {
-                    window.scrollTo({ top: 0, behavior: "smooth" });
-                    setParams((prev) => {
-                      prev.set("category", category.slug!.current!);
-                      return prev;
+                    navigate({
+                      pathname: BLOG_ROUTE,
+                      search: `?category=${category.slug!.current!}`,
                     });
                   }}
                   className={cn(
                     "hover:text-primary transition-colors",
-                    params.get("category") === category.slug!.current! &&
+                    selectedCategory === category.slug!.current! &&
                       "text-primary"
                   )}
                 >
@@ -75,6 +80,20 @@ export const BlogSidebar = () => {
           </ul>
         )}
       </div>
+      {tags && (
+        <div>
+          <h3 className="font-medium md:text-lg lg:text-xl text-black mb-4 md:mb-6">
+            Tags
+          </h3>
+          <ul className="flex flex-wrap gap-x-2 gap-y-4 text-sm md:text-base">
+            {tags.map((tag) => (
+              <li key={tag}>
+                <Button variant="outline">{tag}</Button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </aside>
   );
 };

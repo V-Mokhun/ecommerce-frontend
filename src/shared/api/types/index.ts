@@ -78,3 +78,22 @@ export type BlogPost = {
   _createdAt: string;
   image: SanityImageObject;
 };
+
+export type SingleBlogPost = BlogPost & {
+  bodyRaw: JSON;
+  author: {
+    name: string;
+  };
+  category: {
+    name: string;
+    slug: {
+      current: string;
+    };
+  };
+  tags: {
+    name: string;
+    slug: {
+      current: string;
+    };
+  }[];
+};
