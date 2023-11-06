@@ -90,7 +90,7 @@ export const Header = ({}: HeaderProps) => {
   }, [data, navLinks]);
 
   return (
-    <header className="fixed top-0 left-0 right-0 md:border-b border-solid border-b-primary-100 md:py-4 z-[51] md:z-10 bg-background">
+    <header className="fixed top-0 left-0 right-0 md:border-b border-solid border-b-primary-100 md:py-4 z-[51] md:z-[21] bg-background">
       <Container>
         <div className="flex items-center justify-between gap-4 py-2 md:py-0">
           {isMd ? (
