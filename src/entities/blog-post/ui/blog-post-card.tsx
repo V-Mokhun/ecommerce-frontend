@@ -15,8 +15,6 @@ export const BlogPostCard = ({
   blogPost,
   size = "medium",
 }: BlogPostCardProps) => {
-  console.log(blogPost._createdAt);
-
   return (
     <article
       className={cn(
