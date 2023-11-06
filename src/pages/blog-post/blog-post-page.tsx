@@ -1,7 +1,7 @@
 import { GET_SINGLE_BLOG_POST, SingleBlogPost } from "@/shared/api";
 import { BLOG_ROUTE } from "@/shared/consts";
 import { imageBuilder } from "@/shared/lib/image-builder";
-import { Breadcrumbs, Container } from "@/shared/ui";
+import { Breadcrumbs, Container, Skeleton } from "@/shared/ui";
 import { BlogSidebar } from "@/widgets";
 import { useQuery } from "@apollo/client";
 import { PortableText, PortableTextComponents } from "@portabletext/react";
@@ -16,7 +16,37 @@ export const BlogPostPage = () => {
   });
 
   if (!slug) return <Navigate to={BLOG_ROUTE} />;
-  if (!data) return null;
+
+  if (!data)
+    return (
+      <div className="pb-6">
+        <Container>
+          <div className="flex items-center overflow-x-auto whitespace-nowrap gap-6 pt-4 md:pt-6 pb-4 md:pb-8 lg:pb-10">
+            <Skeleton className="h-6 w-36" />
+            <Skeleton className="h-6 w-24" />
+            <Skeleton className="h-6 w-60" />
+          </div>
+
+          <div className="flex flex-col md:flex-row gap-6 pt-4 md:pt-0">
+            <div className="flex-auto">
+              <Skeleton className="h-6 w-3/4 mb-2 md:mb-4" />
+              <Skeleton className="h-5 w-1/2 mb-3 md:mb-4" />
+              <Skeleton className="w-full h-44 md:h-72 lg:h-96 rounded-lg mb-3 md:mb-4" />
+              <div className="space-y-3 md:space-y-4">
+                <Skeleton className="h-5 w-1/2" />
+                <Skeleton className="h-16 w-4/5" />
+                <Skeleton className="h-5 w-1/3" />
+                <Skeleton className="h-10 w-full" />
+                <Skeleton className="h-5 w-1/4" />
+                <Skeleton className="h-5 w-3/4" />
+              </div>
+            </div>
+            <BlogSidebar tags={[]} />
+          </div>
+        </Container>
+      </div>
+    );
+
   const [blogPost] = data.allBlogPost as [SingleBlogPost];
 
   const readableSlug = slug
