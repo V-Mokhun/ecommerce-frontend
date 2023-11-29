@@ -144,7 +144,7 @@ Project Link: [https://ecommerce-frontend.up.railway.app](https://ecommerce-fron
 [license-shield]: https://img.shields.io/github/license/v-mokhun/ecommerce-frontend.svg?style=for-the-badge
 [license-url]: https://github.com/v-mokhun/ecommerce-frontend/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://www.linkedin.com/in/volodymyr-mokhun-35005723b/
+[linkedin-url]: https://www.linkedin.com/in/volodymyr-mokhun/
 [home]: readme-images/home.jpg
 [React.js]: https://img.shields.io/badge/-ReactJs-61DAFB?logo=react&logoColor=white&style=for-the-badge
 [React-url]: https://reactjs.org/
