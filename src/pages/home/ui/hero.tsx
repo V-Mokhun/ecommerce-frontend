@@ -11,7 +11,7 @@ export const Hero = ({}: HeroProps) => {
         <div className="flex justify-between mt-6 md:mt-0">
           <div className="flex-auto mt-4 md:mt-10">
             <h1 className="font-medium md:font-semibold text-2xl sm:text-4xl md:text-5xl lg:text-6xl text-primary-700 mb-2 md:mb-5 lg:mb-8">
-              Ecommerce
+              TechSphere
             </h1>
             <p className="text-primary-700 font-medium text-xs xs:text-lg sm:text-xl md:text-2xl lg:text-3xl">
               "Join the{" "}

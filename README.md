@@ -1,4 +1,4 @@
-# Ecommerce
+# TechSphere
 
 [![MIT License][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
@@ -10,8 +10,7 @@
   </a>
 
   <p align="center">
-  Ecommerce is a pet project that I created to learn new technologies and improve my skills. Specifically, I wanted to learn how to use Sanity.io as a headless CMS, how to use GraphQL with React, and refresh my knowledge of Redux Toolkit.
-    <br />
+  TechSphere is a pet project that I created to learn new technologies and improve my skills. Specifically, I wanted to learn how to use Sanity.io as a headless CMS, how to use GraphQL with React, and refresh my knowledge of Redux Toolkit.
     <br />
     <a href="https://ecommerce-frontend.up.railway.app">View Site</a>
     ·
@@ -145,7 +144,7 @@ Project Link: [https://ecommerce-frontend.up.railway.app](https://ecommerce-fron
 [license-url]: https://github.com/v-mokhun/ecommerce-frontend/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/v-mokhun/
-[home]: readme-images/home.jpg
+[home]: readme-images/home.png
 [React.js]: https://img.shields.io/badge/-ReactJs-61DAFB?logo=react&logoColor=white&style=for-the-badge
 [React-url]: https://reactjs.org/
 [Sanity.io]: https://img.shields.io/badge/-Sanity.io-000000?logo=Sanity&logoColor=white&style=for-the-badge

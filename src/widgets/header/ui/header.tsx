@@ -113,7 +113,7 @@ export const Header = ({}: HeaderProps) => {
                 className="text-primary-300 font-medium"
                 to={HOME_ROUTE}
               >
-                Ecommerce
+                TechSphere
               </NavLink>
             </>
           )}

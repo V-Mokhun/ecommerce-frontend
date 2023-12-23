@@ -21,7 +21,7 @@ export const AboutPage = ({}: AboutPageProps) => {
           </div>
           <div className="space-y-6 text-base md:text-lg lg:text-xl font-light [&>p]:text-sm [&>p]:md:text-lg [&>p]:lg:text-xl [&>h2]:font-medium [&>h3]:font-medium [&>h4]:font-medium [&>h5]:font-medium [&>h6]:font-medium">
             <p>
-              Ecommerce is an innovative online store that offers a diverse
+              TechSphere is an innovative online store that offers a diverse
               selection of digital gadgets, available for purchase in both cash
               and installment options. Embodying the motto "Join the digital
               revolution today" the website not only provides a seamless
@@ -31,14 +31,14 @@ export const AboutPage = ({}: AboutPageProps) => {
               engage with the content through comments and a question-answer
               section, fostering a dynamic community of tech enthusiasts.
             </p>
-            <h2>Ecommerce Meaning</h2>
+            <h2>TechSphere Meaning</h2>
             <p>
               Lorem ipsum dolor sit amet consectetur, adipisicing elit.
               Quibusdam quisquam sed dolorum corporis! Quo magnam, placeat
               dolorem quasi sequi commodi dolores voluptas voluptatem saepe,
               nisi, ipsa totam maxime est! Non?
             </p>
-            <h2>Some of Ecommerce&apos;s impressive features:</h2>
+            <h2>Some of TechSphere&apos;s impressive features:</h2>
             <ul>
               <li>
                 Diverse digital gadgets for purchase in cash or installments

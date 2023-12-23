@@ -206,7 +206,7 @@ export const Footer = ({}: FooterProps) => {
           <div className="flex justify-between items-center gap-2 text-xs font-medium text-gray-300">
             <p className="flex items-center gap-1">
               <Icon name="copyright" className="w-6 h-6" />{" "}
-              <span>{new Date().getFullYear()} Ecommerce</span>
+              <span>{new Date().getFullYear()} TechSphere</span>
             </p>
             {isMd ? (
               <ul className="flex items-center gap-6">
